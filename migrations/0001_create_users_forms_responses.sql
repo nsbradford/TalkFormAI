@@ -44,3 +44,8 @@ $$ language plpgsql security definer;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
+
+
+create policy "Users are viewable by users who created them."
+  on users for select
+  using ( auth.uid()::text = id );
