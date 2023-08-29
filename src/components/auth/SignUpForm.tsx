@@ -18,8 +18,6 @@ export default function SignUpForm() {
   
     async function signUp(email: string, password: string) {
       setIsMainButtonDisabled(true);
-      console.log(email)
-      console.log(password)
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
