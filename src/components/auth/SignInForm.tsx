@@ -7,10 +7,7 @@ import ErrorAlert from './ErrorAlert';
 import { useRouter } from 'next/router';
 
 
-
-
 export default function SignInForm() {
-
     const supabase = createClientComponentClient<Database>()
     const [error, setError] = useState<AuthError | null>(null);
     const [isMainButtonDisabled, setIsMainButtonDisabled] = useState<boolean>(false);
