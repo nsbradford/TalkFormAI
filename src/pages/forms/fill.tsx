@@ -59,7 +59,7 @@ export default function CreateForm() {
 
   return (
     <div className="h-screen flex flex-col justify-center items-center bg-gray-100">
-      <h1 className="text-4xl font-extrabold mb-6">Create a Form</h1>
+      <h1 className="text-4xl font-extrabold mb-6">Fill a form</h1>
       <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg">
         {messages.map((message, index) => (
           <MessageUI key={index} role={message.role} content={message.content} />
