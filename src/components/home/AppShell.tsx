@@ -12,22 +12,32 @@ function classNames(...classes: string[]) {
 
 type User =  Database['public']['Tables']['users']['Row'] 
 
-type HomeContainerProps = {
+type AppShellProps = {
   user: User;
 }
   
-export default function HomeContainer(props: HomeContainerProps) {
+export default function AppShell(props: AppShellProps) {
   const { push } = useRouter();
   const supabase = createClientComponentClient<Database>()
 
   const userNavigation = [
-    { name: 'Your Profile', href: '#' },
     { name: 'Settings', href: '#' },
     { name: 'Sign out', href: '#', onClick: () => {
       supabase.auth.signOut();
       push('/');
     } },
   ]
+
+  const getAvatar = (size: number) => {
+    if (props.user.avatar_url) {
+      return <img className={`h-${size} w-${size} rounded-full`} src={props.user.avatar_url} alt="" />
+    }
+    return <div className={`h-${size} w-${size} rounded-full bg-gray-500"`}>
+      <div className="flex h-full w-full items-center justify-center text-white">
+        {props.user.email[0]}
+      </div>
+    </div>
+  }
 
 
 
@@ -65,7 +75,7 @@ export default function HomeContainer(props: HomeContainerProps) {
                           <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="absolute -inset-1.5" />
                             <span className="sr-only">Open user menu</span>
-                            <img className="h-8 w-8 rounded-full" src={props.user.avatar_url} alt="" />
+                            {getAvatar(8)}
                           </Menu.Button>
                         </div>
                         <Transition
@@ -118,7 +128,7 @@ export default function HomeContainer(props: HomeContainerProps) {
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
                     <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={props.user.avatar_url} alt="" />
+                      {getAvatar(10)}
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">{props.user.email}</div>

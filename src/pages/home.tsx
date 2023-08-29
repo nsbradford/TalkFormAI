@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSessionContext } from '@supabase/auth-helpers-react'
 import { useRouter } from 'next/router';
-import HomeContainer from '@/components/home/HomeContainer';
+import AppShell from '@/components/home/AppShell';
 import Spinner from '@/components/home/Spinner';
 import ErrorMode from '@/components/home/ErrorMode';
 import { Database } from '../../types/supabase';
@@ -48,7 +48,7 @@ export default function AuthPage() {
   if (isLoading) {
     return (<Spinner/>);
   } else if (user) {
-    return (<HomeContainer
+    return (<AppShell
       user={user}
     />)
   } else {
