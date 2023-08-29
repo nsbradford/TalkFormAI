@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
+import { ChatMessage } from '../../types';
 
-// TODO use OpenAI sdk
-type Message = {
-  role: string; //"user" | "assistant";
-  content: string;
-};
 
-const MessageUI = (message: Message) => {
+
+const MessageUI = (message: ChatMessage) => {
   return (
     <div className={`my-2 p-3 rounded-lg ${message.role === "assistant" ? "bg-blue-400 text-white" : "bg-gray-300 text-black"}`}>
       {message.content}
@@ -15,7 +12,7 @@ const MessageUI = (message: Message) => {
 };
 
 export default function CreateForm() {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
       content: "What kind of form can I help you with?"
@@ -28,7 +25,7 @@ export default function CreateForm() {
   const handleSubmit = async () => {
     if (inputValue.trim()) {
       const userMessage = {
-        role: "user",
+        role: "user" as const,
         content: inputValue.trim()
       };
 
@@ -49,12 +46,21 @@ export default function CreateForm() {
   };
 
   // Simulating the async function to get the assistant response
-  const getAssistantResponse = async (messages: Message[]) => {
-    await new Promise(resolve => setTimeout(resolve, 2000)); // Delay for 2 seconds for demo
-    return {
-      role: "assistant",
-      content: "Here's a simulated response from the assistant!"
-    };
+  const getAssistantResponse = async (messages: ChatMessage[]) => {
+    // await new Promise(resolve => setTimeout(resolve, 2000)); // Delay for 2 seconds for demo
+    // return {
+    //   role: "assistant",
+    //   content: "Here's a simulated response from the assistant!"
+    // };
+    const data = {
+      model: "gpt-3.5-turbo",
+      messages,
+    }
+    const response = await fetch("/api/post", {
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+    return response.json();
   };
 
   return (
