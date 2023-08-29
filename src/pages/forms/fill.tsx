@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChatMessage } from '../../types';
+import { ChatMessage, LLMRequest, LLMResponse } from '../../types';
 
 
 
@@ -45,22 +45,23 @@ export default function CreateForm() {
     setIsWaiting(false);
   };
 
-  // Simulating the async function to get the assistant response
   const getAssistantResponse = async (messages: ChatMessage[]) => {
-    // await new Promise(resolve => setTimeout(resolve, 2000)); // Delay for 2 seconds for demo
-    // return {
-    //   role: "assistant",
-    //   content: "Here's a simulated response from the assistant!"
-    // };
-    const data = {
-      model: "gpt-3.5-turbo",
-      messages,
+    const data: LLMRequest = {
+      completion_create: {
+        model: "gpt-3.5-turbo",
+        messages,
+      },
     }
     const response = await fetch("/api/llm", {
       method: "POST",
       body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
-    return response.json();
+    const json: LLMResponse = await response.json();
+    const text = json.completion.choices[0].message
+    return text;
   };
 
   return (

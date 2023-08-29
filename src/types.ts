@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 
 export type LLMRequest = {
-  completion_create: OpenAI.CompletionCreateParamsNonStreaming
+  completion_create: OpenAI.Chat.CompletionCreateParamsNonStreaming
 }
 
 export type LLMResponse = {
@@ -9,7 +9,3 @@ export type LLMResponse = {
 }
 
 export type ChatMessage = OpenAI.Chat.Completions.CreateChatCompletionRequestMessage
-// {
-//   role: string; //"user" | "assistant";
-//   content: string;
-// };
