@@ -56,7 +56,7 @@ export default function CreateForm() {
       model: "gpt-3.5-turbo",
       messages,
     }
-    const response = await fetch("/api/post", {
+    const response = await fetch("/api/llm", {
       method: "POST",
       body: JSON.stringify(data),
     });
