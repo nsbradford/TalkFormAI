@@ -1,24 +1,19 @@
 import React, { useState } from 'react';
-import { ChatMessage, LLMRequest, LLMResponse } from '../../types';
+import { ChatMessage, LLMRequest, LLMResponse } from '@/types';
+import { FAKE_SCHEMA, PROMPT_FILL } from '@/prompts';
+import { MessageUI } from '@/components/chat';
+import { callLLM } from '@/utils';
 
-
-
-const MessageUI = (message: ChatMessage) => {
-  return (
-    <div className={`my-2 p-3 rounded-lg ${message.role === "assistant" ? "bg-blue-400 text-white" : "bg-gray-300 text-black"}`}>
-      {message.content}
-    </div>
-  );
-};
 
 export default function CreateForm() {
+  const schema = FAKE_SCHEMA; // TODO hydrate from route after page loads
+  const systemPrompt = PROMPT_FILL(schema);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
       content: "What kind of form can I help you with?"
     }
   ]);
-  
   const [inputValue, setInputValue] = useState('');
   const [isWaiting, setIsWaiting] = useState(false);
 
@@ -28,40 +23,16 @@ export default function CreateForm() {
         role: "user" as const,
         content: inputValue.trim()
       };
-
       setMessages([...messages, userMessage]);
       setInputValue('');
-
       setIsWaiting(true);
-
-      const assistantResponse = await getAssistantResponse([...messages, userMessage]);
+      const assistantResponse = await callLLM(systemPrompt, [...messages, userMessage]);
       setMessages(prev => [...prev, assistantResponse]);
-
       setIsWaiting(false);
     }
   };
-
   const handleCancel = () => {
     setIsWaiting(false);
-  };
-
-  const getAssistantResponse = async (messages: ChatMessage[]) => {
-    const data: LLMRequest = {
-      completion_create: {
-        model: "gpt-3.5-turbo",
-        messages,
-      },
-    }
-    const response = await fetch("/api/llm", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const json: LLMResponse = await response.json();
-    const text = json.completion.choices[0].message
-    return text;
   };
 
   return (
