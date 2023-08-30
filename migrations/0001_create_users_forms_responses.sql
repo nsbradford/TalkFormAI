@@ -9,25 +9,22 @@ CREATE TABLE users (
 
 CREATE TABLE forms (
     id VARCHAR(36) PRIMARY KEY,
-    user_id VARCHAR(36) REFERENCES users(id) ON DELETE CASCADE,
+    user_id VARCHAR(36) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    is_open BOOLEAN NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    description TEXT NULL,
     desired_fields_schema TEXT NOT NULL
 );
 
 CREATE TABLE responses (
     id VARCHAR(36) PRIMARY KEY,
-    form_id VARCHAR(36) REFERENCES forms(id) ON DELETE CASCADE,
-    is_complete BOOLEAN NOT NULL,
+    form_id VARCHAR(36) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     results JSON NOT NULL
 );
-
-
-alter table public.users enable row level security;
-alter table public.forms enable row level security;
-alter table public.responses enable row level security;
 
 
 -- This trigger automatically creates a profile entry when a new user signs up via Supabase Auth.
@@ -44,8 +41,3 @@ $$ language plpgsql security definer;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
-
-
-create policy "Users are viewable by users who created them."
-  on users for select
-  using ( auth.uid()::text = id );
