@@ -1,14 +1,16 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/router';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '../../../types/supabase';
 import DashboardMode from './modes/DashboardMode';
-import { User } from '@/types';
+import { Form, User, Response } from '@/types';
 import NewFormMode from './modes/NewFormMode';
 import SettingsMode from './modes/SettingsMode';
 import ErrorMode from './modes/ErrorMode';
+import FormDetailMode from './modes/FormDetailMode';
+import { getFormsFromSupabase, getResponsesFromSupabase } from '@/utils';
 
 
 function classNames(...classes: string[]) {
@@ -26,6 +28,7 @@ type AppMode = {
 
 const dashboardAppModeInternalName = 'dashboard';
 const newFormAppModeInternalName = 'new_form';
+const formDetailAppModeInternalName = 'form_detail';
 const settingsAppModeInternalName = 'settings';
 
 
@@ -35,8 +38,12 @@ export default function AppShell(props: AppShellProps) {
     internalName: dashboardAppModeInternalName,
   }
   const newFormAppMode = {
-    displayName: 'New Form',
+    displayName: 'Create Form',
     internalName: newFormAppModeInternalName,
+  }
+  const formDetailAppMode = {
+    displayName: 'Responses',
+    internalName: formDetailAppModeInternalName,
   }
   const settingsAppMode = {
     displayName: 'Settings',
@@ -46,6 +53,41 @@ export default function AppShell(props: AppShellProps) {
   const { push } = useRouter();
   const supabase = createClientComponentClient<Database>();
   const [mode, setMode] = useState<AppMode>(dashboardAppMode);
+  const [activeForm, setActiveForm] = useState<Form | null>(null);
+  const [allForms, setAllForms] = useState<Form[] | null>(null);
+  const [formIdToResponses, setFormIdToResponses] = useState<Record<string, Response[]> | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getFormsAndResponses = async () => {
+      const forms = await getFormsFromSupabase(props.user.id, supabase);
+      if (forms === undefined) {
+        setIsLoading(false);
+        return;
+      } else if (forms.length === 0) {
+        setAllForms(forms);
+        setFormIdToResponses({} as Record<string, Response[]>);
+        setIsLoading(false);
+        return;
+      }
+      setAllForms(forms);
+      const allResposes = {} as Record<string, Response[]>;
+      for (const form of forms) {
+        const formResponses = await getResponsesFromSupabase(form.id, supabase);
+        if (formResponses === undefined) {
+          continue;
+        }
+        allResposes[form.id] = formResponses as Response[];
+      }
+      setFormIdToResponses(allResposes);
+      setIsLoading(false);
+    };
+    if (isLoading && allForms === null && formIdToResponses === null) {
+      getFormsAndResponses();
+    }
+  }, [isLoading, allForms, formIdToResponses]);
+
+
 
   const userNavigation = [
     { name: 'Settings', href: '#', onClick: () => setMode(settingsAppMode)},
@@ -82,10 +124,19 @@ export default function AppShell(props: AppShellProps) {
     if (mode.internalName === dashboardAppModeInternalName) {
       return (<DashboardMode
         user={props.user}
+        forms={allForms || []}
+        responses={formIdToResponses || {}}
         onNewFormClick={() => setMode(newFormAppMode)}
+        onFormDetailClick={() => setMode(formDetailAppMode)}
       />);
     } else if (mode.internalName === newFormAppModeInternalName) {
-      return <NewFormMode user={props.user}/>;
+      return <NewFormMode 
+        user={props.user}
+        onCancelClick={() => setMode(dashboardAppMode)}
+        onSuccessfulSubmit={() => setMode(dashboardAppMode)}
+      />;
+    } else if (mode.internalName === formDetailAppModeInternalName) {
+      return (<FormDetailMode user={props.user} formId=''/>)
     } else if (mode.internalName === settingsAppModeInternalName) {
       return <SettingsMode user={props.user}/>;
     } else {

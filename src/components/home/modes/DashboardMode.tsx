@@ -1,57 +1,17 @@
-import { useEffect, useState } from 'react';
-import { Database } from '../../../../types/supabase';
-import { useRouter } from 'next/router';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { getFormsFromSupabase, getResponsesFromSupabase } from '@/utils';
 import { Form, Response, User } from '@/types';
-import Spinner from '../Spinner';
 
 type DashboardModeProps = {
     user: User;
+    forms: Form[];
+    responses: Record<string, Response[]>;
     onNewFormClick: () => void;
+    onFormDetailClick: (form: Form, responses: Response[]) => void;
 }
 
 
 export default function DashboardMode(props: DashboardModeProps) {
-    const supabase = createClientComponentClient<Database>();
-    const [forms, setForms] = useState<Form[] | null>(null);
-    const [responses, setResponses] = useState<Record<string, Response[]> | null>(null); // Form ID -> Responses
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-  
-    useEffect(() => {
-      const getFormsAndResponses = async () => {
-        const forms = await getFormsFromSupabase(props.user.id, supabase);
-        if (forms === undefined) {
-          setIsLoading(false);
-          return;
-        } else if (forms.length === 0) {
-          setForms(forms);
-          setResponses({} as Record<string, Response[]>);
-          setIsLoading(false);
-          return;
-        }
-        setForms(forms);
-        const allResposes = {} as Record<string, Response[]>;
-        for (const form of forms) {
-          const formResponses = await getResponsesFromSupabase(form.id, supabase);
-          if (formResponses === undefined) {
-            continue;
-          }
-          allResposes[form.id] = formResponses as Response[];
-        }
-        setResponses(allResposes);
-        setIsLoading(false);
-      };
-      if (isLoading && forms === null && responses === null) {
-        getFormsAndResponses();
-      }
-    }, [isLoading, forms, responses]);
 
-    if (isLoading) {
-        return <Spinner />;
-    } else if (forms === null || responses === null) {
-        return (<p>something went wrong</p>);
-    } else if (forms.length === 0) {
+    if (props.forms.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center h-full">
                 <h1 className="text-2xl font-semibold text-gray-900">You have no forms</h1>
@@ -67,8 +27,8 @@ export default function DashboardMode(props: DashboardModeProps) {
             <button onClick={props.onNewFormClick}>
                 New form
             </button>
-            {forms.map((f) => {
-                const responsesForThisForm = responses[f.id] || [];
+            {props.forms.map((f) => {
+                const responsesForThisForm = props.responses[f.id] || [];
                 return (
                     <li key={f.id} className="flex justify-between gap-x-6 py-5">
                     <div className="flex min-w-0 gap-x-4">
