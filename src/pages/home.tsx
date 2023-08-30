@@ -1,61 +1,34 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react';
-import { useSessionContext } from '@supabase/auth-helpers-react'
-import { useRouter } from 'next/router';
 import AppShell from '@/components/home/AppShell';
-import Spinner from '@/components/home/Spinner';
 import ErrorMode from '@/components/home/ErrorMode';
-import { Database } from '../../types/supabase';
+import Spinner from '@/components/home/Spinner';
+import { User } from '@/types';
+import { getUserFromSupabase } from '@/utils';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-
-type User =  Database['public']['Tables']['users']['Row'] 
+import { useSessionContext } from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { Database } from '../../types/supabase';
 
 export default function AuthPage() {
   const { isLoading, session, error } = useSessionContext();
-  const supabase = createClientComponentClient<Database>()
+  const supabase = createClientComponentClient<Database>();
   const [user, setUser] = useState<null | User>(null);
   const { push } = useRouter();
 
-  
   useEffect(() => {
-    const getUserFromSupabase = async () => {
-      if (!session) {
-        return;
-      }
-      const { data, error } = await supabase
-        .from('users')
-        .select()
-        .eq('id', session?.user.id)
-        .maybeSingle();
-      if (error) {
-        console.error(error);
-        return;
-      } else if (data === null) {
-        console.error('No user found');
-        return;
-      } else {
-        setUser(data);
-      }
-    }
     if (!isLoading && !session) {
       push('/auth');
     }
     if (!isLoading && session) {
-      getUserFromSupabase();
+      getUserFromSupabase(session, supabase, setUser);
     }
   }, [isLoading, session]);
- 
+
   if (isLoading) {
-    return (<Spinner/>);
+    return <Spinner />;
   } else if (user) {
-    return (<AppShell
-      user={user}
-    />)
+    return <AppShell user={user} />;
   } else {
-    return (<ErrorMode
-      session={session}
-      error={error}
-    />)
+    return <ErrorMode session={session} error={error} />;
   }
-  
 }

@@ -1,45 +1,55 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
-import { Session } from '@supabase/supabase-js'
-import { useRouter } from 'next/router'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Database } from '../../../types/supabase'
+import { Fragment } from 'react';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Session } from '@supabase/supabase-js';
+import { useRouter } from 'next/router';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { Database } from '../../../types/supabase';
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
-type User =  Database['public']['Tables']['users']['Row'] 
+type User = Database['public']['Tables']['users']['Row'];
 
 type AppShellProps = {
   user: User;
-}
-  
+};
+
 export default function AppShell(props: AppShellProps) {
   const { push } = useRouter();
-  const supabase = createClientComponentClient<Database>()
+  const supabase = createClientComponentClient<Database>();
 
   const userNavigation = [
     { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#', onClick: () => {
-      supabase.auth.signOut();
-      push('/');
-    } },
-  ]
+    {
+      name: 'Sign out',
+      href: '#',
+      onClick: () => {
+        supabase.auth.signOut();
+        push('/');
+      },
+    },
+  ];
 
   const getAvatar = (size: number) => {
     if (props.user.avatar_url) {
-      return <img className={`h-${size} w-${size} rounded-full`} src={props.user.avatar_url} alt="" />
+      return (
+        <img
+          className={`h-${size} w-${size} rounded-full`}
+          src={props.user.avatar_url}
+          alt=""
+        />
+      );
     }
-    return <div className={`h-${size} w-${size} rounded-full bg-gray-500"`}>
-      <div className="flex h-full w-full items-center justify-center text-white">
-        {props.user.email[0]}
+    return (
+      <div className={`h-${size} w-${size} rounded-full bg-gray-500"`}>
+        <div className="flex h-full w-full items-center justify-center text-white">
+          {props.user.email[0]}
+        </div>
       </div>
-    </div>
-  }
-
-
+    );
+  };
 
   return (
     <>
@@ -92,7 +102,9 @@ export default function AppShell(props: AppShellProps) {
                               <Menu.Item key={item.name}>
                                 {({ active }) => (
                                   <a
-                                    onClick={item.onClick? item.onClick : () => {}}
+                                    onClick={
+                                      item.onClick ? item.onClick : () => {}
+                                    }
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
                                       'block px-4 py-2 text-sm text-gray-700'
@@ -114,9 +126,15 @@ export default function AppShell(props: AppShellProps) {
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
                       {open ? (
-                        <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                        <XMarkIcon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                        <Bars3Icon
+                          className="block h-6 w-6"
+                          aria-hidden="true"
+                        />
                       )}
                     </Disclosure.Button>
                   </div>
@@ -124,15 +142,16 @@ export default function AppShell(props: AppShellProps) {
               </div>
 
               <Disclosure.Panel className="md:hidden">
-                
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   <div className="flex items-center px-5">
-                    <div className="flex-shrink-0">
-                      {getAvatar(10)}
-                    </div>
+                    <div className="flex-shrink-0">{getAvatar(10)}</div>
                     <div className="ml-3">
-                      <div className="text-base font-medium leading-none text-white">{props.user.email}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{props.user.email}</div>
+                      <div className="text-base font-medium leading-none text-white">
+                        {props.user.email}
+                      </div>
+                      <div className="text-sm font-medium leading-none text-gray-400">
+                        {props.user.email}
+                      </div>
                     </div>
                     <button
                       type="button"
@@ -163,7 +182,9 @@ export default function AppShell(props: AppShellProps) {
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-            <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+            <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+              Dashboard
+            </h1>
           </div>
         </header>
         <main>
@@ -173,5 +194,5 @@ export default function AppShell(props: AppShellProps) {
         </main>
       </div>
     </>
-  )
+  );
 }

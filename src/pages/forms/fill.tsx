@@ -4,7 +4,6 @@ import { FAKE_SCHEMA, PROMPT_FILL } from '@/prompts';
 import { MessageUI } from '@/components/chat';
 import { callLLM } from '@/utils';
 
-
 export default function CreateForm() {
   const schema = FAKE_SCHEMA; // TODO hydrate from route after page loads
   const systemPrompt = PROMPT_FILL(schema);
@@ -19,15 +18,21 @@ export default function CreateForm() {
   const inputRef = useRef<HTMLInputElement>(null); // Initialize the ref
 
   const handleSubmit = async (userMessage?: string) => {
-    const messagesToSend = userMessage && userMessage.trim() ? [...messages, {
-      role: "user" as const,
-      content: userMessage.trim()
-    }] : messages;
+    const messagesToSend =
+      userMessage && userMessage.trim()
+        ? [
+            ...messages,
+            {
+              role: 'user' as const,
+              content: userMessage.trim(),
+            },
+          ]
+        : messages;
     setMessages(messagesToSend);
     setInputValue('');
     setIsWaiting(true);
     const assistantResponse = await callLLM(systemPrompt, messagesToSend);
-    setMessages(prev => [...prev, assistantResponse]);
+    setMessages((prev) => [...prev, assistantResponse]);
     setIsWaiting(false);
   };
   const handleCancel = () => {
@@ -56,14 +61,18 @@ export default function CreateForm() {
       <h1 className="text-4xl font-extrabold mb-6">Fill a form</h1>
       <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg">
         {messages.map((message, index) => (
-          <MessageUI key={index} role={message.role} content={message.content} />
+          <MessageUI
+            key={index}
+            role={message.role}
+            content={message.content}
+          />
         ))}
         <div className="mt-4 flex">
           <input
             type="text"
             className="flex-grow p-2 border rounded-lg"
             value={inputValue}
-            onChange={e => setInputValue(e.target.value)}
+            onChange={(e) => setInputValue(e.target.value)}
             disabled={isWaiting}
             onKeyPress={handleKeyPress}
             ref={inputRef}
