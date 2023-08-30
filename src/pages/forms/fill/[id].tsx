@@ -66,11 +66,15 @@ export function InnerChat(props: { form: Form, supabase: SupabaseClient<Database
     setMessages((prev) => [...prev, assistantResponse]);
     if (assistantResponse.content) {
       try {
+        console.log(`LLM response`, assistantResponse);
         const parsed = JSON.parse(assistantResponse.content);
         if (!('action' in parsed && typeof parsed.action === 'string')) {
           console.error('Invalid response from LLM', assistantResponse.content);
+        } else {
+          console.log(`LLM returned valid JSON with action`, parsed.action);
         }
-        if ('form' in parsed && typeof parsed.form === 'string') {
+        if ('form' in parsed && typeof parsed.form === 'object') {
+          console.log('Agent wants to exit, submitting', assistantResponse.content);
           submitResponseToSupabase(form.id, parsed.form, props.supabase).then((maybeError) => {
             // if (maybeError instanceof Error) {
             //   // TODO set error and render it
@@ -78,6 +82,8 @@ export function InnerChat(props: { form: Form, supabase: SupabaseClient<Database
             //   router.push(`/forms/${form.id}/submitted`);
             // }
           });
+        } else {
+          console.log('Agent wants to continue', assistantResponse.content);
         }
       } catch (e) {
         console.error('Invalid response from LLM', assistantResponse.content);
