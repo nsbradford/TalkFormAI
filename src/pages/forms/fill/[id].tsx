@@ -7,24 +7,48 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Database } from '../../../../types/supabase';
 
+// Makes it much easier to track renders/fetches by wrapping the component.
 export default function CreateForm() {
   const router = useRouter();
-  const formId = router.query.id as string;
-  if (typeof formId !== 'string') {
-    console.error(`Invalid form id: '${formId}'`);
+  // If the page is still loading (especially during ISR or fallback scenarios), show a loading state
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  } else {
+    const formId = router.query.id as string;
+    if (typeof formId !== 'string') {
+      // console.error(`Invalid form id: '${formId}'`);
+      return <div>Loading...</div>;
+    }
+    return <CreateFormInner formId={formId} />;
   }
+}
+
+export function CreateFormInner(props: { formId: string }) { 
+  const { formId } = props;
   const supabase = createClientComponentClient<Database>();
+  const [form, setForm] = useState<Form | null>(null);
+  useEffect(() => {
+    if (!form) {
+      getFormFromSupabase(formId, supabase).then((maybeForm) => { 
+        if (maybeForm instanceof Error) {
+          console.error(maybeForm.message);
+          // TODO set error and render it
+        } else {
+          setForm(maybeForm);
+        }
+      });
+    }
+  }, []); // The empty array ensures this effect runs only once on mount
+  return form ? <InnerChat form={form} /> : <div>Loading...</div>;
+}
+export function InnerChat(props: { form: Form }) {
+  const { form } = props;
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isWaiting, setIsWaiting] = useState(false);
-  const [form, setForm] = useState<Form | null>(null);
   const inputRef = useRef<HTMLInputElement>(null); // Initialize the ref
 
   const handleSubmit = async (userMessage?: string) => {
-    if (!form) {
-      console.error('No schema found');
-      return;
-    }
     const messagesToSend =
       userMessage && userMessage.trim()
         ? [
@@ -61,22 +85,12 @@ export default function CreateForm() {
     if (messages.length === 0) {
       handleSubmit();
     }
-    if (!form) {
-      getFormFromSupabase(formId, supabase).then((maybeForm) => { 
-        if (maybeForm instanceof Error) {
-          console.error(maybeForm.message);
-          // TODO set error and render it
-        } else {
-          setForm(maybeForm);
-        }
-      });
-      
-    }
   }, []); // The empty array ensures this effect runs only once on mount
 
   return (
     <div className="flex flex-col items-center bg-gray-100 py-20">
       <h1 className="text-4xl font-extrabold mb-6">Fill a form</h1>
+      {form && <h1 className="text-4xl font-extrabold mb-6">Name: {form.name}</h1>}
       <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg">
         {messages.map((message, index) => (
           <MessageUI
