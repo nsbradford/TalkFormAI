@@ -45,16 +45,21 @@ export default function DashboardMode(props: DashboardModeProps) {
                             </div>
                         </div>
                         <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                            <button
-                                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                            >
-                                Save
-                            </button>
-                            <p className="text-sm leading-6 text-gray-900">
-                                {responsesForThisForm.length === 0 ? 'No responses yet' : responsesForThisForm.length + ' responses'}
-                            </p>
+                            <div className="flex gap-x-6 ">
+                                <button
+                                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >
+                                    Responses
+                                </button>
+                                <button
+                                    className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                >
+                                    Copy URL
+                                </button>
+                                
+                            </div>
                             <p className="mt-1 text-xs leading-5 text-gray-500">
-                                Updated at <time>{f.updated_at}</time>
+                            {responsesForThisForm.length === 0 ? 'No responses yet' : responsesForThisForm.length + ' responses'}
                             </p>
                         </div>
                     </li>
