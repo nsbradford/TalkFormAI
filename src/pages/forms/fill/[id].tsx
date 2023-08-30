@@ -83,7 +83,7 @@ export function InnerChat(props: {
         console.log(`LLM response`, assistantResponse);
         const parsed = JSON.parse(assistantResponse.content);
         if (!('action' in parsed && typeof parsed.action === 'string')) {
-          console.error('Invalid response from LLM', assistantResponse.content);
+          console.error('LLM did not return an action', assistantResponse.content);
         } else {
           console.log(`LLM returned valid JSON with action`, parsed.action);
         }
@@ -105,7 +105,7 @@ export function InnerChat(props: {
           console.log('Agent wants to continue', assistantResponse.content);
         }
       } catch (e) {
-        console.error('Invalid response from LLM', assistantResponse.content);
+        console.error('Failed to parse LLM output', assistantResponse.content);
       }
       setIsWaiting(false);
     }

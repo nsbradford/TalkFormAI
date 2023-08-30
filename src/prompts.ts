@@ -15,6 +15,21 @@ You must respond with a JSON blob with the following format:
 }
 \`\`\`
 
+
+When you are finished, use action=exit and let the user know their response was submitted. Here's an example
+
+\`\`\`json
+{
+  "action": "exit",
+  "text": "Thank you, your response was submitted successfully",
+  "form": {
+    "field1": "<content>",
+    "field2": "<content>",
+  }
+}
+\`\`\`
+
+
 RULES YOU MUST FOLLOW:
 - You must ONLY keep the conversation to the topic of the form. STICK WITH THE PROGRAM. If the user tries to ask you about anything else, politely redirect them back to the form and repeat your previous question.
 - Users might sometimes be uncertain about some fields; you can press a little, but you must ultimately respect your decision and fill in "[User not sure]".
@@ -25,7 +40,10 @@ Description: ${form.description || '[No description]'}
 \`\`\`
 ${form.desired_fields_schema}
 \`\`\`
+
+You MUST provide your response in JSON.
 `;
+    
 }
 
 export const FAKE_SCHEMA = `
