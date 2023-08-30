@@ -4,7 +4,8 @@ import {
   SupabaseClient,
   createClientComponentClient,
 } from '@supabase/auth-helpers-nextjs';
-import { Database } from '../types/supabase';
+import { Database, Json } from '../types/supabase';
+import { v4 } from 'uuid';
 
 export const callLLM = async (
   systemPrompt: string,
@@ -99,4 +100,28 @@ export async function getResponsesFromSupabase(
     return;
   }
   return data as Response[];
+}
+
+export async function submitResponseToSupabase(
+  formId: string,
+  responseJson: Json,
+  supabase: SupabaseClient<Database>,
+): Promise<Response | Error> {
+  const response: Response = {
+    id: v4(),
+    form_id: formId,
+    results: responseJson,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString(),
+  };
+  console.log('Submitting response to Supabase', { formId, response });
+  const { error } = await supabase.from('responses').insert(response); 
+  
+  if (error) {
+    console.error(`Error creating response`, { response, error });
+    return Error(error.message, { cause: error });
+  } else {
+    console.log('Successfully created response', response);
+    return response;
+  }
 }
