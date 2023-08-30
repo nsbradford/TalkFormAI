@@ -33,15 +33,15 @@ export default function AppShell(props: AppShellProps) {
   const dashboardAppMode = {
     displayName: 'Dashboard',
     internalName: dashboardAppModeInternalName,
-  }
+  };
   const newFormAppMode = {
     displayName: 'New Form',
     internalName: newFormAppModeInternalName,
-  }
+  };
   const settingsAppMode = {
     displayName: 'Settings',
     internalName: settingsAppModeInternalName,
-  }
+  };
 
   const { push } = useRouter();
   const supabase = createClientComponentClient<Database>();
@@ -92,7 +92,7 @@ export default function AppShell(props: AppShellProps) {
       return <ErrorMode
         user={props.user}
         errorMessage={`No mode with internal name ${mode.internalName}`}
-      />
+      />;
     }
   };
 

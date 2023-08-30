@@ -1,23 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { ChatMessage, LLMRequest, LLMResponse } from '@/types';
-import { FAKE_SCHEMA, PROMPT_FILL } from '@/prompts';
 import { MessageUI } from '@/components/chat';
-import { callLLM } from '@/utils';
+import { PROMPT_FILL } from '@/prompts';
+import { ChatMessage, Form } from '@/types';
+import { callLLM, getFormFromSupabase } from '@/utils';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useRouter } from 'next/router';
+import React, { useEffect, useRef, useState } from 'react';
+import { Database } from '../../../../types/supabase';
 
 export default function CreateForm() {
-  const schema = FAKE_SCHEMA; // TODO hydrate from route after page loads
-  const systemPrompt = PROMPT_FILL(schema);
-  const [messages, setMessages] = useState<ChatMessage[]>([
-    // {
-    //   role: "assistant",
-    //   content: "What kind of form can I help you with?"
-    // }
-  ]);
+  const router = useRouter();
+  const formId = router.query.id as string;
+  if (typeof formId !== 'string') {
+    console.error(`Invalid form id: '${formId}'`);
+  }
+  const supabase = createClientComponentClient<Database>();
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isWaiting, setIsWaiting] = useState(false);
+  const [form, setForm] = useState<Form | null>(null);
   const inputRef = useRef<HTMLInputElement>(null); // Initialize the ref
 
   const handleSubmit = async (userMessage?: string) => {
+    if (!form) {
+      console.error('No schema found');
+      return;
+    }
     const messagesToSend =
       userMessage && userMessage.trim()
         ? [
@@ -31,7 +38,7 @@ export default function CreateForm() {
     setMessages(messagesToSend);
     setInputValue('');
     setIsWaiting(true);
-    const assistantResponse = await callLLM(systemPrompt, messagesToSend);
+    const assistantResponse = await callLLM(PROMPT_FILL(form), messagesToSend);
     setMessages((prev) => [...prev, assistantResponse]);
     setIsWaiting(false);
   };
@@ -53,6 +60,17 @@ export default function CreateForm() {
   useEffect(() => {
     if (messages.length === 0) {
       handleSubmit();
+    }
+    if (!form) {
+      getFormFromSupabase(formId, supabase).then((maybeForm) => { 
+        if (maybeForm instanceof Error) {
+          console.error(maybeForm.message);
+          // TODO set error and render it
+        } else {
+          setForm(maybeForm);
+        }
+      });
+      
     }
   }, []); // The empty array ensures this effect runs only once on mount
 

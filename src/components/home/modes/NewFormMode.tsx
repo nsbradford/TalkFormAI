@@ -11,7 +11,7 @@ type NewFormModeProps = {
 
 export default function NewFormMode(props: NewFormModeProps) {
     const supabase = createClientComponentClient<Database>();
-    const [form, setForm] = useState<Form>(null);
+    const [form, setForm] = useState<Form | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(true);
   
     return (
@@ -20,5 +20,5 @@ export default function NewFormMode(props: NewFormModeProps) {
                 new form page
             </p>
         </ul>
-    ) 
+    ); 
 }

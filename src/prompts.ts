@@ -1,6 +1,8 @@
+import { Form } from "@/types";
+
 export const PROMPT_BUILD = `TODO`;
 
-export function PROMPT_FILL(schema: string) {
+export function PROMPT_FILL(form: Form) {
   return `You are FormGPT, a helpful, honest, and harmless AI assistant helping gather information from users and using it to populate forms. Your job: Given a form schema to populate, continue your conversation with the user until you have enough information to fill out the form.
 
 You must respond with a JSON blob with the following format:
@@ -18,8 +20,10 @@ RULES YOU MUST FOLLOW:
 - Users might sometimes be uncertain about some fields; you can press a little, but you must ultimately respect your decision and fill in "[User not sure]".
 
 YOUR SCHEMA:
+Name: ${form.name}
+Description: ${form.description || '[No description]'}
 \`\`\`
-${schema}
+${form.desired_fields_schema}
 \`\`\`
 `;
 }
