@@ -55,7 +55,7 @@ export function InnerChat(props: { form: Form }) {
             ...messages,
             {
               role: 'user' as const,
-              content: userMessage.trim(),
+              content: `{ "user_message": "${userMessage.trim()}" }`, // extra JSON to keep model behaving
             },
           ]
         : messages;
