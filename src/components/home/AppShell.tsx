@@ -53,6 +53,7 @@ export default function AppShell(props: AppShellProps) {
   const { push } = useRouter();
   const supabase = createClientComponentClient<Database>();
   const [mode, setMode] = useState<AppMode>(dashboardAppMode);
+  const [shouldRefresh, setShouldRefresh] = useState<boolean>(false); 
   const [activeForm, setActiveForm] = useState<Form | null>(null);
   const [allForms, setAllForms] = useState<Form[] | null>(null);
   const [formIdToResponses, setFormIdToResponses] = useState<Record<string, Response[]> | null>(null);
@@ -82,7 +83,7 @@ export default function AppShell(props: AppShellProps) {
       setFormIdToResponses(allResposes);
       setIsLoading(false);
     };
-    if (isLoading && allForms === null && formIdToResponses === null) {
+    if (shouldRefresh || (isLoading && allForms === null && formIdToResponses === null)) {
       getFormsAndResponses();
     }
   }, [isLoading, allForms, formIdToResponses]);
@@ -134,7 +135,7 @@ export default function AppShell(props: AppShellProps) {
         user={props.user}
         onCancelClick={() => setMode(dashboardAppMode)}
         onSuccessfulSubmit={() => {
-          setAllForms(null);
+          setShouldRefresh(true);
           setMode(dashboardAppMode)}
         }
       />;

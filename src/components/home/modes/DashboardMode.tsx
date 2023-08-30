@@ -29,34 +29,34 @@ export default function DashboardMode(props: DashboardModeProps) {
             </button>
             {props.forms.map((f) => {
                 const responsesForThisForm = props.responses[f.id] || [];
+                const badgeColor = f.is_open ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800';
+                const camelCaseTitle = f.name.charAt(0).toUpperCase() + f.name.slice(1, f.name.length)
                 return (
                     <li key={f.id} className="flex justify-between gap-x-6 py-5">
-                    <div className="flex min-w-0 gap-x-4">
-                        <div className="h-20 w-20 rounded-full bg-gray-500">
-                            <div className="flex h-full w-full items-center justify-center text-white">
-                                {props.user.email[0]}
+                        <div className="flex min-w-0 gap-x-4">
+                            <div className="min-w-0 flex-auto">
+                                <div className="flex gap-x-6 ">
+                                    <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${badgeColor} ring-1 ring-inset ring-gray-500/10`}>
+                                        {f.is_open ? 'Open' : 'Closed'}
+                                    </span>
+                                    <p className="text-sm font-semibold leading-6 text-gray-900">{camelCaseTitle}</p>
+                                </div>
+                            <p className="mt-1 truncate text-xs leading-5 text-gray-500">{f.description || f.desired_fields_schema.slice(0,32) + '...'}</p>
                             </div>
                         </div>
-                        <div className="min-w-0 flex-auto">
-                        <p className="text-sm font-semibold leading-6 text-gray-900">{f.id}</p>
-                        <p className="mt-1 truncate text-xs leading-5 text-gray-500">{f.created_at}</p>
+                        <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
+                            <button
+                                className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                                Save
+                            </button>
+                            <p className="text-sm leading-6 text-gray-900">
+                                {responsesForThisForm.length === 0 ? 'No responses yet' : responsesForThisForm.length + ' responses'}
+                            </p>
+                            <p className="mt-1 text-xs leading-5 text-gray-500">
+                                Updated at <time>{f.updated_at}</time>
+                            </p>
                         </div>
-                    </div>
-                    <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                        <p className="text-sm leading-6 text-gray-900">{f.desired_fields_schema}</p>
-                        {responsesForThisForm.length === 0 ? (
-                        <p className="mt-1 text-xs leading-5 text-gray-500">
-                            No responses yet, last updated at <time>{f.updated_at}</time>
-                        </p>
-                        ) : (
-                            <div className="mt-1 flex items-center gap-x-1.5">
-                                <div className="flex-none rounded-full bg-emerald-500/20 p-1">
-                                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                            </div>
-                            <p className="text-xs leading-5 text-gray-500">{responsesForThisForm.length}</p>
-                        </div>
-                        )}
-                    </div>
                     </li>
                 );
             })}
