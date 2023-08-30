@@ -1,8 +1,8 @@
 import { MessageUI } from '@/components/chat';
 import { PROMPT_FILL } from '@/prompts';
 import { ChatMessage, Form } from '@/types';
-import { callLLM, getFormFromSupabase } from '@/utils';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { callLLM, getFormFromSupabase, submitResponseToSupabase } from '@/utils';
+import { SupabaseClient, createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Database } from '../../../../types/supabase';
@@ -39,9 +39,9 @@ export function CreateFormInner(props: { formId: string }) {
       });
     }
   }, []); // The empty array ensures this effect runs only once on mount
-  return form ? <InnerChat form={form} /> : <div>Loading...</div>;
+  return form ? <InnerChat form={form} supabase={supabase} /> : <div>Loading...</div>;
 }
-export function InnerChat(props: { form: Form }) {
+export function InnerChat(props: { form: Form, supabase: SupabaseClient<Database> }) {
   const { form } = props;
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -52,19 +52,44 @@ export function InnerChat(props: { form: Form }) {
     const messagesToSend =
       userMessage && userMessage.trim()
         ? [
-            ...messages,
-            {
-              role: 'user' as const,
-              content: userMessage.trim(),
-            },
-          ]
+          ...messages,
+          {
+            role: 'user' as const,
+            content: `{ "user_message": "${userMessage.trim()}" }`, // extra JSON to keep model behaving
+          },
+        ]
         : messages;
     setMessages(messagesToSend);
     setInputValue('');
     setIsWaiting(true);
     const assistantResponse = await callLLM(PROMPT_FILL(form), messagesToSend);
     setMessages((prev) => [...prev, assistantResponse]);
-    setIsWaiting(false);
+    if (assistantResponse.content) {
+      try {
+        console.log(`LLM response`, assistantResponse);
+        const parsed = JSON.parse(assistantResponse.content);
+        if (!('action' in parsed && typeof parsed.action === 'string')) {
+          console.error('Invalid response from LLM', assistantResponse.content);
+        } else {
+          console.log(`LLM returned valid JSON with action`, parsed.action);
+        }
+        if ('form' in parsed && typeof parsed.form === 'object') {
+          console.log('Agent wants to exit, submitting', assistantResponse.content);
+          submitResponseToSupabase(form.id, parsed.form, props.supabase).then((maybeError) => {
+            // if (maybeError instanceof Error) {
+            //   // TODO set error and render it
+            // } else {
+            //   router.push(`/forms/${form.id}/submitted`);
+            // }
+          });
+        } else {
+          console.log('Agent wants to continue', assistantResponse.content);
+        }
+      } catch (e) {
+        console.error('Invalid response from LLM', assistantResponse.content);
+      }
+      setIsWaiting(false);
+    };
   };
   const handleCancel = () => {
     setIsWaiting(false);
