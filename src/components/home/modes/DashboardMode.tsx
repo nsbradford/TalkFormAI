@@ -8,11 +8,11 @@ import Spinner from '../Spinner';
 
 type DashboardModeProps = {
     user: User;
+    onNewFormClick: () => void;
 }
 
 
 export default function DashboardMode(props: DashboardModeProps) {
-    const { push } = useRouter();
     const supabase = createClientComponentClient<Database>();
     const [forms, setForms] = useState<Form[] | null>(null);
     const [responses, setResponses] = useState<Record<string, Response[]> | null>(null); // Form ID -> Responses
@@ -47,10 +47,6 @@ export default function DashboardMode(props: DashboardModeProps) {
       }
     }, [isLoading, forms, responses]);
 
-    const onNewFormClick = () => {
-        push('/forms/new')
-    }
-
     if (isLoading) {
         return <Spinner />;
     } else if (forms === null || responses === null) {
@@ -60,7 +56,7 @@ export default function DashboardMode(props: DashboardModeProps) {
             <div className="flex flex-col items-center justify-center h-full">
                 <h1 className="text-2xl font-semibold text-gray-900">You have no forms</h1>
                 <p className="mt-2 text-sm text-gray-500">Create a form to get started</p>
-                <button onClick={onNewFormClick}>
+                <button onClick={props.onNewFormClick}>
                     Create a form
                 </button>
             </div>
@@ -68,7 +64,7 @@ export default function DashboardMode(props: DashboardModeProps) {
     } else {
         return (
             <ul role="list" className="divide-y divide-gray-100">
-            <button onClick={onNewFormClick}>
+            <button onClick={props.onNewFormClick}>
                 New form
             </button>
             {forms.map((f) => {

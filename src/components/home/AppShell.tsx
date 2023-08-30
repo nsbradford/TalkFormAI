@@ -1,13 +1,14 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Session } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '../../../types/supabase';
 import DashboardMode from './modes/DashboardMode';
-import { getFormsFromSupabase, getResponsesFromSupabase } from '@/utils';
-import { Form, Response, User } from '@/types';
+import { User } from '@/types';
+import NewFormMode from './modes/NewFormMode';
+import SettingsMode from './modes/SettingsMode';
+import ErrorMode from './modes/ErrorMode';
 
 
 function classNames(...classes: string[]) {
@@ -18,14 +19,36 @@ type AppShellProps = {
   user: User;
 };
 
+type AppMode = {
+  displayName: string;
+  internalName: string;
+}
+
+const dashboardAppModeInternalName = 'dashboard';
+const newFormAppModeInternalName = 'new_form';
+const settingsAppModeInternalName = 'settings';
+
 
 export default function AppShell(props: AppShellProps) {
+  const dashboardAppMode = {
+    displayName: 'Dashboard',
+    internalName: dashboardAppModeInternalName,
+  }
+  const newFormAppMode = {
+    displayName: 'New Form',
+    internalName: newFormAppModeInternalName,
+  }
+  const settingsAppMode = {
+    displayName: 'Settings',
+    internalName: settingsAppModeInternalName,
+  }
+
   const { push } = useRouter();
   const supabase = createClientComponentClient<Database>();
-  const [mode, setMode] = useState<'loading' | 'dashboard' | 'settings'>('dashboard');
+  const [mode, setMode] = useState<AppMode>(dashboardAppMode);
 
   const userNavigation = [
-    { name: 'Settings', href: '#', onClick: () => setMode('settings')},
+    { name: 'Settings', href: '#', onClick: () => setMode(settingsAppMode)},
     {
       name: 'Sign out',
       href: '#',
@@ -56,12 +79,20 @@ export default function AppShell(props: AppShellProps) {
   };
 
   const getCenterModeComponent = () => {
-    if (mode === 'dashboard') {
-      return <DashboardMode user={props.user}/>;
-    } else if (mode === 'settings') {
-      return <p>{JSON.stringify(props.user)}</p>
+    if (mode.internalName === dashboardAppModeInternalName) {
+      return (<DashboardMode
+        user={props.user}
+        onNewFormClick={() => setMode(newFormAppMode)}
+      />);
+    } else if (mode.internalName === newFormAppModeInternalName) {
+      return <NewFormMode user={props.user}/>;
+    } else if (mode.internalName === settingsAppModeInternalName) {
+      return <SettingsMode user={props.user}/>;
     } else {
-      return <p>Unknown mode: {mode}</p>
+      return <ErrorMode
+        user={props.user}
+        errorMessage={`No mode with internal name ${mode.internalName}`}
+      />
     }
   }
 
@@ -197,7 +228,7 @@ export default function AppShell(props: AppShellProps) {
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              {mode.charAt(0).toUpperCase() + mode.slice(1)}
+              {mode.displayName}
             </h1>
           </div>
         </header>
