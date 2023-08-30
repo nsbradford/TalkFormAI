@@ -94,7 +94,7 @@ export default function AppShell(props: AppShellProps) {
         errorMessage={`No mode with internal name ${mode.internalName}`}
       />
     }
-  }
+  };
 
   return (
     <>

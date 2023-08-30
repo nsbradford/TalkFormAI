@@ -20,7 +20,7 @@ export default function DashboardMode(props: DashboardModeProps) {
   
     useEffect(() => {
       const getFormsAndResponses = async () => {
-        const forms = await getFormsFromSupabase(props.user.id, supabase)
+        const forms = await getFormsFromSupabase(props.user.id, supabase);
         if (forms === undefined) {
           setIsLoading(false);
           return;
@@ -28,10 +28,10 @@ export default function DashboardMode(props: DashboardModeProps) {
           setForms(forms);
           setResponses({} as Record<string, Response[]>);
           setIsLoading(false);
-          return
+          return;
         }
         setForms(forms);
-        let allResposes = {} as Record<string, Response[]>;
+        const allResposes = {} as Record<string, Response[]>;
         for (const form of forms) {
           const formResponses = await getResponsesFromSupabase(form.id, supabase);
           if (formResponses === undefined) {
@@ -41,16 +41,16 @@ export default function DashboardMode(props: DashboardModeProps) {
         }
         setResponses(allResposes);
         setIsLoading(false);
-      }
+      };
       if (isLoading && forms === null && responses === null) {
-        getFormsAndResponses()
+        getFormsAndResponses();
       }
     }, [isLoading, forms, responses]);
 
     if (isLoading) {
         return <Spinner />;
     } else if (forms === null || responses === null) {
-        return (<p>something went wrong</p>)
+        return (<p>something went wrong</p>);
     } else if (forms.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center h-full">
@@ -60,7 +60,7 @@ export default function DashboardMode(props: DashboardModeProps) {
                     Create a form
                 </button>
             </div>
-        )
+        );
     } else {
         return (
             <ul role="list" className="divide-y divide-gray-100">
@@ -98,9 +98,9 @@ export default function DashboardMode(props: DashboardModeProps) {
                         )}
                     </div>
                     </li>
-                )
+                );
             })}
             </ul>
-        ) 
+        ); 
     }
 }
