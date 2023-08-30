@@ -1,27 +1,31 @@
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Session } from '@supabase/supabase-js';
 import { useRouter } from 'next/router';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Database } from '../../../types/supabase';
+import DashboardMode from './modes/DashboardMode';
+import { getFormsFromSupabase, getResponsesFromSupabase } from '@/utils';
+import { Form, Response, User } from '@/types';
+
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-type User = Database['public']['Tables']['users']['Row'];
-
 type AppShellProps = {
   user: User;
 };
 
+
 export default function AppShell(props: AppShellProps) {
   const { push } = useRouter();
   const supabase = createClientComponentClient<Database>();
+  const [mode, setMode] = useState<'loading' | 'dashboard' | 'settings'>('dashboard');
 
   const userNavigation = [
-    { name: 'Settings', href: '#' },
+    { name: 'Settings', href: '#', onClick: () => setMode('settings')},
     {
       name: 'Sign out',
       href: '#',
@@ -50,6 +54,16 @@ export default function AppShell(props: AppShellProps) {
       </div>
     );
   };
+
+  const getCenterModeComponent = () => {
+    if (mode === 'dashboard') {
+      return <DashboardMode user={props.user}/>;
+    } else if (mode === 'settings') {
+      return <p>{JSON.stringify(props.user)}</p>
+    } else {
+      return <p>Unknown mode: {mode}</p>
+    }
+  }
 
   return (
     <>
@@ -183,13 +197,13 @@ export default function AppShell(props: AppShellProps) {
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-              Dashboard
+              {mode.charAt(0).toUpperCase() + mode.slice(1)}
             </h1>
           </div>
         </header>
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            {JSON.stringify(props.user)}
+            {getCenterModeComponent()}
           </div>
         </main>
       </div>

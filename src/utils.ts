@@ -1,4 +1,4 @@
-import { ChatMessage, LLMRequest, LLMResponse, User } from '@/types';
+import { ChatMessage, Form, LLMRequest, LLMResponse, User, Response } from '@/types';
 import {
   Session,
   SupabaseClient,
@@ -51,4 +51,36 @@ export async function getUserFromSupabase(
   } else {
     setUser(data);
   }
+}
+
+
+export async function getFormsFromSupabase(
+  userId: string,
+  supabase: SupabaseClient<Database>
+): Promise<Form[] | undefined> {
+  const { data, error } = await supabase
+    .from('forms')
+    .select()
+    .eq('user_id', userId);
+  if (error) {
+    console.error(error);
+    return;
+  } 
+  return data as Form[];
+}
+
+
+export async function getResponsesFromSupabase(
+  formId: string,
+  supabase: SupabaseClient<Database>,
+): Promise<Response[] | undefined> {
+  const { data, error } = await supabase
+    .from('responses')
+    .select()
+    .eq('form_id', formId);
+  if (error) {
+    console.error(error);
+    return;
+  }
+  return data as Response[];
 }
