@@ -24,24 +24,24 @@ export default function CreateFormComponent() {
   }, [isLoading, session]);
 
   const handleCreateForm = async () => {
-    console.log(`Creating form with desired fields: ${desiredFields}`);
-    if (!user) {
-      console.error('User is not set.');
-      return;
-    }
+    // console.log(`Creating form with desired fields: ${desiredFields}`);
+    // if (!user) {
+    //   console.error('User is not set.');
+    //   return;
+    // }
 
-    const form = {
-      id: v4(),
-      user_id: user.id,
-      desired_fields_schema: desiredFields,
-    };
-    const { error } = await supabase.from('forms').insert(form);
+    // const form = {
+    //   id: v4(),
+    //   user_id: user.id,
+    //   desired_fields_schema: desiredFields,
+    // };
+    // const { error } = await supabase.from('forms').insert(form);
 
-    if (error) {
-      console.error(`Error creating form`, { form, error });
-    } else {
-      console.log('Successfully created form', form);
-    }
+    // if (error) {
+    //   console.error(`Error creating form`, { form, error });
+    // } else {
+    //   console.log('Successfully created form', form);
+    // }
   };
 
   return (
@@ -49,20 +49,20 @@ export default function CreateFormComponent() {
       <h1 className="text-xl mb-4">Create Form</h1>
       {user ? (
         <>
-          <input
+          {/* <input
             type="text"
             className="border p-2 mb-2"
             placeholder="Desired Fields"
             value={desiredFields}
             onChange={(e) => setDesiredFields(e.target.value)}
-          />
-          <h1 className="text-xl mb-4">Create Form</h1>
-          <button
+          /> */}
+          <h1 className="text-xl mb-4">[this page is deprecated]</h1>
+          {/* <button
             className="bg-blue-500 text-white px-4 py-2"
             onClick={handleCreateForm}
           >
             Create Form
-          </button>
+          </button> */}
         </>
       ) : (
         <p>Loading user...</p>

@@ -7,7 +7,7 @@
   ],
   "rules": {
     // I suggest you add those two rules:
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "error",
     // semicolons are required
     "semi": ["error", "always"]

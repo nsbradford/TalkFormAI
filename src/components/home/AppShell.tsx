@@ -59,11 +59,11 @@ export default function AppShell(props: AppShellProps) {
     if (mode === 'dashboard') {
       return <DashboardMode user={props.user}/>;
     } else if (mode === 'settings') {
-      return <p>{JSON.stringify(props.user)}</p>
+      return <p>{JSON.stringify(props.user)}</p>;
     } else {
-      return <p>Unknown mode: {mode}</p>
+      return <p>Unknown mode: {mode}</p>;
     }
-  }
+  };
 
   return (
     <>
