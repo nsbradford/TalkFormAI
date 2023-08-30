@@ -1,11 +1,14 @@
-import { ChatMessage, Form, LLMRequest, LLMResponse, User, Response } from '@/types';
 import {
-  Session,
-  SupabaseClient,
-  createClientComponentClient,
-} from '@supabase/auth-helpers-nextjs';
-import { Database, Json } from '../types/supabase';
+  ChatMessage,
+  Form,
+  LLMRequest,
+  LLMResponse,
+  Response,
+  User,
+} from '@/types';
+import { Session, SupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { v4 } from 'uuid';
+import { Database, Json } from '../types/supabase';
 
 export const callLLM = async (
   systemPrompt: string,
@@ -54,7 +57,6 @@ export async function getUserFromSupabase(
   }
 }
 
-
 export async function getFormsFromSupabase(
   userId: string,
   supabase: SupabaseClient<Database>
@@ -66,7 +68,7 @@ export async function getFormsFromSupabase(
   if (error) {
     console.error(error);
     return;
-  } 
+  }
   return data as Form[];
 }
 
@@ -89,7 +91,7 @@ export async function getFormFromSupabase(
 
 export async function getResponsesFromSupabase(
   formId: string,
-  supabase: SupabaseClient<Database>,
+  supabase: SupabaseClient<Database>
 ): Promise<Response[] | undefined> {
   const { data, error } = await supabase
     .from('responses')
@@ -105,7 +107,7 @@ export async function getResponsesFromSupabase(
 export async function submitResponseToSupabase(
   formId: string,
   responseJson: Json,
-  supabase: SupabaseClient<Database>,
+  supabase: SupabaseClient<Database>
 ): Promise<Response | Error> {
   const response: Response = {
     id: v4(),
@@ -115,8 +117,8 @@ export async function submitResponseToSupabase(
     updated_at: new Date().toISOString(),
   };
   console.log('Submitting response to Supabase', { formId, response });
-  const { error } = await supabase.from('responses').insert(response); 
-  
+  const { error } = await supabase.from('responses').insert(response);
+
   if (error) {
     console.error(`Error creating response`, { response, error });
     return Error(error.message, { cause: error });

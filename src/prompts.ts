@@ -1,4 +1,4 @@
-import { Form } from "@/types";
+import { Form } from '@/types';
 
 export const PROMPT_BUILD = `TODO`;
 

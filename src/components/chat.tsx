@@ -5,15 +5,20 @@ export const MessageUI = (message: ChatMessage) => {
   if (!message.content) {
     content = '';
   } else {
-    // gross hacks but oh well  
+    // gross hacks but oh well
     try {
       const parsed = JSON.parse(message.content);
       if (typeof parsed === 'string') {
         content = parsed;
       } else if ('text' in parsed && typeof parsed.text === 'string') {
         content = parsed.text;
-      } else if ('user_message' in parsed && typeof parsed.user_message === 'string'){
+      } else if (
+        'user_message' in parsed &&
+        typeof parsed.user_message === 'string'
+      ) {
         content = parsed.user_message;
+      } else if ('exit' in parsed) {
+        content = 'Your response was successfully submitted.';
       } else {
         content = message.content;
       }
