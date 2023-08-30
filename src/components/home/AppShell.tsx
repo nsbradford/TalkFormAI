@@ -36,7 +36,7 @@ export default function AppShell(props: AppShellProps) {
   const dashboardAppMode = {
     displayName: 'Dashboard',
     internalName: dashboardAppModeInternalName,
-  }
+  };
   const newFormAppMode = {
     displayName: 'Create Form',
     internalName: newFormAppModeInternalName,
@@ -48,7 +48,7 @@ export default function AppShell(props: AppShellProps) {
   const settingsAppMode = {
     displayName: 'Settings',
     internalName: settingsAppModeInternalName,
-  }
+  };
 
   const { push } = useRouter();
   const supabase = createClientComponentClient<Database>();
@@ -133,7 +133,10 @@ export default function AppShell(props: AppShellProps) {
       return <NewFormMode 
         user={props.user}
         onCancelClick={() => setMode(dashboardAppMode)}
-        onSuccessfulSubmit={() => setMode(dashboardAppMode)}
+        onSuccessfulSubmit={() => {
+          setAllForms(null);
+          setMode(dashboardAppMode)}
+        }
       />;
     } else if (mode.internalName === formDetailAppModeInternalName) {
       return (<FormDetailMode user={props.user} formId=''/>)
@@ -143,7 +146,7 @@ export default function AppShell(props: AppShellProps) {
       return <ErrorMode
         user={props.user}
         errorMessage={`No mode with internal name ${mode.internalName}`}
-      />
+      />;
     }
   };
 

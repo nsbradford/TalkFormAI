@@ -69,6 +69,22 @@ export async function getFormsFromSupabase(
   return data as Form[];
 }
 
+export async function getFormFromSupabase(
+  formId: string,
+  supabase: SupabaseClient<Database>
+): Promise<Form | Error> {
+  const { data, error } = await supabase
+    .from('forms')
+    .select()
+    .eq('id', formId)
+    .maybeSingle();
+  if (error) {
+    return Error(error.message, { cause: error });
+  } else if (data === null) {
+    return Error(`No form found with id '${formId}'`);
+  }
+  return data;
+}
 
 export async function getResponsesFromSupabase(
   formId: string,

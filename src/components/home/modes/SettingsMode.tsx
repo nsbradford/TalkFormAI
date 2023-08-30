@@ -9,5 +9,5 @@ type SettingsModeProps = {
 export default function SettingsMode(props: SettingsModeProps) {
     return (
         <p>{JSON.stringify(props.user)}</p>
-    ) 
+    ); 
 }

@@ -10,5 +10,5 @@ type ErrorModeProps = {
 export default function ErrorMode(props: ErrorModeProps) {
     return (
         <p>{props.errorMessage}</p>
-    ) 
+    ); 
 }
