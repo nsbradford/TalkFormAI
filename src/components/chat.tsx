@@ -17,7 +17,7 @@ export const MessageUI = (message: ChatMessage) => {
         typeof parsed.user_message === 'string'
       ) {
         content = parsed.user_message;
-      } else if ('exit' in parsed) {
+      } else if ('action' in parsed && parsed.action === 'exit') {
         content = 'Your response was successfully submitted.';
       } else {
         content = message.content;
