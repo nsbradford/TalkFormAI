@@ -57,11 +57,11 @@ export default function DashboardMode(props: DashboardModeProps) {
                                     >
                                         View responses
                                     </button>
-                                    <button
-                                        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    >
+                                    { f.is_open ? (  
+                                      <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                                         <LinkIcon className="h-5 w-5" aria-hidden="true" />
-                                    </button>
+                                      </button>
+                                    ) : null }
                                     
                                 </div>
                                 <p className="mt-1 text-xs leading-5 text-gray-500">

@@ -23,13 +23,12 @@ type AppShellProps = {
 type AppMode = {
   displayName: string;
   internalName: string;
-}
+};
 
 const dashboardAppModeInternalName = 'dashboard';
 const newFormAppModeInternalName = 'new_form';
 const formDetailAppModeInternalName = 'form_detail';
 const settingsAppModeInternalName = 'settings';
-
 
 export default function AppShell(props: AppShellProps) {
   const dashboardAppMode = {
@@ -39,11 +38,11 @@ export default function AppShell(props: AppShellProps) {
   const newFormAppMode = {
     displayName: 'Create Form',
     internalName: newFormAppModeInternalName,
-  }
+  };
   const formDetailAppMode = {
     displayName: 'Responses',
     internalName: formDetailAppModeInternalName,
-  }
+  };
   const settingsAppMode = {
     displayName: 'Settings',
     internalName: settingsAppModeInternalName,
@@ -52,10 +51,13 @@ export default function AppShell(props: AppShellProps) {
   const { push } = useRouter();
   const supabase = createClientComponentClient<Database>();
   const [mode, setMode] = useState<AppMode>(dashboardAppMode);
-  const [shouldRefresh, setShouldRefresh] = useState<boolean>(false); 
+  const [shouldRefresh, setShouldRefresh] = useState<boolean>(false);
   const [activeForm, setActiveForm] = useState<Form | null>(null);
   const [allForms, setAllForms] = useState<Form[] | null>(null);
-  const [formIdToResponses, setFormIdToResponses] = useState<Record<string, Response[]> | null>(null);
+  const [formIdToResponses, setFormIdToResponses] = useState<Record<
+    string,
+    Response[]
+  > | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -82,15 +84,16 @@ export default function AppShell(props: AppShellProps) {
       setFormIdToResponses(allResposes);
       setIsLoading(false);
     };
-    if (shouldRefresh || (isLoading && allForms === null && formIdToResponses === null)) {
+    if (
+      shouldRefresh ||
+      (isLoading && allForms === null && formIdToResponses === null)
+    ) {
       getFormsAndResponses();
     }
   }, [isLoading, allForms, formIdToResponses]);
 
-
-
   const userNavigation = [
-    { name: 'Settings', href: '#', onClick: () => setMode(settingsAppMode)},
+    { name: 'Settings', href: '#', onClick: () => setMode(settingsAppMode) },
     {
       name: 'Sign out',
       href: '#',
@@ -122,45 +125,43 @@ export default function AppShell(props: AppShellProps) {
 
   const getCenterModeComponent = () => {
     if (mode.internalName === dashboardAppModeInternalName) {
-      return (<DashboardMode
-        user={props.user}
-        forms={allForms || []}
-        responses={formIdToResponses || {}}
-        onNewFormClick={() => setMode(newFormAppMode)}
-        onFormDetailClick={(formId: string) => {
-          const activeForm = allForms?.find((f) => f.id === formId) || null;
-          if (activeForm === null) {
-            return <ErrorMode
-              user={props.user}
-              errorMessage={`No form with id ${formId}`}
-            />;
-          }
-          setActiveForm(activeForm);
-          setMode(formDetailAppMode)}
-        }
-      />);
+      return (
+        <DashboardMode
+          user={props.user}
+          forms={allForms || []}
+          responses={formIdToResponses || {}}
+          onNewFormClick={() => setMode(newFormAppMode)}
+          onFormDetailClick={() => setMode(formDetailAppMode)}
+        />
+      );
     } else if (mode.internalName === newFormAppModeInternalName) {
-      return <NewFormMode 
-        user={props.user}
-        onCancelClick={() => setMode(dashboardAppMode)}
-        onSuccessfulSubmit={() => {
-          setShouldRefresh(true);
-          setMode(dashboardAppMode)}
-        }
-      />;
-    } else if (mode.internalName === formDetailAppModeInternalName) {
-      return (<FormDetailMode
-        user={props.user}
-        form={activeForm}
-        responses={formIdToResponses?.[activeForm?.id || ''] || []}
-      />)
+      return (
+        <NewFormMode
+          user={props.user}
+          onCancelClick={() => setMode(dashboardAppMode)}
+          onSuccessfulSubmit={() => {
+            setShouldRefresh(true);
+            setMode(dashboardAppMode);
+          }}
+        />
+      );
+    } else if (mode.internalName === formDetailAppModeInternalName && activeForm) {
+      return (
+        <FormDetailMode
+          user={props.user}
+          form={activeForm}
+          responses={formIdToResponses?.[activeForm?.id || ''] || []}
+        />
+      )
     } else if (mode.internalName === settingsAppModeInternalName) {
-      return <SettingsMode user={props.user}/>;
+      return <SettingsMode user={props.user} />;
     } else {
-      return <ErrorMode
-        user={props.user}
-        errorMessage={`No mode with internal name ${mode.internalName}`}
-      />;
+      return (
+        <ErrorMode
+          user={props.user}
+          errorMessage={`No mode with internal name ${mode.internalName}`}
+        />
+      );
     }
   };
 
