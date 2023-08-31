@@ -49,15 +49,16 @@ export const MessageUI = (message: ChatMessage) => {
     >
       <div className="flex items-start">
         <div className="mr-4">
-          {message.role === 'assistant'
-            ? // <FaRobot size={16} />
-              // '🤖'
-              <FontAwesomeIcon icon={faRobot} className='fa-fw text-rose-400' />
-            : // <FaUser size={16} />
+          {message.role === 'assistant' ? (
+            // <FaRobot size={16} />
+            // '🤖'
+            <FontAwesomeIcon icon={faRobot} className="fa-fw text-rose-400" />
+          ) : (
+            // <FaUser size={16} />
             // '👤'
             // text-gray-400 px-3 md:px-6 py-3 text-2xl
-            <FontAwesomeIcon icon={faUser} className='fa-fw text-gray-400' />
-          }
+            <FontAwesomeIcon icon={faUser} className="fa-fw text-gray-400" />
+          )}
         </div>
         <div>
           {/* {message.role === 'assistant' ? (

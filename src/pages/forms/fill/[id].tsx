@@ -17,7 +17,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Database } from '../../../../types/supabase';
 
-
 export const workSans = Work_Sans({
   weight: '400',
   subsets: ['latin'],
@@ -30,7 +29,9 @@ export default function CreateForm() {
   // If the page is still loading (especially during ISR or fallback scenarios), show a loading state
   const formId = router.query.id as string;
   return (
-    <div className={`${workSans.className} flex flex-col items-center bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 py-20 min-h-screen`}>
+    <div
+      className={`${workSans.className} flex flex-col items-center bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 py-20 min-h-screen`}
+    >
       {router.isFallback || typeof formId !== 'string' ? (
         <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>
       ) : (
@@ -176,7 +177,7 @@ export function InnerChat(props: {
             onClick={() => handleSubmit(inputValue)}
             disabled={isWaiting || isDone}
           >
-            <FontAwesomeIcon icon={faArrowRight} className='fa-fw' />
+            <FontAwesomeIcon icon={faArrowRight} className="fa-fw" />
           </button>
         </div>
       </div>

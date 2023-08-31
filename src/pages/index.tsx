@@ -17,7 +17,7 @@ export default function Home() {
           </span>
         </h2>
         <Link
-          href="/auth"
+          href="/home"
           className="inline-block bg-gradient-to-r from-yellow-400 via-pink-400 to-fuchsia-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:from-yellow-300 hover:via-pink-300 hover:to-fuchsia-400"
         >
           Create a form ›

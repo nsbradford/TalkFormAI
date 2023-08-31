@@ -1,10 +1,23 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SignUpForm from '../components/auth/SignUpForm';
 import SignInForm from '@/components/auth/SignInForm';
+import { useSessionContext } from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/router';
 
 export default function AuthPage() {
   const [mode, setMode] = useState<'sign_in' | 'sign_up'>('sign_up');
+  const { isLoading, session } = useSessionContext();
+  const { push } = useRouter();
+
+  useEffect(() => {
+    console.log('Checking if session is loading and if there is a session');
+    if (!isLoading && session) {
+      push('/home');
+    } else {
+      console.log('Session is not loading and there is no session');
+    }
+  }, [isLoading, session]);
 
   function switchMode() {
     if (mode === 'sign_in') {

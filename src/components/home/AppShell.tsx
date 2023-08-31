@@ -145,14 +145,17 @@ export default function AppShell(props: AppShellProps) {
           }}
         />
       );
-    } else if (mode.internalName === formDetailAppModeInternalName && activeForm) {
+    } else if (
+      mode.internalName === formDetailAppModeInternalName &&
+      activeForm
+    ) {
       return (
         <FormDetailMode
           user={props.user}
           form={activeForm}
           responses={formIdToResponses?.[activeForm?.id || ''] || []}
         />
-      )
+      );
     } else if (mode.internalName === settingsAppModeInternalName) {
       return <SettingsMode user={props.user} />;
     } else {
