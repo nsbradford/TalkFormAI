@@ -18,16 +18,16 @@ import { Database } from '../../../../types/supabase';
 export default function CreateForm() {
   const router = useRouter();
   // If the page is still loading (especially during ISR or fallback scenarios), show a loading state
-  if (router.isFallback) {
-    return <div>Loading...</div>;
-  } else {
-    const formId = router.query.id as string;
-    if (typeof formId !== 'string') {
-      // console.error(`Invalid form id: '${formId}'`);
-      return <div>Loading...</div>;
-    }
-    return <CreateFormInner formId={formId} />;
-  }
+  const formId = router.query.id as string;
+  return (
+    <div className="flex flex-col items-center bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 py-20 min-h-screen">
+      {router.isFallback || typeof formId !== 'string' ? (
+        <h1 className="text-4xl font-extrabold mb-6">Loading...</h1>
+      ) : (
+        <CreateFormInner formId={formId} />
+      )}
+    </div>
+  );
 }
 
 export function CreateFormInner(props: { formId: string }) {
@@ -49,7 +49,7 @@ export function CreateFormInner(props: { formId: string }) {
   return form ? (
     <InnerChat form={form} supabase={supabase} />
   ) : (
-    <div>Loading...</div>
+    <h1 className="text-4xl font-extrabold mb-6">Loading...</h1>
   );
 }
 export function InnerChat(props: {
@@ -87,7 +87,10 @@ export function InnerChat(props: {
         console.log(`LLM response`, assistantResponse);
         const parsed = JSON.parse(assistantResponse.content);
         if (!('action' in parsed && typeof parsed.action === 'string')) {
-          console.error('LLM did not return an action', assistantResponse.content);
+          console.error(
+            'LLM did not return an action',
+            assistantResponse.content
+          );
         } else {
           console.log(`LLM returned valid JSON with action`, parsed.action);
         }
@@ -96,15 +99,17 @@ export function InnerChat(props: {
             'Agent wants to exit, submitting',
             assistantResponse.content
           );
-          submitResponseToSupabase(form.id, parsed.submission, props.supabase).then(
-            (maybeError) => {
-              setIsDone(true);
-              setSubmission(parsed.submission);
-              if (maybeError instanceof Error) {
-                setError(maybeError);
-              }
+          submitResponseToSupabase(
+            form.id,
+            parsed.submission,
+            props.supabase
+          ).then((maybeError) => {
+            setIsDone(true);
+            setSubmission(parsed.submission);
+            if (maybeError instanceof Error) {
+              setError(maybeError);
             }
-          );
+          });
         } else {
           console.log('Agent wants to continue', assistantResponse.content);
         }
@@ -136,10 +141,8 @@ export function InnerChat(props: {
   }, []); // The empty array ensures this effect runs only once on mount
 
   return (
-    <div className="flex flex-col items-center bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 py-20 min-h-screen">
-      {form && (
-        <h1 className="text-4xl font-extrabold mb-6">{form.name}</h1>
-      )}
+    <>
+      <h1 className="text-4xl font-extrabold mb-6">{form.name}</h1>
       <div className="w-4/5 lg:w-1/2 2xl:w-2/5 bg-white shadow-md p-6 rounded-lg">
         {messages.map((message, index) => (
           <MessageUI
@@ -170,31 +173,38 @@ export function InnerChat(props: {
 
       {error && ErrorBox(error)}
       {submission && SubmissionBox(submission)}
-    </div>
+    </>
   );
 }
 
-          {/* {isWaiting && (
+{
+  /* {isWaiting && (
             <button
               className="ml-2 py-2 px-4 bg-red-500 text-white rounded-lg"
               onClick={handleCancel}
             >
               Cancel
             </button>
-          )} */}
+          )} */
+}
 
 function ErrorBox(error: Error): React.ReactNode {
-  return <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-red-300 shadow-md p-6 rounded-lg mt-4">
-    <h1 className="text-4xl font-extrabold mb-6">Error</h1>
-    <pre>{error.message}</pre>
-  </div>;
+  return (
+    <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-red-300 shadow-md p-6 rounded-lg mt-4">
+      <h1 className="text-4xl font-extrabold mb-6">Error</h1>
+      <pre>{error.message}</pre>
+    </div>
+  );
 }
 
 function SubmissionBox(submission: object): React.ReactNode {
-  return <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg mt-4">
-    <h1 className="text-4xl font-extrabold mb-6">Submission</h1>
-    <pre className='whitespace-pre-wrap'>{JSON.stringify(submission, null, 2)}</pre>
-    {/* <div className="mt-4 flex">
+  return (
+    <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg mt-4">
+      <h1 className="text-4xl font-extrabold mb-6">Submission</h1>
+      <pre className="whitespace-pre-wrap">
+        {JSON.stringify(submission, null, 2)}
+      </pre>
+      {/* <div className="mt-4 flex">
           <button
             className="ml-2 py-2 px-4 bg-green-500 text-white rounded-lg"
             onClick={() => router.push('/')}
@@ -202,6 +212,6 @@ function SubmissionBox(submission: object): React.ReactNode {
             Home
           </button>
         </div> */}
-  </div>;
+    </div>
+  );
 }
-

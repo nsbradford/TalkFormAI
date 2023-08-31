@@ -38,32 +38,30 @@ export const MessageUI = (message: ChatMessage) => {
     //   {content}
     // </div>
     <div
-  className={`my-2 p-3 rounded-lg ${
-    message.role === 'assistant'
-      ? 'bg-gray-200 text-black'
-      : 'bg-white text-black'
-  }`}
-  // style={{ borderBottom: '1px solid #ccc' }}
->
-  <div className="flex items-start">
-    <div className="mr-4">
-      {message.role === 'assistant' ? (
-        // <FaRobot size={16} />
-        '🤖'
-      ) : (
-        // <FaUser size={16} />
-        '👤'
-      )}
-    </div>
-    <div>
-      {/* {message.role === 'assistant' ? (
+      className={`my-2 p-3 rounded-lg ${
+        message.role === 'assistant'
+          ? 'bg-gray-200 text-black'
+          : 'bg-white text-black'
+      }`}
+      // style={{ borderBottom: '1px solid #ccc' }}
+    >
+      <div className="flex items-start">
+        <div className="mr-4">
+          {message.role === 'assistant'
+            ? // <FaRobot size={16} />
+              '🤖'
+            : // <FaUser size={16} />
+              '👤'}
+        </div>
+        <div>
+          {/* {message.role === 'assistant' ? (
         <pre className="whitespace-pre-wrap">{content}</pre>
       ) : (
         <span>{content}</span>
       )} */}
-      <span>{content}</span>
+          <span>{content}</span>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
   );
 };
