@@ -30,23 +30,22 @@ export default function CreateForm() {
   // If the page is still loading (especially during ISR or fallback scenarios), show a loading state
   const formId = router.query.id as string;
   return (
-<>
-      
+    <>
       <div
-      className={`bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 min-h-screen`}
+        className={`bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 min-h-screen`}
       >
         <NavBar getAvatar={() => <></>} userNavigation={[]} props={{}} />
-    <div
-      className={`${workSans.className} flex flex-col items-center  min-h-screen py-20`}
-    >
-      {router.isFallback || typeof formId !== 'string' ? (
-        <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>
-      ) : (
-        <CreateFormInner formId={formId} />
-      )}
+        <div
+          className={`${workSans.className} flex flex-col items-center  min-h-screen py-20`}
+        >
+          {router.isFallback || typeof formId !== 'string' ? (
+            <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>
+          ) : (
+            <CreateFormInner formId={formId} />
+          )}
         </div>
-        </div>
-      </>
+      </div>
+    </>
   );
 }
 
