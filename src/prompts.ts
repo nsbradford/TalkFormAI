@@ -41,13 +41,13 @@ YOUR SCHEMA:
 Name: ${form.name}
 Description: ${form.description || '[No description]'}
 \`\`\`
-Movie-themed game night. Ask everyone their name, RSVP, favorite movie, dietary preferences, # of guests. Remind everyone to BYOB.
+${form.desired_fields_schema}
 \`\`\`
 
 You MUST provide your response in JSON.
 `;
-// ${form.desired_fields_schema}
 }
+// Movie-themed game night. Ask everyone their name, RSVP, favorite movie, dietary preferences, # of guests. Remind everyone to BYOB.
 
 export const FAKE_SCHEMA = `
 {

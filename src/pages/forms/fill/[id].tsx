@@ -62,6 +62,8 @@ export function InnerChat(props: {
   const [isWaiting, setIsWaiting] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null); // Initialize the ref
+  const [submission, setSubmission] = useState<object | null>(null);
+  const [error, setError] = useState<Error | null>(null);
 
   const handleSubmit = async (userMessage?: string) => {
     const messagesToSend =
@@ -96,11 +98,10 @@ export function InnerChat(props: {
           submitResponseToSupabase(form.id, parsed.form, props.supabase).then(
             (maybeError) => {
               setIsDone(true);
-              // if (maybeError instanceof Error) {
-              //   // TODO set error and render it
-              // } else {
-              //   router.push(`/forms/${form.id}/submitted`);
-              // }
+              setSubmission(parsed.submission);
+              if (maybeError instanceof Error) {
+                setError(maybeError);
+              }
             }
           );
         } else {
@@ -174,6 +175,20 @@ export function InnerChat(props: {
           )}
         </div>
       </div>
+
+      {submission && (
+        <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg mt-4">
+          <h1 className="text-4xl font-extrabold mb-6">Submission</h1>
+          <pre>{JSON.stringify(submission, null, 2)}</pre>
+          {/* <div className="mt-4 flex">
+            <button
+              className="ml-2 py-2 px-4 bg-green-500 text-white rounded-lg"
+              onClick={() => router.push('/')}
+            >
+              Home
+            </button>
+          </div> */}
+        </div>)}
     </div>
   );
 }
