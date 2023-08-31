@@ -1,3 +1,4 @@
+import { NavBar } from '@/components/home/NavBar';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Work_Sans } from 'next/font/google';
@@ -13,6 +14,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <>
+      <NavBar getAvatar={() => <></>} userNavigation={[]} props={{}}/>
       <div className={`flex justify-center items-center mt-20`}>
         <div className="flex flex-col items-center justify-center">
           <h1 className="text-4xl font-extrabold pb-8 md:text-7xl bg-gradient-to-r from-purple-600 to-blue-400 bg-clip-text text-transparent">

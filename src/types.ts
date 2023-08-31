@@ -15,3 +15,8 @@ export type ChatMessage =
 export type User = Database['public']['Tables']['users']['Row'];
 export type Form = Database['public']['Tables']['forms']['Row'];
 export type Response = Database['public']['Tables']['responses']['Row'];
+
+
+export type AppShellProps = {
+  user: User;
+};
