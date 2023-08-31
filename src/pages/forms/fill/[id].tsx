@@ -95,7 +95,7 @@ export function InnerChat(props: {
             'Agent wants to exit, submitting',
             assistantResponse.content
           );
-          submitResponseToSupabase(form.id, parsed.form, props.supabase).then(
+          submitResponseToSupabase(form.id, parsed.submission, props.supabase).then(
             (maybeError) => {
               setIsDone(true);
               setSubmission(parsed.submission);
