@@ -131,7 +131,19 @@ export default function AppShell(props: AppShellProps) {
           forms={allForms || []}
           responses={formIdToResponses || {}}
           onNewFormClick={() => setMode(newFormAppMode)}
-          onFormDetailClick={() => setMode(formDetailAppMode)}
+          onFormDetailClick={(formId) => {
+            const selectedForm = allForms?.find((f) => f.id === formId);
+            if (selectedForm === undefined) {
+              return (
+                <ErrorMode
+                  user={props.user}
+                  errorMessage={`No form found for ${formId}`}
+                />
+              )
+            }
+            setActiveForm(selectedForm)
+            setMode(formDetailAppMode)
+          }}
         />
       );
     } else if (mode.internalName === newFormAppModeInternalName) {
@@ -162,7 +174,7 @@ export default function AppShell(props: AppShellProps) {
       return (
         <ErrorMode
           user={props.user}
-          errorMessage={`No mode with internal name ${mode.internalName}`}
+          errorMessage={`No mode found for ${mode.internalName}`}
         />
       );
     }
