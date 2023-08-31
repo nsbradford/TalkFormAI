@@ -3,6 +3,7 @@ import { ChatMessage, LLMRequest, LLMResponse } from '@/types';
 import { FAKE_SCHEMA, PROMPT_FILL } from '@/prompts';
 import { MessageUI } from '@/components/chat';
 import { callLLM } from '@/utils';
+import { Button } from '@mantine/core'
 
 export default function CreateForm() {
   const schema = FAKE_SCHEMA; // TODO hydrate from route after page loads
@@ -77,20 +78,20 @@ export default function CreateForm() {
             onKeyPress={handleKeyPress}
             ref={inputRef}
           />
-          <button
+          <Button
             className="ml-2 py-2 px-4 bg-green-500 text-white rounded-lg"
             onClick={() => handleSubmit(inputValue)}
             disabled={isWaiting}
           >
             Submit
-          </button>
+          </Button>
           {isWaiting && (
-            <button
+            <Button
               className="ml-2 py-2 px-4 bg-red-500 text-white rounded-lg"
               onClick={handleCancel}
             >
               Cancel
-            </button>
+            </Button>
           )}
         </div>
       </div>

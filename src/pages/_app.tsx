@@ -1,11 +1,8 @@
-import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
-import { Session, SessionContextProvider } from '@supabase/auth-helpers-react';
+import { MantineProvider, ButtonStylesParams } from '@mantine/core';
+import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs';
 import { useState } from 'react';
-import { config } from '@fortawesome/fontawesome-svg-core';
-import '@fortawesome/fontawesome-svg-core/styles.css';
-config.autoAddCss = false;
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() => createPagesBrowserClient());
@@ -14,7 +11,15 @@ export default function App({ Component, pageProps }: AppProps) {
       supabaseClient={supabaseClient}
       initialSession={pageProps.initialSession}
     >
-      <Component {...pageProps} />
+      <MantineProvider 
+        theme={{
+          components: {
+            // Per-component styles go here
+          },
+        }}
+      >
+        <Component {...pageProps} />
+      </MantineProvider>
     </SessionContextProvider>
   );
 }

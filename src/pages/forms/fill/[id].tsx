@@ -16,6 +16,7 @@ import { Work_Sans } from 'next/font/google';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Database } from '../../../../types/supabase';
+import { Button } from '@mantine/core';
 
 
 export const workSans = Work_Sans({
@@ -171,13 +172,13 @@ export function InnerChat(props: {
             onKeyPress={handleKeyPress}
             ref={inputRef}
           />
-          <button
+          <Button
             className="ml-2 py-2 px-4 bg-rose-400 hover:bg-rose-300 text-white rounded-lg disabled:bg-gray-300"
             onClick={() => handleSubmit(inputValue)}
             disabled={isWaiting || isDone}
           >
             <FontAwesomeIcon icon={faArrowRight} className='fa-fw' />
-          </button>
+          </Button>
         </div>
       </div>
 

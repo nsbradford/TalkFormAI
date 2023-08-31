@@ -3,6 +3,8 @@ import { Database } from '../../../../types/supabase';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { Form, User } from '@/types';
 import { v4 } from 'uuid';
+import { Button } from '@mantine/core';
+
 
 type NewFormModeProps = {
   user: User;
@@ -86,20 +88,22 @@ export default function NewFormMode(props: NewFormModeProps) {
         </div>
       </div>
       <div className="mt-6 flex items-center justify-end gap-x-6">
-        <button
+        <Button
           type="button"
           onClick={props.onCancelClick}
+          variant='white'
           className="text-sm font-semibold leading-6 text-gray-900"
         >
           Cancel
-        </button>
-        <button
+        </Button>
+        <Button
           type="submit"
           disabled={isLoading}
+          loading={isLoading}
           className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
         >
           Save
-        </button>
+        </Button>
       </div>
     </form>
   );

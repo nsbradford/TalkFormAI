@@ -6,6 +6,9 @@ import { v4 } from 'uuid';
 import { Database } from '../../../types/supabase';
 import { useRouter } from 'next/router';
 import { getUserFromSupabase } from '@/utils';
+import { Button } from '@mantine/core';
+
+
 
 export default function CreateFormComponent() {
   const [desiredFields, setDesiredFields] = useState('');
@@ -62,12 +65,12 @@ export default function CreateFormComponent() {
             onChange={(e) => setDesiredFields(e.target.value)}
           />
           {/* <h1 className="text-xl mb-4">[this page is deprecated]</h1> */}
-          <button
+          <Button
             className="bg-blue-500 text-white px-4 py-2"
             onClick={handleCreateForm}
           >
             Create Form
-          </button>
+          </Button>
         </>
       ) : (
         <p>Loading user...</p>
