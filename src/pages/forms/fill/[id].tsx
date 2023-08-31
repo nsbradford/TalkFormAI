@@ -136,12 +136,11 @@ export function InnerChat(props: {
   }, []); // The empty array ensures this effect runs only once on mount
 
   return (
-    <div className="flex flex-col items-center bg-gray-100 py-20">
-      {/* <h1 className="text-4xl font-extrabold mb-6">Fill a form</h1> */}
+    <div className="flex flex-col items-center bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 py-20 min-h-screen">
       {form && (
         <h1 className="text-4xl font-extrabold mb-6">{form.name}</h1>
       )}
-      <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg">
+      <div className="w-4/5 lg:w-1/2 2xl:w-2/5 bg-white shadow-md p-6 rounded-lg">
         {messages.map((message, index) => (
           <MessageUI
             key={index}
@@ -152,7 +151,7 @@ export function InnerChat(props: {
         <div className="mt-4 flex">
           <input
             type="text"
-            className="flex-grow p-2 border rounded-lg disabled:bg-gray-300"
+            className="flex-grow p-2 border border-gray-400 rounded-lg disabled:bg-gray-100"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             disabled={isWaiting || isDone}
@@ -166,14 +165,6 @@ export function InnerChat(props: {
           >
             →
           </button>
-          {isWaiting && (
-            <button
-              className="ml-2 py-2 px-4 bg-red-500 text-white rounded-lg"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-          )}
         </div>
       </div>
 
@@ -182,6 +173,15 @@ export function InnerChat(props: {
     </div>
   );
 }
+
+          {/* {isWaiting && (
+            <button
+              className="ml-2 py-2 px-4 bg-red-500 text-white rounded-lg"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+          )} */}
 
 function ErrorBox(error: Error): React.ReactNode {
   return <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-red-300 shadow-md p-6 rounded-lg mt-4">
