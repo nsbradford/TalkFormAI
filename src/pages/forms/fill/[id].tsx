@@ -22,7 +22,7 @@ export default function CreateForm() {
   return (
     <div className="flex flex-col items-center bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 py-20 min-h-screen">
       {router.isFallback || typeof formId !== 'string' ? (
-        <h1 className="text-4xl font-extrabold mb-6">Loading...</h1>
+        <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>
       ) : (
         <CreateFormInner formId={formId} />
       )}
@@ -49,7 +49,7 @@ export function CreateFormInner(props: { formId: string }) {
   return form ? (
     <InnerChat form={form} supabase={supabase} />
   ) : (
-    <h1 className="text-4xl font-extrabold mb-6">Loading...</h1>
+    <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>
   );
 }
 export function InnerChat(props: {
@@ -64,7 +64,7 @@ export function InnerChat(props: {
   const inputRef = useRef<HTMLInputElement>(null); // Initialize the ref
   const [submission, setSubmission] = useState<object | null>(null);
   const [error, setError] = useState<Error | null>(null);
-  // new Error('Postgres error')
+  // new Error('Postgres error: blah al;sdjf a;aldkfja ;sdfja; sdf;ajk sd;fljka ;dsfjk')
 
   const handleSubmit = async (userMessage?: string) => {
     const messagesToSend =
@@ -119,9 +119,9 @@ export function InnerChat(props: {
       setIsWaiting(false);
     }
   };
-  const handleCancel = () => {
-    setIsWaiting(false);
-  };
+  // const handleCancel = () => {
+  //   setIsWaiting(false);
+  // };
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !isWaiting) {
       handleSubmit(inputValue);
@@ -142,7 +142,7 @@ export function InnerChat(props: {
 
   return (
     <>
-      <h1 className="text-4xl font-extrabold mb-6">{form.name}</h1>
+      <h1 className="text-3xl font-extrabold mb-6">{form.name}</h1>
       <div className="w-4/5 lg:w-1/2 2xl:w-2/5 bg-white shadow-md p-6 rounded-lg">
         {messages.map((message, index) => (
           <MessageUI
@@ -154,7 +154,7 @@ export function InnerChat(props: {
         <div className="mt-4 flex">
           <input
             type="text"
-            className="flex-grow p-2 border border-gray-400 rounded-lg disabled:bg-gray-100"
+            className="flex-grow p-2 border border-gray-400 focus:border-red-500 focus:outline-none rounded-lg disabled:bg-gray-100 focus:ring-rose-300"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             disabled={isWaiting || isDone}
@@ -162,7 +162,7 @@ export function InnerChat(props: {
             ref={inputRef}
           />
           <button
-            className="ml-2 py-2 px-4 bg-blue-500 hover:bg-blue-300 text-white rounded-lg disabled:bg-gray-300"
+            className="ml-2 py-2 px-4 bg-rose-400 hover:bg-rose-300 text-white rounded-lg disabled:bg-gray-300"
             onClick={() => handleSubmit(inputValue)}
             disabled={isWaiting || isDone}
           >
@@ -191,8 +191,8 @@ export function InnerChat(props: {
 function ErrorBox(error: Error): React.ReactNode {
   return (
     <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-red-300 shadow-md p-6 rounded-lg mt-4">
-      <h1 className="text-4xl font-extrabold mb-6">Error</h1>
-      <pre>{error.message}</pre>
+      <h1 className="text-xl font-extrabold mb-6">Error</h1>
+      <p className="font-mono text-sm whitespace-pre-wrap">{error.message}</p>
     </div>
   );
 }
@@ -200,10 +200,10 @@ function ErrorBox(error: Error): React.ReactNode {
 function SubmissionBox(submission: object): React.ReactNode {
   return (
     <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg mt-4">
-      <h1 className="text-4xl font-extrabold mb-6">Submission</h1>
-      <pre className="whitespace-pre-wrap">
+      <h1 className="text-xl font-extrabold mb-6">Submission</h1>
+      <p className="font-mono text-sm whitespace-pre-wrap">
         {JSON.stringify(submission, null, 2)}
-      </pre>
+      </p>
       {/* <div className="mt-4 flex">
           <button
             className="ml-2 py-2 px-4 bg-green-500 text-white rounded-lg"
