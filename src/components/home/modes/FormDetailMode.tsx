@@ -1,8 +1,9 @@
-import { Form, User } from '@/types';
+import { Form, User, Response} from '@/types';
 
 type FormDetailModeProps = {
     user: User;
-    formId: string;
+    form: Form;
+    responses: Response[];
 }
 
 
@@ -10,8 +11,8 @@ type FormDetailModeProps = {
 export default function FormDetailMode(props: FormDetailModeProps) {
     return (
         <>
-            <p>{JSON.stringify(props.formId)}</p>
-            <p>{JSON.stringify([])}</p>
+            <p>{JSON.stringify(props.form)}</p>
+            <p>{JSON.stringify(props.responses)}</p>
         </>
     ) 
 }

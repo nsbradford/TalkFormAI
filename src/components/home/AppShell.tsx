@@ -12,7 +12,6 @@ import ErrorMode from './modes/ErrorMode';
 import FormDetailMode from './modes/FormDetailMode';
 import { getFormsFromSupabase, getResponsesFromSupabase } from '@/utils';
 
-
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
@@ -128,7 +127,17 @@ export default function AppShell(props: AppShellProps) {
         forms={allForms || []}
         responses={formIdToResponses || {}}
         onNewFormClick={() => setMode(newFormAppMode)}
-        onFormDetailClick={() => setMode(formDetailAppMode)}
+        onFormDetailClick={(formId: string) => {
+          const activeForm = allForms?.find((f) => f.id === formId) || null;
+          if (activeForm === null) {
+            return <ErrorMode
+              user={props.user}
+              errorMessage={`No form with id ${formId}`}
+            />;
+          }
+          setActiveForm(activeForm);
+          setMode(formDetailAppMode)}
+        }
       />);
     } else if (mode.internalName === newFormAppModeInternalName) {
       return <NewFormMode 
@@ -140,7 +149,11 @@ export default function AppShell(props: AppShellProps) {
         }
       />;
     } else if (mode.internalName === formDetailAppModeInternalName) {
-      return (<FormDetailMode user={props.user} formId=''/>)
+      return (<FormDetailMode
+        user={props.user}
+        form={activeForm}
+        responses={formIdToResponses?.[activeForm?.id || ''] || []}
+      />)
     } else if (mode.internalName === settingsAppModeInternalName) {
       return <SettingsMode user={props.user}/>;
     } else {
