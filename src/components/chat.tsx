@@ -34,7 +34,7 @@ export const MessageUI = (message: ChatMessage) => {
           : 'bg-gray-300 text-black'
       }`}
     >
-      {content}
+      {message.role === 'assistant' ? <pre className='whitespace-pre-wrap'>{content}</pre> : <span>{content}</span>}
     </div>
   );
 };

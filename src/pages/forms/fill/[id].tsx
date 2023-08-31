@@ -64,6 +64,7 @@ export function InnerChat(props: {
   const inputRef = useRef<HTMLInputElement>(null); // Initialize the ref
   const [submission, setSubmission] = useState<object | null>(null);
   const [error, setError] = useState<Error | null>(null);
+  // new Error('Postgres error')
 
   const handleSubmit = async (userMessage?: string) => {
     const messagesToSend =
@@ -136,9 +137,9 @@ export function InnerChat(props: {
 
   return (
     <div className="flex flex-col items-center bg-gray-100 py-20">
-      <h1 className="text-4xl font-extrabold mb-6">Fill a form</h1>
+      {/* <h1 className="text-4xl font-extrabold mb-6">Fill a form</h1> */}
       {form && (
-        <h1 className="text-4xl font-extrabold mb-6">Name: {form.name}</h1>
+        <h1 className="text-4xl font-extrabold mb-6">{form.name}</h1>
       )}
       <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg">
         {messages.map((message, index) => (
@@ -151,7 +152,7 @@ export function InnerChat(props: {
         <div className="mt-4 flex">
           <input
             type="text"
-            className="flex-grow p-2 border rounded-lg"
+            className="flex-grow p-2 border rounded-lg disabled:bg-gray-300"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             disabled={isWaiting || isDone}
@@ -159,11 +160,11 @@ export function InnerChat(props: {
             ref={inputRef}
           />
           <button
-            className="ml-2 py-2 px-4 bg-green-500 text-white rounded-lg"
+            className="ml-2 py-2 px-4 bg-blue-500 hover:bg-blue-300 text-white rounded-lg disabled:bg-gray-300"
             onClick={() => handleSubmit(inputValue)}
             disabled={isWaiting || isDone}
           >
-            Submit
+            →
           </button>
           {isWaiting && (
             <button
@@ -176,19 +177,31 @@ export function InnerChat(props: {
         </div>
       </div>
 
-      {submission && (
-        <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg mt-4">
-          <h1 className="text-4xl font-extrabold mb-6">Submission</h1>
-          <pre>{JSON.stringify(submission, null, 2)}</pre>
-          {/* <div className="mt-4 flex">
-            <button
-              className="ml-2 py-2 px-4 bg-green-500 text-white rounded-lg"
-              onClick={() => router.push('/')}
-            >
-              Home
-            </button>
-          </div> */}
-        </div>)}
+      {error && ErrorBox(error)}
+      {submission && SubmissionBox(submission)}
     </div>
   );
 }
+
+function ErrorBox(error: Error): React.ReactNode {
+  return <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-red-300 shadow-md p-6 rounded-lg mt-4">
+    <h1 className="text-4xl font-extrabold mb-6">Error</h1>
+    <pre>{error.message}</pre>
+  </div>;
+}
+
+function SubmissionBox(submission: object): React.ReactNode {
+  return <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-white shadow-md p-6 rounded-lg mt-4">
+    <h1 className="text-4xl font-extrabold mb-6">Submission</h1>
+    <pre className='whitespace-pre-wrap'>{JSON.stringify(submission, null, 2)}</pre>
+    {/* <div className="mt-4 flex">
+          <button
+            className="ml-2 py-2 px-4 bg-green-500 text-white rounded-lg"
+            onClick={() => router.push('/')}
+          >
+            Home
+          </button>
+        </div> */}
+  </div>;
+}
+
