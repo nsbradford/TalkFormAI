@@ -9,6 +9,11 @@ type DashboardModeProps = {
   onFormDetailClick: (formId: string) => void;
 };
 
+const openInNewTab = (url: string) => {
+  const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+  if (newWindow) newWindow.opener = null
+}
+
 export default function DashboardMode(props: DashboardModeProps) {
   if (props.forms.length === 0) {
     return (
@@ -68,7 +73,7 @@ export default function DashboardMode(props: DashboardModeProps) {
                       View responses
                     </button>
                     {f.is_open ? (
-                      <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                      <button onClick={() => openInNewTab(`https://talkform.ai/forms/fill/${f.id}`)} className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         <LinkIcon className="h-5 w-5" aria-hidden="true" />
                       </button>
                     ) : null}
