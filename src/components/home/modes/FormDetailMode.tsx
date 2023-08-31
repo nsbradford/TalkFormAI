@@ -11,7 +11,9 @@ export default function FormDetailMode(props: FormDetailModeProps) {
   const badgeColor = props.form.is_open
     ? 'bg-green-100 text-green-800'
     : 'bg-red-100 text-red-800';
-  const camelCaseTitle = props.form.name.charAt(0).toUpperCase() + props.form.name.slice(1, props.form.name.length);
+  const camelCaseTitle =
+    props.form.name.charAt(0).toUpperCase() +
+    props.form.name.slice(1, props.form.name.length);
   return (
     <>
       <div className="flex min-w-0 gap-x-4">
@@ -32,7 +34,9 @@ export default function FormDetailMode(props: FormDetailModeProps) {
         </div>
       </div>
       <ResponsesTable
-        data={props.responses.map((response) => response.results as Array<Record<string, any>>)}
+        data={props.responses.map(
+          (response) => response.results as Array<Record<string, any>>
+        )}
       />
     </>
   );

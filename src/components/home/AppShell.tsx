@@ -139,10 +139,10 @@ export default function AppShell(props: AppShellProps) {
                   user={props.user}
                   errorMessage={`No form found for ${formId}`}
                 />
-              )
+              );
             }
-            setActiveForm(selectedForm)
-            setMode(formDetailAppMode)
+            setActiveForm(selectedForm);
+            setMode(formDetailAppMode);
           }}
         />
       );
