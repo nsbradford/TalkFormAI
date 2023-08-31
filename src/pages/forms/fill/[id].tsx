@@ -6,14 +6,16 @@ import {
   getFormFromSupabase,
   submitResponseToSupabase,
 } from '@/utils';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   SupabaseClient,
   createClientComponentClient,
 } from '@supabase/auth-helpers-nextjs';
+import { Work_Sans } from 'next/font/google';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Database } from '../../../../types/supabase';
-import { Work_Sans } from 'next/font/google';
 
 
 export const workSans = Work_Sans({
@@ -174,7 +176,7 @@ export function InnerChat(props: {
             onClick={() => handleSubmit(inputValue)}
             disabled={isWaiting || isDone}
           >
-            →
+            <FontAwesomeIcon icon={faArrowRight} className='fa-fw' />
           </button>
         </div>
       </div>
