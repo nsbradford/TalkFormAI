@@ -60,6 +60,7 @@ export function InnerChat(props: {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isWaiting, setIsWaiting] = useState(false);
+  const [isDone, setIsDone] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null); // Initialize the ref
 
   const handleSubmit = async (userMessage?: string) => {
@@ -87,13 +88,14 @@ export function InnerChat(props: {
         } else {
           console.log(`LLM returned valid JSON with action`, parsed.action);
         }
-        if ('form' in parsed && typeof parsed.form === 'object') {
+        if ('submission' in parsed && typeof parsed.submission === 'object') {
           console.log(
             'Agent wants to exit, submitting',
             assistantResponse.content
           );
           submitResponseToSupabase(form.id, parsed.form, props.supabase).then(
             (maybeError) => {
+              setIsDone(true);
               // if (maybeError instanceof Error) {
               //   // TODO set error and render it
               // } else {
@@ -151,14 +153,14 @@ export function InnerChat(props: {
             className="flex-grow p-2 border rounded-lg"
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            disabled={isWaiting}
+            disabled={isWaiting || isDone}
             onKeyPress={handleKeyPress}
             ref={inputRef}
           />
           <button
             className="ml-2 py-2 px-4 bg-green-500 text-white rounded-lg"
             onClick={() => handleSubmit(inputValue)}
-            disabled={isWaiting}
+            disabled={isWaiting || isDone}
           >
             Submit
           </button>
