@@ -13,6 +13,14 @@ import {
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Database } from '../../../../types/supabase';
+import { Work_Sans } from 'next/font/google';
+
+
+export const workSans = Work_Sans({
+  weight: '400',
+  subsets: ['latin'],
+  // variable: '--font-inter',
+});
 
 // Makes it much easier to track renders/fetches by wrapping the component.
 export default function CreateForm() {
@@ -20,7 +28,7 @@ export default function CreateForm() {
   // If the page is still loading (especially during ISR or fallback scenarios), show a loading state
   const formId = router.query.id as string;
   return (
-    <div className="flex flex-col items-center bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 py-20 min-h-screen">
+    <div className={`${workSans.className} flex flex-col items-center bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 py-20 min-h-screen`}>
       {router.isFallback || typeof formId !== 'string' ? (
         <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>
       ) : (
