@@ -211,7 +211,7 @@ export default function NewFormMode(props: NewFormModeProps) {
             <div>
               <div className="mt-4">
                 Fields Schema:
-                <pre className="bg-gray-100 p-3 rounded">
+                <pre className="bg-gray-100 p-3 rounded whitespace-pre-wrap">
                   {JSON.stringify(fieldsSchema, null, 2)}
                 </pre>
               </div>
