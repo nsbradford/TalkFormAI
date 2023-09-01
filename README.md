@@ -14,6 +14,8 @@ Anything you can dream, you can build. Truly, we live in a golden age of technol
 ## Demo
 Head over to [talkform.ai](https://www.talkform.ai/) to try it out!
 
+> :warning: **WARNING**: TalkForm.AI is in early development. Use at own risk.
+
 ## Contributing
 This is a [Next.js](https://nextjs.org/) project. You'll need **Node** (probably using **[nvm](https://github.com/nvm-sh/nvm)**) and **[yarn](https://yarnpkg.com/)**.
 
