@@ -128,6 +128,9 @@ export async function submitResponseToSupabase(
   }
 }
 
-export const removeStartAndEndQuotes = (str: string) => {
+export const removeStartAndEndQuotes = (str: string |  null) => {
+  if (!str) {
+    return str;
+  }
   return str.replace(/^"(.*)"$/, '$1');
 };
