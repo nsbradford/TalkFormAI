@@ -4,12 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Work_Sans } from 'next/font/google';
 import Link from 'next/link';
 
-// export const workSans = Work_Sans({
-//   weight: '400',
-//   subsets: ['latin'],
-//   // variable: '--font-inter',
-// });
-// const inter = Inter({ subsets: ['latin'] });
+export const workSans = Work_Sans({
+  weight: '400',
+  subsets: ['latin'],
+  // variable: '--font-inter',
+});
 
 export default function Home() {
   return (
@@ -26,32 +25,40 @@ export default function Home() {
               It just works.
             </span>
           </h2>
-          <div className="space-x-4">
-            <Link
-              href="https://github.com/nsbradford/talkformai" // Replace with your repo URL
-              className="inline-block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:bg-gray-600"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <FontAwesomeIcon
-                icon={faGithub}
-                className="fa-fw text-white-400"
-              />{' '}
-              View on GitHub
-            </Link>
-            <Link
-              href="/home"
-              className="inline-block bg-gradient-to-r from-yellow-400 via-pink-400 to-fuchsia-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:from-yellow-300 hover:via-pink-300 hover:to-fuchsia-400"
-            >
-              Create a form ›
-            </Link>
-          </div>
+          <GetStartedButtons />
+          <hr className="border-gray-300 mx-auto w-3/4 mt-14" />
+          <Specifics />
+          <GetStartedButtons />
         </div>
       </div>
-      <Specifics />
       <Footer />
     </>
   );
+}
+
+function GetStartedButtons() {
+  return (<>
+    <div className="space-x-4">
+      <Link
+        href="https://github.com/nsbradford/talkformai" // Replace with your repo URL
+        className="inline-block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:bg-gray-600"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <FontAwesomeIcon
+          icon={faGithub}
+          className="fa-fw text-white-400"
+        />{' '}
+        View on GitHub
+      </Link>
+      <Link
+        href="/home"
+        className="inline-block bg-gradient-to-r from-yellow-400 via-pink-400 to-fuchsia-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:from-yellow-300 hover:via-pink-300 hover:to-fuchsia-400"
+      >
+        Create a form ›
+      </Link>
+    </div>
+  </>);
 }
 
 // https://github.com/tailwindtoolbox/Landing-Page
@@ -550,9 +557,9 @@ function SpecificsTextOnRight(props: { heading: string; content: string }) {
 
 function Specifics() {
   return (
-    <section className="bg-white border-b py-8">
+    <section className={`${workSans.className} bg-white pt-8 mt-12`}>
       <div className="container max-w-5xl mx-auto m-8">
-        <h2 className="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">
+        <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
           Faster, easier, more powerful.
         </h2>
         <div className="w-full mb-4">
@@ -560,11 +567,11 @@ function Specifics() {
         </div>
         <SpecificsTextOnLeft
           heading="Chat to create."
-          content="No more tedious form builders. The field types are inferred automatically by our cutting-edge AI."
+          content="No more tedious form builders. The field types are inferred automatically by our AI."
         />
         <SpecificsTextOnRight
-          heading="Chat to create."
-          content="No more tedious form builders. The field types are inferred automatically by our cutting-edge AI."
+          heading="Chat to fill."
+          content="Our AI automatically validates, cleans, structures, and fills the fields."
         />
         <SpecificsTextOnLeft
           heading="Power you've never seen."
@@ -574,7 +581,15 @@ function Specifics() {
           heading="Keep your data structured."
           content="All your form responses remain structured according to the inferred schema for easy analysis."
         />
+        <hr className="border-gray-300 mx-auto w-3/4 mt-14" />
+        <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800 mt-12">
+          Get started for free
+        </h2>
+        {/* <h2 className="text-xl font-extrabold mb-8 md:text-2xl">
+            While GPU supplies last!
+          </h2> */}
       </div>
+      
     </section>
   );
 }
