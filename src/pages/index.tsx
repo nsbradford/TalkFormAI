@@ -139,20 +139,15 @@ function Specifics() {
         <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
           Faster, easier, more powerful.
         </h2>
-        <div className="w-full mb-4">
-          <div className="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-        </div>
         <SpecificsTextOnLeft
           heading="Chat to create."
           content="No more tedious form builders. The field types are inferred automatically by our AI."
         >
-          <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
-            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400 text-left">
-              Waitlist for my startup: name, email address, company, job title,
-              and what technologies they currently use for marketing research.
-              If they&rsquo;re a software engineer, ask for their GitHub.
-            </div>
-          </div>
+          <FloatingTextBox
+            text={`Waitlist for my startup: name, email address, company, job title,
+      and what technologies they currently use for marketing research.
+      If they're a software engineer, ask for their GitHub.`}
+          />
         </SpecificsTextOnLeft>
         <SpecificsTextOnRight
           heading="Chat to fill."
@@ -243,5 +238,14 @@ function Specifics() {
         </h2>
       </div>
     </section>
+  );
+}
+function FloatingTextBox(props: { text: string }) {
+  return (
+    <div className={`${sunsetGradient} p-6 rounded-xl shadow-xl`}>
+      <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400 text-left">
+        {props.text}
+      </div>
+    </div>
   );
 }
