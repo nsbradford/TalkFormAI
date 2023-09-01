@@ -22,13 +22,13 @@ export default function Home() {
     <>
       <NavBar getAvatar={() => <></>} userNavigation={[]} props={{}} />
       <div className={`flex justify-center items-center mt-20`}>
-        <div className="flex flex-col items-center justify-center text-center">
+        <div className="flex flex-col items-center justify-center">
           <h1
-            className={`text-4xl font-extrabold pb-8 md:text-7xl ${titleGradient} bg-clip-text text-transparent`}
+            className={`text-4xl font-extrabold pb-8 md:text-7xl ${titleGradient} bg-clip-text text-transparent text-center`}
           >
             Forms, reimagined.
           </h1>
-          <h2 className="text-xl font-extrabold mb-8 md:text-2xl px-12">
+          <h2 className="text-xl font-extrabold mb-8 md:text-2xl px-12 text-center">
             Chat to create. Chat to fill. Zero config.{' '}
             <span className={`${titleGradient} bg-clip-text text-transparent`}>
               It just works.
