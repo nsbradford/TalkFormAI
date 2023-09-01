@@ -26,14 +26,6 @@ export function NavBar(theProps: {
               </div>
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
-                  <button
-                    type="button"
-                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
@@ -41,7 +33,7 @@ export function NavBar(theProps: {
                       <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
-                        {getAvatar(8)}
+                        {getAvatar(10)}
                       </Menu.Button>
                     </div>
                     <Transition
@@ -95,21 +87,10 @@ export function NavBar(theProps: {
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">{getAvatar(10)}</div>
                   <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-white">
-                      {props.user.email}
-                    </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
                       {props.user.email}
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                  >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
                 </div>
                 <div className="mt-3 space-y-1 px-2">
                   {userNavigation.map((item) => (
