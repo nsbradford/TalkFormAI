@@ -192,7 +192,7 @@ export default function AppShell(props: AppShellProps) {
               
               <p>
               <span className="font-extrabold">Warning: </span>
-              This product is in early development. Do not use it for sensitive or confidential information. For more information, see <a className='underline' target="_blank" href="https://github.com/nsbradford/TalkFormAI/blob/main/LICENSE">terms</a>.
+              This product is in early development. Do not use it for sensitive or confidential information. For details, see <a className='underline' target="_blank" href="https://github.com/nsbradford/TalkFormAI/blob/main/LICENSE">terms</a>.
               </p>
             </div>
           </div>
