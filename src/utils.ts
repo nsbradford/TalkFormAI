@@ -128,7 +128,7 @@ export async function submitResponseToSupabase(
   }
 }
 
-export const removeStartAndEndQuotes = (str: string |  null) => {
+export const removeStartAndEndQuotes = (str: string | null) => {
   if (!str) {
     return str;
   }
