@@ -1,3 +1,4 @@
+import { MessageUI } from '@/components/chat';
 import { NavBar } from '@/components/home/NavBar';
 import { TalkFormLogo } from '@/components/talkform';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
@@ -14,7 +15,7 @@ export const workSans = Work_Sans({
 const sunsetGradient =
   'bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100';
 const titleGradient = 'bg-gradient-to-r from-purple-600 to-blue-400';
-const pinkGradient = 'from-yellow-400 via-pink-400 to-fuchsia-500';
+// const pinkGradient = 'from-yellow-400 via-pink-400 to-fuchsia-500';
 
 export default function Home() {
   return (
@@ -115,7 +116,7 @@ function SpecificsTextOnLeft(props: {
 function SpecificsTextOnRight(props: { heading: string; content: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-wrap flex-col-reverse sm:flex-row">
-      <div className="w-full sm:w-1/2 p-6 mt-6"></div>
+      <div className="w-full sm:w-1/2 p-2">{props.children}</div>
       <div className="w-full sm:w-1/2 p-6 mt-6">
         <div className="align-middle">
           <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
@@ -123,11 +124,10 @@ function SpecificsTextOnRight(props: { heading: string; content: string; childre
           </h3>
           <p className="text-gray-600 mb-8">
             {props.content}
-            <br />
-            <br />
           </p>
         </div>
       </div>
+      
     </div>
   );
 }
@@ -150,7 +150,7 @@ function Specifics() {
             <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400">
               Waitlist for my startup: name, email address, company, job title,
               and what technologies they currently use for marketing research.
-              If they&rsquo;re any kind of software engineer, ask for their
+              If they&rsquo;re a software engineer, ask for their
               GitHub.
             </div>
           </div>
@@ -158,7 +158,32 @@ function Specifics() {
         <SpecificsTextOnRight
           heading="Chat to fill."
           content="Our AI automatically validates, cleans, structures, and fills the fields."
-        >{ }</SpecificsTextOnRight>
+        >
+          <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
+            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400">
+              <MessageUI
+                role={'assistant'}
+                content={'Thanks, Jane! Now, what is your company and job title?'}
+              />
+              <MessageUI
+                role={'user'}
+                content={`I'm a ML Engineer at Tech Co`}
+              />
+              <MessageUI
+                role={'assistant'}
+                content={`Very cool! What's your GitHub?`}
+              />
+              <MessageUI
+                role={'user'}
+                content={`https://github.com/jd-70B`}
+              />
+              <MessageUI
+                role={'assistant'}
+                content={`Thanks, I see your username is 'jd-70B'. Now, what technologies do you use when doing marketing research?`}
+              />
+            </div>
+          </div>
+        </SpecificsTextOnRight>
         <SpecificsTextOnLeft
           heading="Keep your data structured."
           content="All your form responses remain structured according to the inferred schema for easy analysis."
@@ -179,9 +204,9 @@ function Specifics() {
                 <td className="py-2 px-2 border-b">Jane Doe</td>
                 <td className="py-2 px-2 border-b">jd@ex.co</td>
                 <td className="py-2 px-2 border-b">Tech Co.</td>
-                <td className="py-2 px-2 border-b">Software Engineer</td>
+                <td className="py-2 px-2 border-b">ML Engineer</td>
                 <td className="py-2 px-2 border-b">React, Node, Python</td>
-                <td className="py-2 px-2 border-b">jd123</td>
+                <td className="py-2 px-2 border-b">jd-70B</td>
               </tr>
               <tr>
                 <td className="py-2 px-2 border-b">Bill Smith</td>

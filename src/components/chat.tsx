@@ -2,32 +2,8 @@ import { ChatMessage } from '@/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRobot, faUser } from '@fortawesome/free-solid-svg-icons';
 
-export const MessageUI = (message: ChatMessage) => {
-  let content;
-  if (!message.content) {
-    content = '';
-  } else {
-    // gross hacks but oh well
-    try {
-      const parsed = JSON.parse(message.content);
-      if (typeof parsed === 'string') {
-        content = parsed;
-      } else if ('text' in parsed && typeof parsed.text === 'string') {
-        content = parsed.text;
-      } else if (
-        'user_message' in parsed &&
-        typeof parsed.user_message === 'string'
-      ) {
-        content = parsed.user_message;
-      } else if ('action' in parsed && parsed.action === 'exit') {
-        content = 'Your response was successfully submitted.';
-      } else {
-        content = message.content;
-      }
-    } catch (e) {
-      content = message.content;
-    }
-  }
+export function MessageUI(message: ChatMessage) {
+  const content = parseMessageJson(message);
   return (
     <div
       className={`my-2 p-3 rounded-lg ${
@@ -51,3 +27,30 @@ export const MessageUI = (message: ChatMessage) => {
     </div>
   );
 };
+
+function parseMessageJson(message: ChatMessage) {
+  let content;
+  if (!message.content) {
+    content = '';
+  } else {
+    // gross hacks but oh well
+    try {
+      const parsed = JSON.parse(message.content);
+      if (typeof parsed === 'string') {
+        content = parsed;
+      } else if ('text' in parsed && typeof parsed.text === 'string') {
+        content = parsed.text;
+      } else if ('user_message' in parsed &&
+        typeof parsed.user_message === 'string') {
+        content = parsed.user_message;
+      } else if ('action' in parsed && parsed.action === 'exit') {
+        content = 'Your response was successfully submitted.';
+      } else {
+        content = message.content;
+      }
+    } catch (e) {
+      content = message.content;
+    }
+  }
+  return content;
+}
