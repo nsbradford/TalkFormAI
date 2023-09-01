@@ -99,8 +99,6 @@ function SpecificsTextOnLeft(props: {
   content: string;
   children: React.ReactNode;
 }) {
-  const text =
-    "Waitlist form: name, email address, company, job title, and what technologies they currently use for marketing research. If they're any kind of software engineer, ask for their GitHub.";
   return (
     // <div className="flex flex-wrap">
     <div className="flex flex-wrap">
@@ -114,7 +112,7 @@ function SpecificsTextOnLeft(props: {
     </div>
   );
 }
-function SpecificsTextOnRight(props: { heading: string; content: string }) {
+function SpecificsTextOnRight(props: { heading: string; content: string; children: React.ReactNode }) {
   return (
     <div className="flex flex-wrap flex-col-reverse sm:flex-row">
       <div className="w-full sm:w-1/2 p-6 mt-6"></div>
@@ -149,7 +147,7 @@ function Specifics() {
           content="No more tedious form builders. The field types are inferred automatically by our AI."
         >
           <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
-            <div className="bg-white p-4 rounded-lg shadow-xl text-sm text-gray-400">
+            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400">
               Waitlist for my startup: name, email address, company, job title,
               and what technologies they currently use for marketing research.
               If they&rsquo;re any kind of software engineer, ask for their
@@ -160,15 +158,48 @@ function Specifics() {
         <SpecificsTextOnRight
           heading="Chat to fill."
           content="Our AI automatically validates, cleans, structures, and fills the fields."
-        />
+        >{ }</SpecificsTextOnRight>
         <SpecificsTextOnLeft
-          heading="Power you've never seen."
-          content="Custom validations. Complicated conditional logic. If you can think it, we can do it."
-        >{ }</SpecificsTextOnLeft>
-        <SpecificsTextOnRight
           heading="Keep your data structured."
           content="All your form responses remain structured according to the inferred schema for easy analysis."
-        />
+        ><div className={`${sunsetGradient} p-6 rounded-xl shadow-xl`}>
+          <table className="text-xs min-w-full bg-white rounded-lg shadow-xl text-sm text-gray-400 border-collapse p-8">
+            <thead>
+              <tr className="text-left border-b">
+                <th className="py-2 px-2">Name</th>
+                <th className="py-2 px-2">Email</th>
+                <th className="py-2 px-2">Company</th>
+                <th className="py-2 px-2">Title</th>
+                <th className="py-2 px-2">Tech</th>
+                <th className="py-2 px-2">GitHub</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="py-2 px-2 border-b">Jane Doe</td>
+                <td className="py-2 px-2 border-b">jd@ex.co</td>
+                <td className="py-2 px-2 border-b">Tech Co.</td>
+                <td className="py-2 px-2 border-b">Software Engineer</td>
+                <td className="py-2 px-2 border-b">React, Node, Python</td>
+                <td className="py-2 px-2 border-b">jd123</td>
+              </tr>
+              <tr>
+                <td className="py-2 px-2 border-b">Bill Smith</td>
+                <td className="py-2 px-2 border-b">bsx@ex.co</td>
+                <td className="py-2 px-2 border-b">Biz Corp.</td>
+                <td className="py-2 px-2 border-b">Marketing Manager</td>
+                <td className="py-2 px-2 border-b">Google Analytics</td>
+                <td className="py-2 px-2 border-b">-</td>
+              </tr>
+              {/* ... Add more rows as needed */}
+            </tbody>
+          </table>
+        </div>
+      </SpecificsTextOnLeft>
+        <SpecificsTextOnRight
+          heading="Power you've never seen."
+          content="Custom validations. Complicated conditional logic. If you can think it, we can do it."
+        >{ }</SpecificsTextOnRight>
         <hr className="border-gray-300 mx-auto w-3/4 mt-14" />
         <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800 mt-12">
           Get started for free
