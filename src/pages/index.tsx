@@ -22,14 +22,14 @@ export default function Home() {
     <>
       <NavBar getAvatar={() => <></>} userNavigation={[]} props={{}} />
       <div className={`flex justify-center items-center mt-20`}>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center text-center">
           <h1
             className={`text-4xl font-extrabold pb-8 md:text-7xl ${titleGradient} bg-clip-text text-transparent`}
           >
             Forms, reimagined.
           </h1>
-          <h2 className="text-xl font-extrabold mb-8 md:text-2xl">
-            Chat to build. Chat to fill. Zero config.{' '}
+          <h2 className="text-xl font-extrabold mb-8 md:text-2xl px-12">
+            Chat to create. Chat to fill. Zero config.{' '}
             <span className={`${titleGradient} bg-clip-text text-transparent`}>
               It just works.
             </span>
@@ -135,7 +135,7 @@ function SpecificsTextOnRight(props: {
 function Specifics() {
   return (
     <section className={`${workSans.className} bg-white`}>
-      <div className="container max-w-5xl mx-auto m-8">
+      <div className="container max-w-5xl mx-auto mt-8">
         <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
           Faster, easier, more powerful.
         </h2>
@@ -143,7 +143,7 @@ function Specifics() {
           <div className="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
         <SpecificsTextOnLeft
-          heading="Chat to build."
+          heading="Chat to create."
           content="No more tedious form builders. The field types are inferred automatically by our AI."
         >
           <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
@@ -182,7 +182,7 @@ function Specifics() {
             </div>
           </div>
         </SpecificsTextOnRight>
-        <SpecificsTextOnLeft
+        {/* <SpecificsTextOnLeft
           heading="Keep your data structured."
           content="All your form responses remain structured according to the inferred schema for easy analysis."
         >
@@ -218,7 +218,7 @@ function Specifics() {
               </tbody>
             </table>
           </div>
-        </SpecificsTextOnLeft>
+        </SpecificsTextOnLeft> */}
         <SpecificsTextOnRight
           heading="Unlimited Power."
           content="Custom validations. Complicated conditional logic. If you can think it, we can do it."
