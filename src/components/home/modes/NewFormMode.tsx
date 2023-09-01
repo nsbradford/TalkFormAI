@@ -26,14 +26,13 @@ export default function NewFormMode(props: NewFormModeProps) {
   async function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setIsLoading(true);
-    const fields_schema = { instructions: formTopic };
 
     await supabase.from('forms').insert([
       {
         description: description,
         raw_instructions: formTopic,
         fields_guidance: fieldsGuidance,
-        fields_schema: fields_schema,
+        fields_schema: fieldsSchema,
         id: v4(),
         is_open: true,
         name: title,
