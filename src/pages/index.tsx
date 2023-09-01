@@ -28,7 +28,7 @@ export default function Home() {
             Forms, reimagined.
           </h1>
           <h2 className="text-xl font-extrabold mb-8 md:text-2xl">
-            Chat to create. Chat to fill. Zero configuration.{' '}
+            Chat to build. Chat to fill. Zero config.{' '}
             <span className={`${titleGradient} bg-clip-text text-transparent`}>
               It just works.
             </span>
@@ -110,7 +110,7 @@ function SpecificsTextOnLeft(props: {
         </h3>
         <p className="text-gray-600 mb-8 pr-4">{props.content}</p>
       </div>
-      <div className="w-full sm:w-1/2">{props.children}</div>
+      <div className="w-full sm:w-1/2 p-2">{props.children}</div>
     </div>
   );
 }
@@ -145,7 +145,7 @@ function Specifics() {
           <div className="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
         <SpecificsTextOnLeft
-          heading="Chat to create."
+          heading="Chat to build."
           content="No more tedious form builders. The field types are inferred automatically by our AI."
         >
           <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
