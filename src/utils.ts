@@ -112,7 +112,7 @@ export async function submitResponseToSupabase(
   const response: Response = {
     id: v4(),
     form_id: formId,
-    results: responseJson,
+    fields: responseJson,
     created_at: new Date().toISOString(),
     updated_at: new Date().toISOString(),
   };
@@ -126,4 +126,8 @@ export async function submitResponseToSupabase(
     console.log('Successfully created response', response);
     return response;
   }
+}
+
+const removeStartAndEndQuotes = (str: string) => {
+  return str.replace(/^"(.*)"$/, '$1');
 }

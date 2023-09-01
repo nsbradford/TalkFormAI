@@ -29,13 +29,16 @@ export default function FormDetailMode(props: FormDetailModeProps) {
             </span>
           </div>
           <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-            {props.form.desired_fields_schema}
+            {JSON.stringify(props.form.fields_schema)}
+          </p>
+          <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+            {props.form.fields_guidance}
           </p>
         </div>
       </div>
       <ResponsesTable
         data={props.responses.map(
-          (response) => response.results as Array<Record<string, any>>
+          (response) => response.fields as Array<Record<string, any>>
         )}
       />
     </>

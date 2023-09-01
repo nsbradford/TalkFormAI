@@ -15,7 +15,9 @@ CREATE TABLE forms (
     is_open BOOLEAN NOT NULL,
     name VARCHAR(255) NOT NULL,
     description TEXT NULL,
-    desired_fields_schema TEXT NOT NULL
+    raw_instructions TEXT NOT NULL, -- provided by the user
+    fields_guidance TEXT NOT NULL, -- the guidance we give the fill agent to guide the fill process
+    fields_schema JSON NOT NULL -- the fields we've extracted from the raw_instructions
 );
 
 CREATE TABLE responses (
@@ -23,7 +25,7 @@ CREATE TABLE responses (
     form_id VARCHAR(36) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    results JSON NOT NULL
+    fields JSON NOT NULL -- the fields from the field schema, with the user's responses
 );
 
 

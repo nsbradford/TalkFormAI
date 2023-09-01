@@ -1,6 +1,6 @@
 import { Form } from '@/types';
 
-export const PROMPT_BUILD = `TODO`;
+export const PROMPT_BUILD = `You are FormGPT, a helpful, honest, and harmless AI assistant helping gather information from users and using it to populate forms.  First, we need to create a form.`;
 
 export function PROMPT_FILL(form: Form) {
   return `You are FormGPT, a helpful, honest, and harmless AI assistant helping gather information from users and using it to populate forms. Your job: Given a form schema to populate, continue your conversation with the user until you have enough information to fill out the form.
@@ -40,8 +40,9 @@ RULES YOU MUST FOLLOW:
 YOUR SCHEMA:
 Name: ${form.name}
 Description: ${form.description || '[No description]'}
+Guidence: ${form.fields_guidance || '[No guidance, use your best judgement]'}
 \`\`\`
-${form.desired_fields_schema}
+${form.fields_schema}
 \`\`\`
 
 You MUST provide your response in JSON.
