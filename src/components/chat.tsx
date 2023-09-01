@@ -8,8 +8,8 @@ export function MessageUI(message: ChatMessage) {
     <div
       className={`my-2 p-3 rounded-lg ${
         message.role === 'assistant'
-          ? 'bg-gray-100 text-black'
-          : 'bg-white text-black'
+          ? 'bg-gray-100'
+          : 'bg-white'
       }`}
     >
       <div className="flex items-start">

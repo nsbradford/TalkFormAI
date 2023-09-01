@@ -216,15 +216,20 @@ function Specifics() {
                 <td className="py-2 px-2 border-b">Google Analytics</td>
                 <td className="py-2 px-2 border-b">-</td>
               </tr>
-              {/* ... Add more rows as needed */}
             </tbody>
           </table>
         </div>
       </SpecificsTextOnLeft>
         <SpecificsTextOnRight
-          heading="Power you've never seen."
+          heading="Unlimited Power."
           content="Custom validations. Complicated conditional logic. If you can think it, we can do it."
-        >{ }</SpecificsTextOnRight>
+        >
+          <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
+            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400">
+              {`VC coffee chat: name, email, startup name, stage, one-sentence pitch. If the pitch mentions crypto, politely end the convo. Translate their pitch to Spanish and French as well. If they're past seed, ask for valuation and $ raised at each stage. If they're an AI company, ask about their moat, and if you suspect they're a thin wrapper around OpenAI, add a secret flag.`}
+            </div>
+          </div>
+        </SpecificsTextOnRight>
         <hr className="border-gray-300 mx-auto w-3/4 mt-14" />
         <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800 mt-12">
           Get started for free
