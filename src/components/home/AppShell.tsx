@@ -189,9 +189,10 @@ export default function AppShell(props: AppShellProps) {
               className="bg-yellow-100 border-l-4 border-yellow-500 text-black mt-2 p-4 text-xs"
               role="alert"
             >
-              <p className="font-extrabold">Warning:</p>
+              
               <p>
-              This product is in early development. Do not use it for sensitive or confidential information. For more information, see <a className='underline' href="https://github.com/nsbradford/TalkFormAI/blob/main/LICENSE">terms</a>.
+              <span className="font-extrabold">Warning: </span>
+              This product is in early development. Do not use it for sensitive or confidential information. For more information, see <a className='underline' target="_blank" href="https://github.com/nsbradford/TalkFormAI/blob/main/LICENSE">terms</a>.
               </p>
             </div>
           </div>
