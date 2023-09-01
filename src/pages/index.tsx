@@ -182,43 +182,43 @@ function Specifics() {
             </div>
           </div>
         </SpecificsTextOnRight>
-        {/* <SpecificsTextOnLeft
+        <SpecificsTextOnLeft
           heading="Keep your data structured."
           content="All your form responses remain structured according to the inferred schema for easy analysis."
         >
           <div className={`${sunsetGradient} p-6 rounded-xl shadow-xl`}>
-            <table className="text-xs min-w-full bg-white rounded-lg shadow-xl text-sm text-gray-400 border-collapse p-8">
+            <table className="text-xs min-w-full bg-white rounded-lg shadow-xl text-sm text-gray-400 border-collapse text-left">
               <thead>
-                <tr className="text-left border-b">
-                  <th className="py-2 px-2">Name</th>
-                  <th className="py-2 px-2">Email</th>
-                  <th className="py-2 px-2">Company</th>
-                  <th className="py-2 px-2">Title</th>
-                  <th className="py-2 px-2">Tech</th>
-                  <th className="py-2 px-2">GitHub</th>
+                <tr className="border-b">
+                  <th className="p-1 pl-2 sm:p-2">Name</th>
+                  <th className="p-1 pl-2 sm:p-2">Email</th>
+                  <th className="p-1 pl-2 sm:p-2">Company</th>
+                  <th className="p-1 pl-2 sm:p-2">Title</th>
+                  <th className="p-1 pl-2 sm:p-2">Tech</th>
+                  <th className="p-1 hidden sm:table-cell">GitHub</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="py-2 px-2 border-b">Jane Doe</td>
-                  <td className="py-2 px-2 border-b">jd@ex.co</td>
-                  <td className="py-2 px-2 border-b">Tech Co.</td>
-                  <td className="py-2 px-2 border-b">ML Engineer</td>
-                  <td className="py-2 px-2 border-b">React, Node, Python</td>
-                  <td className="py-2 px-2 border-b">jd-70B</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">Jane Doe</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">jd@ex.co</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">Tech Co.</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">ML Engineer</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">React, Node, Python</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b hidden sm:table-cell">jd-70B</td>
                 </tr>
                 <tr>
-                  <td className="py-2 px-2 border-b">Bill Smith</td>
-                  <td className="py-2 px-2 border-b">bsx@ex.co</td>
-                  <td className="py-2 px-2 border-b">Biz Corp.</td>
-                  <td className="py-2 px-2 border-b">Marketing Manager</td>
-                  <td className="py-2 px-2 border-b">Google Analytics</td>
-                  <td className="py-2 px-2 border-b">-</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">Bill Smith</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">bsx@ex.co</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">Biz Corp.</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">Marketing Manager</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">Google Analytics</td>
+                  <td className="p-1 border-b hidden sm:table-cell">-</td>
                 </tr>
               </tbody>
             </table>
           </div>
-        </SpecificsTextOnLeft> */}
+        </SpecificsTextOnLeft>
         <SpecificsTextOnRight
           heading="Unlimited Power."
           content="Custom validations. Complicated conditional logic. If you can think it, we can do it."
