@@ -16,6 +16,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Database } from '../../../../types/supabase';
 import { NavBar } from '@/components/home/NavBar';
+import { workSans } from '@/components/misc';
 
 // Makes it much easier to track renders/fetches by wrapping the component.
 export default function CreateForm() {
