@@ -1,21 +1,10 @@
 import { MessageUI } from '@/components/chat';
 import { NavBar } from '@/components/home/NavBar';
+import { sunsetGradient, titleGradient, titleGradientHover, workSans, workSansHeavy } from '@/components/misc';
 import { TalkFormLogo } from '@/components/talkform';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Work_Sans } from 'next/font/google';
 import Link from 'next/link';
-
-export const workSans = Work_Sans({
-  weight: '400',
-  subsets: ['latin'],
-  // variable: '--font-inter',
-});
-
-const sunsetGradient =
-  'bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100';
-const titleGradient = 'bg-gradient-to-r from-purple-600 to-blue-400';
-// const pinkGradient = 'from-yellow-400 via-pink-400 to-fuchsia-500';
 
 export default function Home() {
   return (
@@ -28,7 +17,7 @@ export default function Home() {
           >
             Forms, reimagined.
           </h1>
-          <h2 className="text-xl font-extrabold mb-8 md:text-2xl px-12 text-center">
+          <h2 className={`${workSansHeavy.className} text-xl font-extrabold mb-8 md:text-2xl px-12 text-center`}>
             Chat to create. Chat to fill. Zero config.{' '}
             <span className={`${titleGradient} bg-clip-text text-transparent`}>
               It just works.
@@ -60,7 +49,7 @@ function GetStartedButtons() {
         </Link>
         <Link
           href="/home"
-          className={`inline-block ${titleGradient} text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:from-yellow-300 hover:via-pink-300 hover:to-fuchsia-400`}
+          className={`inline-block ${titleGradient} text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out ${titleGradientHover}`}
         >
           Create a form ›
         </Link>
@@ -136,7 +125,7 @@ function Specifics() {
   return (
     <section className={`${workSans.className} bg-white`}>
       <div className="container max-w-5xl mx-auto mt-8">
-        <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
+        <h2 className="w-full my-2 text-3xl sm:text-4xl font-bold leading-tight text-center text-gray-800">
           Faster, easier, more powerful.
         </h2>
         <SpecificsTextOnLeft
@@ -184,7 +173,7 @@ function Specifics() {
           <SampleResponseTable />
         </SpecificsTextOnLeft>
         <SpecificsTextOnRight
-          heading="Unlimited Power."
+          heading="Unlimited power."
           content="Custom validations. Complicated conditional logic. If you can think it, we can do it."
         >
           <FloatingTextBox

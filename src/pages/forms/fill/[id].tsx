@@ -12,17 +12,10 @@ import {
   SupabaseClient,
   createClientComponentClient,
 } from '@supabase/auth-helpers-nextjs';
-import { Work_Sans } from 'next/font/google';
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Database } from '../../../../types/supabase';
 import { NavBar } from '@/components/home/NavBar';
-
-export const workSans = Work_Sans({
-  weight: '400',
-  subsets: ['latin'],
-  // variable: '--font-inter',
-});
 
 // Makes it much easier to track renders/fetches by wrapping the component.
 export default function CreateForm() {
