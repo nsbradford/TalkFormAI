@@ -53,12 +53,13 @@ export function CreateFormInner(props: { formId: string }) {
   const { formId } = props;
   const supabase = createClientComponentClient<Database>();
   const [form, setForm] = useState<Form | null>(null);
+  const [error, setError] = useState<Error | null>(null);
   useEffect(() => {
     if (!form) {
       getFormFromSupabase(formId, supabase).then((maybeForm) => {
         if (maybeForm instanceof Error) {
           console.error(maybeForm.message);
-          // TODO set error and render it
+          setError(maybeForm);
         } else {
           setForm(maybeForm);
         }
@@ -67,9 +68,10 @@ export function CreateFormInner(props: { formId: string }) {
   }, []); // The empty array ensures this effect runs only once on mount
   return form ? (
     <InnerChat form={form} supabase={supabase} />
-  ) : (
-    <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>
-  );
+  ) : 
+    <>{error ? ErrorBox(error) : <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>}
+    </>
+  ;
 }
 export function InnerChat(props: {
   form: Form;
