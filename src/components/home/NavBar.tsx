@@ -9,6 +9,8 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
+// const contact = <a href="mailto:nsbradford@gmail.com,seanhunterbrooks@gmail.com">Contact</a>;
+
 export function NavBar(theProps: {
   getAvatar: (size: number) => JSX.Element;
   userNavigation: { name: string; href: string; onClick: () => void }[];
@@ -26,7 +28,6 @@ export function NavBar(theProps: {
               </div>
               <div className="hidden md:block">
                 <div className="ml-4 flex items-center md:ml-6">
-
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>

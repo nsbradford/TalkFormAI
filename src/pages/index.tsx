@@ -204,14 +204,20 @@ function Specifics() {
                   <td className="p-1 pl-2 sm:p-2 border-b">jd@ex.co</td>
                   <td className="p-1 pl-2 sm:p-2 border-b">Tech Co.</td>
                   <td className="p-1 pl-2 sm:p-2 border-b">ML Engineer</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">React, Node, Python</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b hidden sm:table-cell">jd-70B</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">
+                    React, Node, Python
+                  </td>
+                  <td className="p-1 pl-2 sm:p-2 border-b hidden sm:table-cell">
+                    jd-70B
+                  </td>
                 </tr>
                 <tr>
                   <td className="p-1 pl-2 sm:p-2 border-b">Bill Smith</td>
                   <td className="p-1 pl-2 sm:p-2 border-b">bsx@ex.co</td>
                   <td className="p-1 pl-2 sm:p-2 border-b">Biz Corp.</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">Marketing Manager</td>
+                  <td className="p-1 pl-2 sm:p-2 border-b">
+                    Marketing Manager
+                  </td>
                   <td className="p-1 pl-2 sm:p-2 border-b">Google Analytics</td>
                   <td className="p-1 border-b hidden sm:table-cell">-</td>
                 </tr>
@@ -223,7 +229,9 @@ function Specifics() {
           heading="Unlimited Power."
           content="Custom validations. Complicated conditional logic. If you can think it, we can do it."
         >
-          <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl text-left`}>
+          <div
+            className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl text-left`}
+          >
             <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400">
               {`VC coffee chat: name, email, startup name, stage, one-sentence pitch. If the pitch mentions crypto, politely end the convo. Translate their pitch to Spanish and French as well. If they're past seed, ask for valuation and $ raised at each stage. If they're an AI company, ask about their moat, and if you suspect they're a thin wrapper around OpenAI, add a secret flag.`}
             </div>
