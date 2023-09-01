@@ -1,12 +1,11 @@
-# TalkForm.AI
-
-![Vercel](https://img.shields.io/github/deployments/nsbradford/TalkFormAI/production?logo=vercel&label=Vercel%20deployment)
+# <img src="./public/talkform.png" alt="Talkform Icon" width="25"> TalkForm.AI
 
 Conversational form creation and responses
 
-_THIS IS A WORK IN PROGRESS_
+![Vercel](https://img.shields.io/github/deployments/nsbradford/TalkFormAI/production?logo=vercel&label=Vercel%20deployment)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+This is a [Next.js](https://nextjs.org/) project.
 
 ## Contributing
 
