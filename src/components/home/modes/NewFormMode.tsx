@@ -5,6 +5,7 @@ import { ChatMessage, User } from '@/types';
 import { v4 } from 'uuid';
 import { callLLM } from '@/utils';
 import { PROMPT_BUILD } from '@/prompts';
+import { removeStartAndEndQuotes } from '@/utils';
 
 type NewFormModeProps = {
   user: User;
@@ -237,7 +238,4 @@ export default function NewFormMode(props: NewFormModeProps) {
     </form>
   );
 }
-
-function removeStartAndEndQuotes(content: string | null): import("react").SetStateAction<string> {
-  throw new Error('Function not implemented.');
-}
+x
