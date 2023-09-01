@@ -238,4 +238,3 @@ export default function NewFormMode(props: NewFormModeProps) {
     </form>
   );
 }
-x
