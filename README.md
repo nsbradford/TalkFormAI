@@ -4,10 +4,10 @@ Create and fill forms with chat.
 
 ![Vercel](https://img.shields.io/github/deployments/nsbradford/TalkFormAI/production?logo=vercel&label=Vercel%20deployment) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Why?
+## Why
 Tired of lame, sad forms? Annoyed with tedious form builders? Feeling limited in what kinds of custom validations and logic you can express? You're in luck: [text is the universal interface](https://scale.com/blog/text-universal-interface), and so [TalkForm.AI](https://www.talkform.ai/) is here to help.
 
-Simply chat to create a form, and chat to fill it. The field types are inferred automatically by our AI, and all your form responses remain structured according to the inferred schema for easy analysis. And you get unlimited power to do custom validations and complicated logic.
+Simply chat to create a form, and chat to fill it. The field types are inferred automatically by an LLM, and all your form responses remain structured according to the inferred schema for easy analysis. And you get unlimited power to do custom validations and complicated logic.
 
 Anything you can dream, you can build. Truly, we live in a golden age of technology.
 
