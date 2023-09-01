@@ -101,7 +101,7 @@ function SpecificsTextOnLeft(props: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-wrap mt-20">
+    <div className="flex flex-wrap mt-8 sm:mt-20">
       <div className="w-full sm:w-1/2 p-6">
         <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
           {props.heading}
@@ -118,7 +118,7 @@ function SpecificsTextOnRight(props: {
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-wrap flex-col-reverse sm:flex-row mt-20">
+    <div className="flex flex-wrap flex-col-reverse sm:flex-row mt-8 sm:mt-20">
       <div className="w-full sm:w-1/2 p-2">{props.children}</div>
       <div className="w-full sm:w-1/2 p-6">
         <div className="align-middle">
@@ -153,7 +153,7 @@ function Specifics() {
           heading="Chat to fill."
           content="Our AI automatically validates, cleans, structures, and fills the fields."
         >
-          <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
+          <FloatingGradientBackground>
             <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400 text-left">
               <MessageUI
                 role={'assistant'}
@@ -175,62 +175,21 @@ function Specifics() {
                 content={`Thanks, I see your username is 'jd-70B'. Now, what technologies do you use when doing marketing research?`}
               />
             </div>
-          </div>
+          </FloatingGradientBackground>
         </SpecificsTextOnRight>
         <SpecificsTextOnLeft
           heading="Keep your data structured."
           content="All your form responses remain structured according to the inferred schema for easy analysis."
         >
-          <div className={`${sunsetGradient} p-6 rounded-xl shadow-xl`}>
-            <table className="text-xs min-w-full bg-white rounded-lg shadow-xl text-sm text-gray-400 border-collapse text-left">
-              <thead>
-                <tr className="border-b">
-                  <th className="p-1 pl-2 sm:p-2">Name</th>
-                  <th className="p-1 pl-2 sm:p-2">Email</th>
-                  <th className="p-1 pl-2 sm:p-2">Company</th>
-                  <th className="p-1 pl-2 sm:p-2">Title</th>
-                  <th className="p-1 pl-2 sm:p-2">Tech</th>
-                  <th className="p-1 hidden sm:table-cell">GitHub</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td className="p-1 pl-2 sm:p-2 border-b">Jane Doe</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">jd@ex.co</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">Tech Co.</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">ML Engineer</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">
-                    React, Node, Python
-                  </td>
-                  <td className="p-1 pl-2 sm:p-2 border-b hidden sm:table-cell">
-                    jd-70B
-                  </td>
-                </tr>
-                <tr>
-                  <td className="p-1 pl-2 sm:p-2 border-b">Bill Smith</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">bsx@ex.co</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">Biz Corp.</td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">
-                    Marketing Manager
-                  </td>
-                  <td className="p-1 pl-2 sm:p-2 border-b">Google Analytics</td>
-                  <td className="p-1 border-b hidden sm:table-cell">-</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <SampleResponseTable />
         </SpecificsTextOnLeft>
         <SpecificsTextOnRight
           heading="Unlimited Power."
           content="Custom validations. Complicated conditional logic. If you can think it, we can do it."
         >
-          <div
-            className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl text-left`}
-          >
-            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400">
-              {`VC coffee chat: name, email, startup name, stage, one-sentence pitch. If the pitch mentions crypto, politely end the convo. Translate their pitch to Spanish and French as well. If they're past seed, ask for valuation and $ raised at each stage. If they're an AI company, ask about their moat, and if you suspect they're a thin wrapper around OpenAI, add a secret flag.`}
-            </div>
-          </div>
+          <FloatingTextBox
+            text={`VC coffee chat: name, email, startup name, stage, one-sentence pitch. If the pitch mentions crypto, politely end the convo. Translate their pitch to Spanish and French as well. If they're past seed, ask for valuation and $ raised at each stage. If they're an AI company, ask about their moat, and if you suspect they're a thin wrapper around OpenAI, add a secret flag.`}
+          />
         </SpecificsTextOnRight>
         <hr className="border-gray-300 mx-auto w-3/4 mt-14" />
         <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800 mt-12">
@@ -240,12 +199,58 @@ function Specifics() {
     </section>
   );
 }
+
+function SampleResponseTable() {
+  return <FloatingGradientBackground><table className="text-xs min-w-full bg-white rounded-lg shadow-xl text-sm text-gray-400 border-collapse text-left">
+    <thead>
+      <tr className="border-b">
+        <th className="p-1 pl-2 sm:p-2">Name</th>
+        <th className="p-1 pl-2 sm:p-2">Email</th>
+        <th className="p-1 pl-2 sm:p-2">Company</th>
+        <th className="p-1 pl-2 sm:p-2">Title</th>
+        <th className="p-1 pl-2 sm:p-2">Tech</th>
+        <th className="p-1 hidden sm:table-cell">GitHub</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td className="p-1 pl-2 sm:p-2 border-b">Jane Doe</td>
+        <td className="p-1 pl-2 sm:p-2 border-b">jd@ex.co</td>
+        <td className="p-1 pl-2 sm:p-2 border-b">Tech Co.</td>
+        <td className="p-1 pl-2 sm:p-2 border-b">ML Engineer</td>
+        <td className="p-1 pl-2 sm:p-2 border-b">
+          React, Node, Python
+        </td>
+        <td className="p-1 pl-2 sm:p-2 border-b hidden sm:table-cell">
+          jd-70B
+        </td>
+      </tr>
+      <tr>
+        <td className="p-1 pl-2 sm:p-2 border-b">Bill Smith</td>
+        <td className="p-1 pl-2 sm:p-2 border-b">bsx@ex.co</td>
+        <td className="p-1 pl-2 sm:p-2 border-b">Biz Corp.</td>
+        <td className="p-1 pl-2 sm:p-2 border-b">
+          Marketing Manager
+        </td>
+        <td className="p-1 pl-2 sm:p-2 border-b">Google Analytics</td>
+        <td className="p-1 border-b hidden sm:table-cell">-</td>
+      </tr>
+    </tbody>
+  </table></FloatingGradientBackground>;
+}
+
+function FloatingGradientBackground(props: { children: React.ReactNode }) {
+  return <div className={`${sunsetGradient} p-6 rounded-xl shadow-xl`}>
+    {props.children}
+  </div>;
+}
+
 function FloatingTextBox(props: { text: string }) {
   return (
-    <div className={`${sunsetGradient} p-6 rounded-xl shadow-xl`}>
+    <FloatingGradientBackground>
       <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400 text-left">
         {props.text}
       </div>
-    </div>
+    </FloatingGradientBackground>
   );
 }
