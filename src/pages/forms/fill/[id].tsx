@@ -87,10 +87,9 @@ export function InnerChat(props: {
   const [inputValue, setInputValue] = useState('');
   const [isWaiting, setIsWaiting] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  const inputRef = useRef<HTMLInputElement>(null); // Initialize the ref
+  const inputRef = useRef<HTMLInputElement>(null);
   const [submission, setSubmission] = useState<object | null>(null);
   const [error, setError] = useState<Error | null>(null);
-  // new Error('Postgres error: blah al;sdjf a;aldkfja ;sdfja; sdf;ajk sd;fljka ;dsfjk')
 
   const handleSubmit = async (userMessage?: string) => {
     const messagesToSend =
@@ -145,9 +144,6 @@ export function InnerChat(props: {
       setIsWaiting(false);
     }
   };
-  // const handleCancel = () => {
-  //   setIsWaiting(false);
-  // };
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !isWaiting) {
       handleSubmit(inputValue);
@@ -220,17 +216,6 @@ function MiniSpinner() {
   );
 }
 
-{
-  /* {isWaiting && (
-            <button
-              className="ml-2 py-2 px-4 bg-red-500 text-white rounded-lg"
-              onClick={handleCancel}
-            >
-              Cancel
-            </button>
-          )} */
-}
-
 function ErrorBox(error: Error): React.ReactNode {
   return (
     <div className="w-4/5 md:w-1/2 lg:w-1/3 bg-red-300 shadow-md p-6 rounded-lg mt-4">
@@ -247,14 +232,6 @@ function SubmissionBox(submission: object): React.ReactNode {
       <p className="font-mono text-sm whitespace-pre-wrap">
         {JSON.stringify(submission, null, 2)}
       </p>
-      {/* <div className="mt-4 flex">
-          <button
-            className="ml-2 py-2 px-4 bg-green-500 text-white rounded-lg"
-            onClick={() => router.push('/')}
-          >
-            Home
-          </button>
-        </div> */}
     </div>
   );
 }
