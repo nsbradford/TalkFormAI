@@ -15,20 +15,37 @@ Anything you can dream, you can build. Truly, we live in a golden age of technol
 Head over to [talkform.ai](https://www.talkform.ai/) to try it out!
 
 ## Contributing
-This is a [Next.js](https://nextjs.org/) project.
+This is a [Next.js](https://nextjs.org/) project. You'll need **Node** (probably using **[nvm](https://github.com/nvm-sh/nvm)**) and **[yarn](https://yarnpkg.com/)**.
 
-Requires Node
-
-Install
-
+### Install dependencies
 ```bash
 yarn
 ```
 
-First, run the development server:
-
+### Run development server
 ```bash
 yarn dev
 ```
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. The page auto-updates as you make edits.
+
+### Lint
+Uses **[eslint](https://eslint.org/)** to enforce lint rules.
+```bash
+yarn lint:fix
+```
+
+
+### Format
+Uses **[prettier](https://prettier.io/)** to enforce standard code formatting.
+```bash
+yarn lint:fix
+```
+
+### Create an optimized production build
+Useful to see what will actually be released.
+```bash
+yarn build
+```
+
+## About
+See our [about page](https://www.talkform.ai/about).
