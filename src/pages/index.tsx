@@ -147,7 +147,7 @@ function Specifics() {
           content="No more tedious form builders. The field types are inferred automatically by our AI."
         >
           <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
-            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400">
+            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400 text-left">
               Waitlist for my startup: name, email address, company, job title,
               and what technologies they currently use for marketing research.
               If they&rsquo;re a software engineer, ask for their GitHub.
@@ -159,7 +159,7 @@ function Specifics() {
           content="Our AI automatically validates, cleans, structures, and fills the fields."
         >
           <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
-            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400">
+            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400 text-left">
               <MessageUI
                 role={'assistant'}
                 content={
@@ -223,7 +223,7 @@ function Specifics() {
           heading="Unlimited Power."
           content="Custom validations. Complicated conditional logic. If you can think it, we can do it."
         >
-          <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl`}>
+          <div className={` ${sunsetGradient}  p-6 rounded-xl shadow-xl text-left`}>
             <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400">
               {`VC coffee chat: name, email, startup name, stage, one-sentence pitch. If the pitch mentions crypto, politely end the convo. Translate their pitch to Spanish and French as well. If they're past seed, ask for valuation and $ raised at each stage. If they're an AI company, ask about their moat, and if you suspect they're a thin wrapper around OpenAI, add a secret flag.`}
             </div>
