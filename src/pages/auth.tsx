@@ -4,6 +4,8 @@ import SignUpForm from '../components/auth/SignUpForm';
 import SignInForm from '@/components/auth/SignInForm';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
+import { TalkFormLogo } from '@/components/talkform';
+import { NavBar } from '@/components/home/NavBar';
 
 export default function AuthPage() {
   const [mode, setMode] = useState<'sign_in' | 'sign_up'>('sign_up');
@@ -29,13 +31,9 @@ export default function AuthPage() {
 
   return (
     <>
+      <NavBar getAvatar={() => <></>} userNavigation={[]} props={{}} />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img
-            className="mx-auto h-10 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-            alt="Your Company"
-          />
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             {mode == 'sign_in'
               ? 'Sign in to your account'

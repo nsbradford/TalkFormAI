@@ -1,4 +1,5 @@
 import { NavBar } from '@/components/home/NavBar';
+import { TalkFormLogo } from '@/components/talkform';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Work_Sans } from 'next/font/google';
@@ -26,7 +27,7 @@ export default function Home() {
             </span>
           </h2>
           <GetStartedButtons />
-          <hr className="border-gray-300 mx-auto w-3/4 mt-14" />
+          <hr className="border-gray-300 mx-auto w-3/4 mt-28 my-16" />
           <Specifics />
           <GetStartedButtons />
         </div>
@@ -37,28 +38,27 @@ export default function Home() {
 }
 
 function GetStartedButtons() {
-  return (<>
-    <div className="space-x-4">
-      <Link
-        href="https://github.com/nsbradford/talkformai" // Replace with your repo URL
-        className="inline-block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:bg-gray-600"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <FontAwesomeIcon
-          icon={faGithub}
-          className="fa-fw text-white-400"
-        />{' '}
-        View on GitHub
-      </Link>
-      <Link
-        href="/home"
-        className="inline-block bg-gradient-to-r from-yellow-400 via-pink-400 to-fuchsia-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:from-yellow-300 hover:via-pink-300 hover:to-fuchsia-400"
-      >
-        Create a form ›
-      </Link>
-    </div>
-  </>);
+  return (
+    <>
+      <div className="space-x-4">
+        <Link
+          href="https://github.com/nsbradford/talkformai" // Replace with your repo URL
+          className="inline-block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:bg-gray-600"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <FontAwesomeIcon icon={faGithub} className="fa-fw text-white-400" />{' '}
+          View on GitHub
+        </Link>
+        <Link
+          href="/home"
+          className="inline-block bg-gradient-to-r from-yellow-400 via-pink-400 to-fuchsia-500 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:from-yellow-300 hover:via-pink-300 hover:to-fuchsia-400"
+        >
+          Create a form ›
+        </Link>
+      </div>
+    </>
+  );
 }
 
 // https://github.com/tailwindtoolbox/Landing-Page
@@ -67,16 +67,7 @@ function Footer() {
     <div className="mx-auto px-8 bg-gray-100 mt-20">
       <div className="w-full flex flex-col md:flex-row py-6">
         <div className="flex-1 mb-6 text-black">
-          {/* <a className="text-pink-600 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
-                
-                TalkForm AI
-          </a> */}
-          <Link
-            href="/"
-            className="font-extrabold text-2xl lg:text-4xl my-8 inline-block bg-gradient-to-r from-purple-600 to-blue-400 bg-clip-text text-transparent hover:no-underline"
-          >
-            TalkForm AI
-          </Link>
+          <TalkFormLogo />
         </div>
         <div className="flex-1">
           <p className="uppercase text-gray-500 md:mb-6">contact us</p>
@@ -557,7 +548,7 @@ function SpecificsTextOnRight(props: { heading: string; content: string }) {
 
 function Specifics() {
   return (
-    <section className={`${workSans.className} bg-white pt-8 mt-12`}>
+    <section className={`${workSans.className} bg-white`}>
       <div className="container max-w-5xl mx-auto m-8">
         <h2 className="w-full my-2 text-4xl font-bold leading-tight text-center text-gray-800">
           Faster, easier, more powerful.
@@ -589,7 +580,6 @@ function Specifics() {
             While GPU supplies last!
           </h2> */}
       </div>
-      
     </section>
   );
 }

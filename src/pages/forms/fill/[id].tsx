@@ -185,7 +185,11 @@ export function InnerChat(props: {
             onClick={() => handleSubmit(inputValue)}
             disabled={isWaiting || isDone}
           >
-            <FontAwesomeIcon icon={faArrowRight} className="fa-fw" />
+            {isWaiting ? (
+              <MiniSpinner />
+            ) : (
+              <FontAwesomeIcon icon={faArrowRight} className="fa-fw" />
+            )}
           </button>
         </div>
       </div>
@@ -193,6 +197,19 @@ export function InnerChat(props: {
       {error && ErrorBox(error)}
       {submission && SubmissionBox(submission)}
     </>
+  );
+}
+
+function MiniSpinner() {
+  return (
+    <div
+      className="inline-block h-5 w-5 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+      role="status"
+    >
+      <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+        Loading...
+      </span>
+    </div>
   );
 }
 
