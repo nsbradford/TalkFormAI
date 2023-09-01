@@ -1,6 +1,6 @@
 # <img src="./public/talkform.png" alt="Talkform Icon" width="25"> TalkForm.AI
 
-Conversational form creation and responses
+Create and fill forms with chat.
 
 ![Vercel](https://img.shields.io/github/deployments/nsbradford/TalkFormAI/production?logo=vercel&label=Vercel%20deployment) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -38,7 +38,7 @@ yarn lint:fix
 ### Format
 Uses **[prettier](https://prettier.io/)** to enforce standard code formatting.
 ```bash
-yarn lint:fix
+yarn format
 ```
 
 ### Create an optimized production build
