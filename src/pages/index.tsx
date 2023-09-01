@@ -101,13 +101,12 @@ function SpecificsTextOnLeft(props: {
   children: React.ReactNode;
 }) {
   return (
-    // <div className="flex flex-wrap">
-    <div className="flex flex-wrap">
+    <div className="flex flex-wrap mt-20">
       <div className="w-full sm:w-1/2 p-6">
         <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
           {props.heading}
         </h3>
-        <p className="text-gray-600 mb-8 pr-4">{props.content}</p>
+        <p className="text-gray-600 pr-4">{props.content}</p>
       </div>
       <div className="w-full sm:w-1/2 p-2">{props.children}</div>
     </div>
@@ -115,14 +114,14 @@ function SpecificsTextOnLeft(props: {
 }
 function SpecificsTextOnRight(props: { heading: string; content: string; children: React.ReactNode }) {
   return (
-    <div className="flex flex-wrap flex-col-reverse sm:flex-row">
+    <div className="flex flex-wrap flex-col-reverse sm:flex-row mt-20">
       <div className="w-full sm:w-1/2 p-2">{props.children}</div>
-      <div className="w-full sm:w-1/2 p-6 mt-6">
+      <div className="w-full sm:w-1/2 p-6">
         <div className="align-middle">
           <h3 className="text-3xl text-gray-800 font-bold leading-none mb-3">
             {props.heading}
           </h3>
-          <p className="text-gray-600 mb-8">
+          <p className="text-gray-600 pr-4">
             {props.content}
           </p>
         </div>
