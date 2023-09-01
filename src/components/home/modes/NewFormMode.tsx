@@ -49,21 +49,26 @@ export default function NewFormMode(props: NewFormModeProps) {
     const conversationThread: ChatMessage[] = [
       {
         role: 'user',
-        content: 'Here is a short text description of what I want to create a survey form about: ' + formTopic + '\n' + 'What should the title of this survey form be?',
-      }
+        content:
+          'Here is a short text description of what I want to create a survey form about: ' +
+          formTopic +
+          '\n' +
+          'What should the title of this survey form be?',
+      },
     ];
     const titleResponse = await callLLM(PROMPT_BUILD, conversationThread);
     if (!titleResponse) {
       console.error('No response from LLM');
       setStep(1);
       return;
-    };
+    }
     setTitle(removeStartAndEndQuotes(titleResponse.content) || '');
 
     conversationThread.push(titleResponse);
     conversationThread.push({
       role: 'user',
-      content: 'Create a short description of this survey form.  This description will be given to a person who is in charge of administering the form data collection.  This person will use this description to understand what the form is about, so that they can collect the correct information from respondents.  Don\'t include information that is not relevant to the form, or state that this is a form.  This survey administrator already knows that, instead they care about information relation the forms content.  For example, if you want to collect a respondent\'s name and age, you can write: "This form is to collect the names and ages of people attending a birthday party."',
+      content:
+        'Create a short description of this survey form.  This description will be given to a person who is in charge of administering the form data collection.  This person will use this description to understand what the form is about, so that they can collect the correct information from respondents.  Don\'t include information that is not relevant to the form, or state that this is a form.  This survey administrator already knows that, instead they care about information relation the forms content.  For example, if you want to collect a respondent\'s name and age, you can write: "This form is to collect the names and ages of people attending a birthday party."',
     });
     const descriptionResponse = await callLLM(PROMPT_BUILD, conversationThread);
     if (!descriptionResponse) {
@@ -76,29 +81,39 @@ export default function NewFormMode(props: NewFormModeProps) {
     conversationThread.push(descriptionResponse);
     conversationThread.push({
       role: 'user',
-      content: 'Write any guidance that will help respondents fill out this form, such as conditional information to collect or how to answer questions.  The survey administrator will reference this guidence when deciding which follow up questions to ask or how to interpret the answers.  For example, if you want to collect a RSVP for a birthday party, including the number of guests attending, you may write "Please include the number of guests attending the birthday party, but only if the RSVP is yes." because it doesn\'t make sense to ask for the number of guests if the respondent is not attending.',
+      content:
+        'Write any guidance that will help respondents fill out this form, such as conditional information to collect or how to answer questions.  The survey administrator will reference this guidence when deciding which follow up questions to ask or how to interpret the answers.  For example, if you want to collect a RSVP for a birthday party, including the number of guests attending, you may write "Please include the number of guests attending the birthday party, but only if the RSVP is yes." because it doesn\'t make sense to ask for the number of guests if the respondent is not attending.',
     });
 
-    const fieldsGuidanceResponse = await callLLM(PROMPT_BUILD, conversationThread);
+    const fieldsGuidanceResponse = await callLLM(
+      PROMPT_BUILD,
+      conversationThread
+    );
     if (!fieldsGuidanceResponse) {
       console.error('No response from LLM');
       setStep(1);
       return;
-    };
-    setFieldsGuidance(removeStartAndEndQuotes(fieldsGuidanceResponse.content) || '');
+    }
+    setFieldsGuidance(
+      removeStartAndEndQuotes(fieldsGuidanceResponse.content) || ''
+    );
 
     conversationThread.push(fieldsGuidanceResponse);
     conversationThread.push({
       role: 'user',
-      content: 'Now return a JSON object that will serve as a template for the form responses.  This object should have keys that are strings and values that are strings.  The keys are the names of the fields that the survey administrator should attempt to obtain.  They values should be descriptions of those fields, including any formatting information or non-obvious ways to validate the provided information.  For example, if you want to collect a respondent\'s name and age, you can write: {"name": "name of the respondent", "age": "age of the respondent"}',
+      content:
+        'Now return a JSON object that will serve as a template for the form responses.  This object should have keys that are strings and values that are strings.  The keys are the names of the fields that the survey administrator should attempt to obtain.  They values should be descriptions of those fields, including any formatting information or non-obvious ways to validate the provided information.  For example, if you want to collect a respondent\'s name and age, you can write: {"name": "name of the respondent", "age": "age of the respondent"}',
     });
 
-    const fieldsSchemaResponse = await callLLM(PROMPT_BUILD, conversationThread);
+    const fieldsSchemaResponse = await callLLM(
+      PROMPT_BUILD,
+      conversationThread
+    );
     if (!fieldsSchemaResponse) {
       console.error('No response from LLM');
       setStep(1);
       return;
-    };
+    }
     const fieldsSchema = fieldsSchemaResponse.content || '{}';
     const fieldsSchemaJSON = JSON.parse(fieldsSchema);
     setFieldsSchema(fieldsSchemaJSON);
@@ -107,7 +122,6 @@ export default function NewFormMode(props: NewFormModeProps) {
 
   const renderStepContent = () => {
     if (step === 1) {
-
       return (
         <div className="sm:col-span-4">
           <label
@@ -150,7 +164,7 @@ export default function NewFormMode(props: NewFormModeProps) {
               Title
             </label>
             <div className="mt-2">
-              <input 
+              <input
                 type="text"
                 id="title"
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -196,7 +210,9 @@ export default function NewFormMode(props: NewFormModeProps) {
             <div>
               <div className="mt-4">
                 Fields Schema:
-                <pre className="bg-gray-100 p-3 rounded">{JSON.stringify(fieldsSchema, null, 2)}</pre>
+                <pre className="bg-gray-100 p-3 rounded whitespace-pre-wrap">
+                  {JSON.stringify(fieldsSchema, null, 2)}
+                </pre>
               </div>
             </div>
           </div>

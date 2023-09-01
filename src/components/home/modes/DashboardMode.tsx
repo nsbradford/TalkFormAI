@@ -59,7 +59,9 @@ export default function DashboardMode(props: DashboardModeProps) {
                       </span>
                     </div>
                     <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                      {f.description ? f.description.slice(0, 128) + '...' :  f.raw_instructions.slice(0, 128) + '...'}
+                      {f.description
+                        ? f.description.slice(0, 128) + '...'
+                        : f.raw_instructions.slice(0, 128) + '...'}
                     </p>
                   </div>
                 </div>

@@ -7,9 +7,7 @@ export function MessageUI(message: ChatMessage) {
   return (
     <div
       className={`my-2 p-3 rounded-lg ${
-        message.role === 'assistant'
-          ? 'bg-gray-100 text-black'
-          : 'bg-white text-black'
+        message.role === 'assistant' ? 'bg-gray-100' : 'bg-white'
       }`}
     >
       <div className="flex items-start">
@@ -26,7 +24,7 @@ export function MessageUI(message: ChatMessage) {
       </div>
     </div>
   );
-};
+}
 
 function parseMessageJson(message: ChatMessage) {
   let content;
@@ -40,8 +38,10 @@ function parseMessageJson(message: ChatMessage) {
         content = parsed;
       } else if ('text' in parsed && typeof parsed.text === 'string') {
         content = parsed.text;
-      } else if ('user_message' in parsed &&
-        typeof parsed.user_message === 'string') {
+      } else if (
+        'user_message' in parsed &&
+        typeof parsed.user_message === 'string'
+      ) {
         content = parsed.user_message;
       } else if ('action' in parsed && parsed.action === 'exit') {
         content = 'Your response was successfully submitted.';

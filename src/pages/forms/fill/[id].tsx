@@ -68,10 +68,15 @@ export function CreateFormInner(props: { formId: string }) {
   }, []); // The empty array ensures this effect runs only once on mount
   return form ? (
     <InnerChat form={form} supabase={supabase} />
-  ) : 
-    <>{error ? ErrorBox(error) : <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>}
+  ) : (
+    <>
+      {error ? (
+        ErrorBox(error)
+      ) : (
+        <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>
+      )}
     </>
-  ;
+  );
 }
 export function InnerChat(props: {
   form: Form;
