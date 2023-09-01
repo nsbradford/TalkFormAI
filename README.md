@@ -1,5 +1,7 @@
 # TalkForm.AI
 
+![Vercel](https://img.shields.io/github/deployments/nsbradford/TalkFormAI/production?logo=vercel&label=Vercel%20deployment)
+
 Conversational form creation and responses
 
 _THIS IS A WORK IN PROGRESS_
