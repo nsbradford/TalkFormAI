@@ -1,19 +1,24 @@
 import { useState, useEffect } from 'react';
-import { Database } from '../../../../types/supabase';
+import { Database } from '../../../types/supabase';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { ChatMessage, User } from '@/types';
 import { v4 } from 'uuid';
-import { callLLM } from '@/utils';
+import { callLLM, getUserFromSupabase } from '@/utils';
 import { PROMPT_BUILD } from '@/prompts';
 import { removeStartAndEndQuotes } from '@/utils';
+import Page from '@/components/layout/Page';
+import Spinner from '@/components/home/Spinner';
+import { useRouter } from 'next/router';
+import { useSessionContext } from '@supabase/auth-helpers-react';
+import Link from 'next/link';
 
-type NewFormModeProps = {
+type NewFormPageProps = {
   user: User;
   onCancelClick: () => void;
   onSuccessfulSubmit: () => void;
 };
 
-export default function NewFormMode(props: NewFormModeProps) {
+export default function NewFormPage(props: NewFormPageProps) {
   const supabase = createClientComponentClient<Database>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [step, setStep] = useState(1);
@@ -22,26 +27,51 @@ export default function NewFormMode(props: NewFormModeProps) {
   const [title, setTitle] = useState('');
   const [fieldsGuidance, setFieldsGuidance] = useState('');
   const [fieldsSchema, setFieldsSchema] = useState('{}');
+  const { push } = useRouter();
+  const [user, setUser] = useState<null | User>(null);
+  const { isLoading: isSessionLoading, session, error } = useSessionContext();
+  const [loadingMessage, setLoadingMessage] = useState('Building form...');
+
+  useEffect(() => {
+    if (!isSessionLoading && !session) {
+      push('/auth');
+    }
+    if (!isSessionLoading && session) {
+      getUserFromSupabase(session, supabase, setUser);
+    }
+  }, [isLoading, session]);
+
+  useEffect(() => {
+    if (step === 1.5) {
+      const interval = setInterval(() => {
+        setLoadingMessage(prev => (prev === 'Building form...') ? 'Educating chat agent...' : 'Building form...');
+      }, 3000);
+      
+      return () => clearInterval(interval); // Clear the interval when component unmounts or step changes
+    }
+  }, [step]);
 
   async function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
+    if (user === null) {
+      return;
+    }
     event.preventDefault();
     setIsLoading(true);
-
+    const formId = v4();
     await supabase.from('forms').insert([
       {
         description: description,
         raw_instructions: formTopic,
         fields_guidance: fieldsGuidance,
         fields_schema: fieldsSchema,
-        id: v4(),
+        id: formId,
         is_open: true,
         name: title,
-        user_id: props.user.id,
+        user_id: user.id,
       },
     ]);
-
     setIsLoading(false);
-    props.onSuccessfulSubmit();
+    push(`/forms/${formId}`);
   }
 
   const transitionToStep2WithLLM = async () => {
@@ -64,6 +94,7 @@ export default function NewFormMode(props: NewFormModeProps) {
     }
     setTitle(removeStartAndEndQuotes(titleResponse.content) || '');
 
+    console.log('titleResponse', titleResponse)
     conversationThread.push(titleResponse);
     conversationThread.push({
       role: 'user',
@@ -78,6 +109,7 @@ export default function NewFormMode(props: NewFormModeProps) {
     }
     setDescription(removeStartAndEndQuotes(descriptionResponse.content) || '');
 
+    console.log('descriptionResponse', descriptionResponse)
     conversationThread.push(descriptionResponse);
     conversationThread.push({
       role: 'user',
@@ -98,6 +130,7 @@ export default function NewFormMode(props: NewFormModeProps) {
       removeStartAndEndQuotes(fieldsGuidanceResponse.content) || ''
     );
 
+    console.log('fieldsGuidanceResponse', fieldsGuidanceResponse)
     conversationThread.push(fieldsGuidanceResponse);
     conversationThread.push({
       role: 'user',
@@ -151,8 +184,11 @@ export default function NewFormMode(props: NewFormModeProps) {
           </div>
         </div>
       );
-    } else if (step === 1.5) {
-      return <div className="col-span-full">Loading...</div>;
+    } else if (step === 1.5) {      
+      return <div className="flex flex-col items-center justify-center space-y-2">
+        <Spinner />
+        <div className="text-gray-600">{loadingMessage}</div>
+      </div>
     } else if (step === 2) {
       return (
         <div className="col-span-full">
@@ -222,34 +258,37 @@ export default function NewFormMode(props: NewFormModeProps) {
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <div className="space-y-12">
-        <div className="border-b border-gray-900/10 pb-12">
-          <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-            {renderStepContent()}
+    <Page user={null} pageTitle={'New form'} >
+      <form onSubmit={onFormSubmit}>
+        <div className="space-y-12">
+          <div className="border-b border-gray-900/10 pb-12">
+            <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+              {renderStepContent()}
+            </div>
           </div>
         </div>
-      </div>
-      <div className="mt-6 flex items-center justify-end gap-x-6">
-        {step === 2 && (
-          <button
-            type="button"
-            onClick={props.onCancelClick}
-            className="text-sm font-semibold leading-6 text-gray-900"
-          >
-            Cancel
-          </button>
-        )}
-        {step === 2 && (
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
-            Save
-          </button>
-        )}
-      </div>
-    </form>
+        <div className="mt-6 flex items-center justify-end gap-x-6">
+          {step === 2 && (
+            <Link href='/home'>
+              <button
+                type="button"
+                className="text-sm font-semibold leading-6 text-gray-900"
+              >
+                Cancel
+              </button>
+            </Link>
+          )}
+          {step === 2 && (
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+            >
+              Save
+            </button>
+          )}
+        </div>
+      </form>
+    </Page>
   );
 }

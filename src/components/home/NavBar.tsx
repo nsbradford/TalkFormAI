@@ -1,7 +1,6 @@
 import { AppShellProps } from '@/types';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { BellIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
-import Link from 'next/link';
 import { Fragment } from 'react';
 import { TalkFormLogo } from '../talkform';
 
