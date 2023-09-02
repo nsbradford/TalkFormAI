@@ -1,19 +1,18 @@
-import { Form, User, Response } from '@/types';
-import ResponsesTable from '../../components/home/modes/ResponsesTable';
+import Spinner from '@/components/home/Spinner';
 import Page from '@/components/layout/Page';
+import { Form, Response, User } from '@/types';
 import {
   getFormFromSupabase,
   getResponsesFromSupabase,
   getUserFromSupabase,
 } from '@/utils';
-import { useEffect, useState } from 'react';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext } from '@supabase/auth-helpers-react';
-import { Database } from '../../../types/supabase';
-import Spinner from '@/components/home/Spinner';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { LinkIcon } from '@heroicons/react/24/outline';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { Database } from '../../../types/supabase';
+import ResponsesTable from '../../components/home/modes/ResponsesTable';
 
 export default function FormDetailPage() {
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
@@ -63,8 +62,8 @@ export default function FormDetailPage() {
   const camelCaseTitle =
     form.name.charAt(0).toUpperCase() + form.name.slice(1, form.name.length);
   return (
-    <Page pageTitle="Responses" user={null}>
-      <div className="flex min-w-0 gap-x-4 mb-6">
+    <Page pageTitle="Responses" user={user}>
+      <div className="flex min-w-0 gap-x-4 mb-6 text-xs p-4">
         <div className="min-w-0 flex-auto">
           <div className="flex gap-x-6 mb-2">
             <h1 className="text-lg font-bold leading-6 text-gray-900">
@@ -78,15 +77,54 @@ export default function FormDetailPage() {
           </div>
           <Link href={'/forms/fill/' + form.id}>
             <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-              View form
+              View live form
             </button>
           </Link>
-          <p className="mt-1 text-md leading-5 text-gray-500">
-            {form.description}
-          </p>
-          <p className="mt-1 text-xs leading-5 text-gray-500">
-            {form.fields_guidance}
-          </p>
+          <div className="mt-4">
+            <h2 className="text-lg font-semibold text-gray-700 mb-2 mt-8">
+              Description
+            </h2>
+            <div className="p-4 bg-gray-100 border border-gray-200 rounded">
+              {form.description.split('\n').map((line, i) => (
+                <span key={i}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <h2 className="text-lg font-semibold text-gray-700 mb-2 mt-8">
+              <span className="font-mono text-gray-400">
+                {'[AI-generated]'}
+              </span>{' '}
+              Guidance
+            </h2>
+            <div className="p-4 bg-gray-100 border border-gray-200 rounded">
+              {form.fields_guidance.split('\n').map((line, i) => (
+                <span key={i}>
+                  {line}
+                  <br />
+                </span>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <h2 className="text-lg font-semibold text-gray-700 mb-2 mt-8">
+              <span className="font-mono text-gray-400">
+                {'[AI-generated]'}
+              </span>{' '}
+              Schema
+            </h2>
+            <div className="p-4 bg-gray-100 border border-gray-200 rounded overflow-x-auto whitespace-pre-wrap font-mono">
+              {JSON.stringify(form.fields_schema, null, 2)}
+            </div>
+          </div>
+          <h2 className="text-lg font-semibold text-gray-700 mb-2 mt-8">
+            Responses
+          </h2>
         </div>
       </div>
       <ResponsesTable

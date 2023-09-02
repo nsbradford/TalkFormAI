@@ -4,7 +4,17 @@ interface Props {
 
 // TODO use the Union of all possible types for the data
 const ResponsesTable: React.FC<Props> = ({ data }) => {
-  if (!data || data.length === 0) return <div>No data available.</div>;
+  const errorText = !data
+    ? 'Loading...'
+    : data.length === 0
+    ? 'No responses yet'
+    : undefined;
+  if (!data || data.length === 0)
+    return (
+      <div className="p-4 max-w-md mx-auto mx-4 bg-gray-100 border border-gray-300 rounded shadow-md text-center text-gray-600 font-semibold">
+        {errorText}
+      </div>
+    );
   // Assuming all lists have identical structure, so we'll use the first list's first item for headers
   const sampleItem = data[0];
   if (!sampleItem)
