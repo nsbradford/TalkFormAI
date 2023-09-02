@@ -3,7 +3,7 @@ import { NavBar } from '../home/NavBar';
 import Link from 'next/link';
 
 interface PageProps {
-  user: User | null;
+  user?: User | null;
   pageTitle: string;
   children: React.ReactNode;
 }
@@ -12,7 +12,7 @@ export default function Page(props: PageProps) {
   return (
     <>
       <div className="min-h-full">
-        <NavBar getAvatar={() => <></>} userNavigation={[]} user={props.user} />
+        <NavBar />
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">

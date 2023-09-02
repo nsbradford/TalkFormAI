@@ -15,7 +15,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <>
-      <NavBar getAvatar={() => <></>} userNavigation={[]} user={null} />
+      <NavBar />
       <div className={`flex justify-center items-center mt-20`}>
         <div className="flex flex-col items-center justify-center">
           <h1

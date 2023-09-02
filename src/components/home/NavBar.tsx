@@ -1,8 +1,13 @@
 import { User } from '@/types';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Fragment } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { TalkFormLogo } from '../talkform';
+import { getUserFromSupabase } from '@/utils';
+import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { useSessionContext } from '@supabase/auth-helpers-react';
+import { useRouter } from 'next/router';
+import { Database } from '../../../types/supabase';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -10,12 +15,66 @@ function classNames(...classes: string[]) {
 
 // const contact = <a href="mailto:nsbradford@gmail.com,seanhunterbrooks@gmail.com">Contact</a>;
 
-export function NavBar(theProps: {
-  getAvatar: (size: number) => JSX.Element;
-  userNavigation: { name: string; href: string; onClick: () => void }[];
-  user?: User | null;
-}) {
-  const { getAvatar, userNavigation, user } = theProps;
+export function NavBar(theProps: {}) {
+  // TODO later refactor all the user hydration code
+  const { push } = useRouter();
+  const { isLoading: isSessionLoading, session, error } = useSessionContext();
+  const supabase = createClientComponentClient<Database>();
+  const [user, setUser] = useState<null | User>(null);
+
+  useEffect(() => {
+    if (!isSessionLoading && !session) {
+      push('/auth');
+    }
+    if (!isSessionLoading && session) {
+      getUserFromSupabase(session, supabase, setUser);
+    }
+  }, [isSessionLoading, session]);
+
+  const userNavigation = [
+    {
+      name: 'Settings',
+      href: '/settings',
+      onClick: () => {}, //setMode(settingsAppMode),
+    },
+    {
+      name: 'Sign out',
+      href: '#',
+      onClick: () => {
+        supabase.auth.signOut();
+        push('/');
+      },
+    },
+  ];
+
+  const getAvatar = (size: number) => {
+    if (!user) {
+      return (
+        <div className={`h-${size} w-${size} rounded-full bg-gray-500"`}>
+          <div className="flex h-full w-full items-center justify-center text-white">
+            ?
+          </div>
+        </div>
+      );
+    }
+    if (user.avatar_url) {
+      return (
+        <img
+          className={`h-${size} w-${size} rounded-full`}
+          src={user.avatar_url}
+          alt=""
+        />
+      );
+    }
+    return (
+      <div className={`h-${size} w-${size} rounded-full bg-gray-500"`}>
+        <div className="flex h-full w-full items-center justify-center text-white">
+          {user.email[0]}
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Disclosure as="nav" className="bg-black bg-opacity-5">
       {({ open }) => (

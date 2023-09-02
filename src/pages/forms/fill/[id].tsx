@@ -28,7 +28,7 @@ export default function CreateForm() {
       <div
         className={`bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 min-h-screen`}
       >
-        <NavBar getAvatar={() => <></>} userNavigation={[]} user={null} />
+        <NavBar />
         <div
           className={`${workSans.className} flex flex-col items-center  min-h-screen py-20`}
         >
