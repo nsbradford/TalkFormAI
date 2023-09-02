@@ -1,6 +1,10 @@
 import Spinner from '@/components/home/Spinner';
 import { Form, User, Response } from '@/types';
-import { getFormsFromSupabase, getResponsesFromSupabase, getUserFromSupabase } from '@/utils';
+import {
+  getFormsFromSupabase,
+  getResponsesFromSupabase,
+  getUserFromSupabase,
+} from '@/utils';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
@@ -8,8 +12,6 @@ import { useEffect, useState } from 'react';
 import { Database } from '../../../types/supabase';
 import Link from 'next/link';
 import { LinkIcon } from '@heroicons/react/24/outline';
-
-
 
 export default function DashboardMode() {
   const { push } = useRouter();
@@ -64,8 +66,6 @@ export default function DashboardMode() {
     }
   }, [isSessionLoading, user, allForms, formIdToResponses]);
 
-
-
   if (user === null || allForms === null || formIdToResponses === null) {
     return <Spinner />;
   } else if (allForms.length === 0) {
@@ -77,24 +77,19 @@ export default function DashboardMode() {
         <p className="mt-2 text-sm text-gray-500">
           Create a form to get started
         </p>
-        
-        <Link href={"/forms/new"}>
-          <button
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
+
+        <Link href={'/forms/new'}>
+          <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             New form
           </button>
         </Link>
-        
       </div>
     );
   } else {
     return (
       <>
-        <Link href={"/forms/new"}>
-          <button
-            className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-          >
+        <Link href={'/forms/new'}>
+          <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             New form
           </button>
         </Link>
@@ -129,18 +124,14 @@ export default function DashboardMode() {
                 </div>
                 <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                   <div className="flex gap-x-2 ">
-                    <Link href={"/forms/" + f.id}>
-                      <button
-                        className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                      >
+                    <Link href={'/forms/' + f.id}>
+                      <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         View responses
                       </button>
                     </Link>
                     {f.is_open ? (
-                      <Link href={"/forms/fill/" + f.id}>
-                        <button
-                          className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        >
+                      <Link href={'/forms/fill/' + f.id}>
+                        <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                           <LinkIcon className="h-5 w-5" aria-hidden="true" />
                         </button>
                       </Link>

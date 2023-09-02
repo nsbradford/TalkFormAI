@@ -1,13 +1,11 @@
-import { User } from "@supabase/auth-helpers-nextjs";
-import { NavBar } from "../home/NavBar";
+import { User } from '@supabase/auth-helpers-nextjs';
+import { NavBar } from '../home/NavBar';
 
- 
 interface PageProps {
   user: User | null;
-  pageTitle: string
-  children: React.ReactNode
+  pageTitle: string;
+  children: React.ReactNode;
 }
-
 
 export default function Page(props: PageProps) {
   return (
@@ -28,6 +26,6 @@ export default function Page(props: PageProps) {
           </div>
         </main>
       </div>
-  </>
+    </>
   );
 }

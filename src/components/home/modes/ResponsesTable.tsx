@@ -52,7 +52,12 @@ const ResponsesTable: React.FC<Props> = ({ data }) => {
         </thead>
         <tbody className="text-gray-700 divide-y divide-gray-300">
           {data.map((row, rowIndex) => (
-            <tr key={rowIndex} className={`${rowIndex % 2 === 0 ? 'bg-gray-50' : ''} hover:bg-gray-100`}>
+            <tr
+              key={rowIndex}
+              className={`${
+                rowIndex % 2 === 0 ? 'bg-gray-50' : ''
+              } hover:bg-gray-100`}
+            >
               {headers.map((header) => (
                 <td key={header} className="border px-4 py-2">
                   {row[header] || 'N/A'}

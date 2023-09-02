@@ -44,9 +44,13 @@ export default function NewFormPage(props: NewFormPageProps) {
   useEffect(() => {
     if (step === 1.5) {
       const interval = setInterval(() => {
-        setLoadingMessage(prev => (prev === 'Building form...') ? 'Educating chat agent...' : 'Building form...');
+        setLoadingMessage((prev) =>
+          prev === 'Building form...'
+            ? 'Educating chat agent...'
+            : 'Building form...'
+        );
       }, 3000);
-      
+
       return () => clearInterval(interval); // Clear the interval when component unmounts or step changes
     }
   }, [step]);
@@ -184,11 +188,13 @@ export default function NewFormPage(props: NewFormPageProps) {
           </div>
         </div>
       );
-    } else if (step === 1.5) {      
-      return <div className="flex flex-col items-center justify-center space-y-2">
-        <Spinner />
-        <div className="text-gray-600">{loadingMessage}</div>
-      </div>;
+    } else if (step === 1.5) {
+      return (
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <Spinner />
+          <div className="text-gray-600">{loadingMessage}</div>
+        </div>
+      );
     } else if (step === 2) {
       return (
         <div className="col-span-full">
@@ -258,7 +264,7 @@ export default function NewFormPage(props: NewFormPageProps) {
   };
 
   return (
-    <Page user={null} pageTitle={'New form'} >
+    <Page user={null} pageTitle={'New form'}>
       <form onSubmit={onFormSubmit}>
         <div className="space-y-12">
           <div className="border-b border-gray-900/10 pb-12">
@@ -269,7 +275,7 @@ export default function NewFormPage(props: NewFormPageProps) {
         </div>
         <div className="mt-6 flex items-center justify-end gap-x-6">
           {step === 2 && (
-            <Link href='/home'>
+            <Link href="/home">
               <button
                 type="button"
                 className="text-sm font-semibold leading-6 text-gray-900"
