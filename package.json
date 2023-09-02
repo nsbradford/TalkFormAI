@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "yarn lint --fix",
+    "format": "npx prettier --write .",
     "generate-db-types": "npx supabase gen types typescript --project-id \"uvthrievvhksvomqwowg\" --schema public > types/supabase.ts"
   },
   "dependencies": {
