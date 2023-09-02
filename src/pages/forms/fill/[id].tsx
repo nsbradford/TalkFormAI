@@ -100,6 +100,10 @@ export function InnerChat(props: {
     setInputValue('');
     setIsWaiting(true);
     const assistantResponse = await callLLM(PROMPT_FILL(form), messagesToSend);
+    if (assistantResponse instanceof Error) {
+      setError(assistantResponse);
+      return;
+    }
     setMessages((prev) => [...prev, assistantResponse]);
     if (assistantResponse.content) {
       try {

@@ -26,11 +26,14 @@ export const callLLM = async (
     body: JSON.stringify(data),
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${process.env.NEXT_PUBLIC_LLM_API_KEY}`,
     },
   });
+  if (!response.ok) {
+    return Error(`LLM API returned ${response.status}: ${response.statusText}`);
+  }
   const json: LLMResponse = await response.json();
-  const text = json.completion.choices[0].message;
-  return text;
+  return json.completion.choices[0].message;
 };
 
 export async function getUserFromSupabase(

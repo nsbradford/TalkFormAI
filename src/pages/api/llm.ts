@@ -14,8 +14,13 @@ const openai = new OpenAI({
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<LLMResponse>
+  res: NextApiResponse<LLMResponse | { error: string }>
 ) {
+  const auth = req.headers.authorization;
+  if (!auth || auth !== `Bearer ${process.env.NEXT_PUBLIC_LLM_API_KEY}`) {
+    res.status(401).json({ error: 'Unauthorized' });
+    return;
+  }
   const llmRequest: LLMRequest = req.body;
   console.log(`LLM middleware: got request: ${JSON.stringify(llmRequest)}`);
   const completion = await openai.chat.completions.create(
