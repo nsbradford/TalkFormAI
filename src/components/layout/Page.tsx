@@ -20,10 +20,10 @@ export default function Page(props: PageProps) {
               {props.pageTitle}
             </h1>
             <div
-              className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-4 mt-4"
+              className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-3 mt-4"
               role="alert"
             >
-              <p className="">
+              <p className="text-xs">
                 <span className="font-bold">Warning</span>: This product is in
                 early stages of development. Do not use for
                 sensitive/confidential info. For details, see{' '}
