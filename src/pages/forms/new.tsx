@@ -94,7 +94,7 @@ export default function NewFormPage(props: NewFormPageProps) {
     }
     setTitle(removeStartAndEndQuotes(titleResponse.content) || '');
 
-    console.log('titleResponse', titleResponse)
+    console.log('titleResponse', titleResponse);
     conversationThread.push(titleResponse);
     conversationThread.push({
       role: 'user',
@@ -109,7 +109,7 @@ export default function NewFormPage(props: NewFormPageProps) {
     }
     setDescription(removeStartAndEndQuotes(descriptionResponse.content) || '');
 
-    console.log('descriptionResponse', descriptionResponse)
+    console.log('descriptionResponse', descriptionResponse);
     conversationThread.push(descriptionResponse);
     conversationThread.push({
       role: 'user',
@@ -130,7 +130,7 @@ export default function NewFormPage(props: NewFormPageProps) {
       removeStartAndEndQuotes(fieldsGuidanceResponse.content) || ''
     );
 
-    console.log('fieldsGuidanceResponse', fieldsGuidanceResponse)
+    console.log('fieldsGuidanceResponse', fieldsGuidanceResponse);
     conversationThread.push(fieldsGuidanceResponse);
     conversationThread.push({
       role: 'user',
@@ -188,7 +188,7 @@ export default function NewFormPage(props: NewFormPageProps) {
       return <div className="flex flex-col items-center justify-center space-y-2">
         <Spinner />
         <div className="text-gray-600">{loadingMessage}</div>
-      </div>
+      </div>;
     } else if (step === 2) {
       return (
         <div className="col-span-full">
