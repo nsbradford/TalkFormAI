@@ -24,7 +24,7 @@ export default function HomePage() {
   }, [isSessionLoading, session]);
 
   return (
-    <Page pageTitle="Home">
+    <Page pageTitle="Home" user={user}>
       <DashboardMode user={user} />
     </Page>
   );
