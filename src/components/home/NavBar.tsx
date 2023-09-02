@@ -8,6 +8,8 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { Database } from '../../../types/supabase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
@@ -23,15 +25,17 @@ export function NavBar() {
   const [user, setUser] = useState<null | User>(null);
 
   useEffect(() => {
-    if (!isSessionLoading && !session) {
-      push('/auth');
-    }
     if (!isSessionLoading && session) {
       getUserFromSupabase(session, supabase, setUser);
     }
   }, [isSessionLoading, session]);
 
-  const userNavigation = [
+  const userNavigation = user ? [
+    {
+      name: 'Home',
+      href: '/home',
+      onClick: () => { },
+    },
     {
       name: 'Settings',
       href: '/settings',
@@ -46,31 +50,22 @@ export function NavBar() {
         push('/auth');
       },
     },
+  ] : [
+      {
+      // TODO refactor auth
+      name: 'Sign up',
+      href: '#',
+      onClick: () => {
+        push('/auth#');
+      },
+    },
   ];
 
   const getAvatar = (size: number) => {
-    if (!user) {
-      return (
-        <div className={`h-${size} w-${size} rounded-full bg-gray-500"`}>
-          <div className="flex h-full w-full items-center justify-center text-white">
-            ?
-          </div>
-        </div>
-      );
-    }
-    if (user.avatar_url) {
-      return (
-        <img
-          className={`h-${size} w-${size} rounded-full`}
-          src={user.avatar_url}
-          alt=""
-        />
-      );
-    }
     return (
-      <div className={`h-${size} w-${size} rounded-full bg-gray-500"`}>
+      <div className={`h-${size} w-${size} rounded-full bg-gray-500`}>
         <div className="flex h-full w-full items-center justify-center text-white">
-          {user.email[0]}
+          <FontAwesomeIcon icon={faUser} className="fa-fw text-white" />
         </div>
       </div>
     );
@@ -90,7 +85,7 @@ export function NavBar() {
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
                         {getAvatar(12)}
@@ -129,7 +124,7 @@ export function NavBar() {
               </div>
               <div className="-mr-2 flex md:hidden">
                 {/* Mobile menu button */}
-                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-gray-800">
                   <span className="absolute -inset-0.5" />
                   <span className="sr-only">Open main menu</span>
                   {open ? (
@@ -142,11 +137,11 @@ export function NavBar() {
             </div>
           </div>
 
-          {user && (
+          {/* {user && (
             <Disclosure.Panel className="md:hidden">
               <div className="border-t border-gray-700 pb-3 pt-4">
                 <div className="flex items-center px-5">
-                  <div className="flex-shrink-0">{getAvatar(12)}</div>
+                  <div className="">{getAvatar(12)}</div>
                   <div className="ml-3">
                     <div className="text-sm font-medium leading-none text-gray-400">
                       {user.email}
@@ -167,7 +162,7 @@ export function NavBar() {
                 </div>
               </div>
             </Disclosure.Panel>
-          )}
+          )} */}
         </>
       )}
     </Disclosure>

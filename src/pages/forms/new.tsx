@@ -163,10 +163,11 @@ export default function NewFormPage(props: NewFormPageProps) {
         <div className="sm:col-span-4">
           <label
             htmlFor="formTopic"
-            className="block text-sm font-medium leading-6 text-gray-900"
+            className="block text-xl font-medium leading-6 text-gray-900"
           >
             What is your form about?
           </label>
+          <p className='text-sm text-gray-500 mt-2 mb-4'>{'Describe in words what information you want to collect.'}</p>
           <div className="mt-2">
             <textarea
               id="formTopic"
