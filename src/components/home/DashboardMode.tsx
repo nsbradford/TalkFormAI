@@ -77,9 +77,7 @@ export default function DashboardMode(props: { user: User | null }) {
           href={'/forms/new'}
           className={`inline-block ${titleGradient} text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out ${titleGradientHover} mb-10`}
         >
-          {/* <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"> */}
           New form
-          {/* </button> */}
         </Link>
         {allForms.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
@@ -118,11 +116,33 @@ export default function DashboardMode(props: { user: User | null }) {
                         {f.is_open ? 'Open' : 'Closed'}
                       </span>
                     </div>
-                    <p className="text-xs leading-5 text-gray-500">
-                      {f.description
-                        ? f.description.slice(0, 128) + '...'
-                        : f.raw_instructions.slice(0, 128) + '...'}
-                    </p>
+                    <div className="">
+                      {f.created_at && (
+                        <p className="text-xs text-gray-400 font-mono my-2">
+                          Created:{' '}
+                          {new Date(f.created_at).toLocaleDateString(
+                            undefined,
+                            {
+                              year: 'numeric',
+                              month: 'numeric',
+                              day: 'numeric',
+                            }
+                          )}{' '}
+                          {new Date(f.created_at).toLocaleTimeString(
+                            undefined,
+                            {
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            }
+                          )}
+                        </p>
+                      )}
+                      <p className="text-xs leading-5 text-gray-600">
+                        {f.description
+                          ? f.description.slice(0, 128) + '...'
+                          : f.raw_instructions.slice(0, 128) + '...'}
+                      </p>
+                    </div>
                   </div>
                   <div className="flex flex-col gap-2 mt-4 sm:mt-0">
                     <div className="flex gap-2">
