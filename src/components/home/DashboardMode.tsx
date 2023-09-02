@@ -1,20 +1,15 @@
 import Spinner from '@/components/home/Spinner';
-import { Form, User, Response } from '@/types';
-import {
-  getFormsFromSupabase,
-  getResponsesFromSupabase,
-  getUserFromSupabase,
-} from '@/utils';
+import { Form, Response, User } from '@/types';
+import { getFormsFromSupabase, getResponsesFromSupabase } from '@/utils';
+import { LinkIcon } from '@heroicons/react/24/outline';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext } from '@supabase/auth-helpers-react';
-import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Database } from '../../../types/supabase';
-import Link from 'next/link';
-import { LinkIcon } from '@heroicons/react/24/outline';
 
 export default function DashboardMode(props: { user: User | null }) {
-  const { user} = props;
+  const { user } = props;
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
   const supabase = createClientComponentClient<Database>();
   const [allForms, setAllForms] = useState<Form[] | null>(null);
@@ -73,13 +68,13 @@ export default function DashboardMode(props: { user: User | null }) {
     );
   } else {
     return (
-      <>
+      <div className="px-4">
         <Link href={'/forms/new'}>
-          <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600">
             New form
           </button>
         </Link>
-        <ul role="list" className="divide-y divide-gray-100">
+        <ul role="list" className="divide-y divide-gray-200 space-y-4">
           {allForms.map((f) => {
             const responsesForThisForm = formIdToResponses[f.id] || [];
             const badgeColor = f.is_open
@@ -87,43 +82,45 @@ export default function DashboardMode(props: { user: User | null }) {
               : 'bg-red-100 text-red-800';
             const camelCaseTitle =
               f.name.charAt(0).toUpperCase() + f.name.slice(1, f.name.length);
+
             return (
-              <li key={f.id} className="flex justify-between gap-x-6 py-5">
-                <div className="flex min-w-0 gap-x-4">
-                  <div className="min-w-0 flex-auto">
-                    <div className="flex gap-x-6 ">
-                      <p className="text-sm font-semibold leading-6 text-gray-900">
-                        {camelCaseTitle}
-                      </p>
-                      <span
-                        className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${badgeColor} ring-1 ring-inset ring-gray-500/10`}
-                      >
-                        {f.is_open ? 'Open' : 'Closed'}
-                      </span>
-                    </div>
-                    <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                      {f.description
-                        ? f.description.slice(0, 128) + '...'
-                        : f.raw_instructions.slice(0, 128) + '...'}
+              <li
+                key={f.id}
+                className="flex flex-wrap justify-between gap-4 py-5"
+              >
+                <div className="flex-grow space-y-2">
+                  <div className="flex items-center gap-4">
+                    <p className="text-sm font-semibold leading-6 text-gray-900">
+                      {camelCaseTitle}
                     </p>
+                    <span
+                      className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${badgeColor} ring-1 ring-inset ring-gray-500/10`}
+                    >
+                      {f.is_open ? 'Open' : 'Closed'}
+                    </span>
                   </div>
+                  <p className="text-xs leading-5 text-gray-500">
+                    {f.description
+                      ? f.description.slice(0, 128) + '...'
+                      : f.raw_instructions.slice(0, 128) + '...'}
+                  </p>
                 </div>
-                <div className="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
-                  <div className="flex gap-x-2 ">
+                <div className="flex flex-col gap-2 mt-4 sm:mt-0">
+                  <div className="flex gap-2">
                     <Link href={'/forms/' + f.id}>
-                      <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                      <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600">
                         View responses
                       </button>
                     </Link>
                     {f.is_open ? (
                       <Link href={'/forms/fill/' + f.id}>
-                        <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600">
                           <LinkIcon className="h-5 w-5" aria-hidden="true" />
                         </button>
                       </Link>
                     ) : null}
                   </div>
-                  <p className="mt-1 text-xs leading-5 text-gray-500">
+                  <p className="mt-2 text-xs leading-5 text-gray-500 sm:mt-0">
                     {responsesForThisForm.length === 0
                       ? 'No responses yet'
                       : responsesForThisForm.length + ' responses'}
@@ -133,7 +130,7 @@ export default function DashboardMode(props: { user: User | null }) {
             );
           })}
         </ul>
-      </>
+      </div>
     );
   }
 }
