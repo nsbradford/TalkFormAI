@@ -13,26 +13,15 @@ import { Database } from '../../../types/supabase';
 import Link from 'next/link';
 import { LinkIcon } from '@heroicons/react/24/outline';
 
-export default function DashboardMode() {
-  const { push } = useRouter();
+export default function DashboardMode(props: { user: User | null }) {
+  const { user} = props;
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
   const supabase = createClientComponentClient<Database>();
-  const [user, setUser] = useState<null | User>(null);
   const [allForms, setAllForms] = useState<Form[] | null>(null);
   const [formIdToResponses, setFormIdToResponses] = useState<Record<
     string,
     Response[]
   > | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    if (!isSessionLoading && !session) {
-      push('/auth');
-    }
-    if (!isSessionLoading && session) {
-      getUserFromSupabase(session, supabase, setUser);
-    }
-  }, [isLoading, session]);
 
   useEffect(() => {
     const getFormsAndResponses = async () => {
@@ -41,12 +30,10 @@ export default function DashboardMode() {
       }
       const forms = await getFormsFromSupabase(user.id, supabase);
       if (forms === undefined) {
-        setIsLoading(false);
         return;
       } else if (forms.length === 0) {
         setAllForms(forms);
         setFormIdToResponses({} as Record<string, Response[]>);
-        setIsLoading(false);
         return;
       }
       setAllForms(forms);
@@ -59,7 +46,6 @@ export default function DashboardMode() {
         allResposes[form.id] = formResponses as Response[];
       }
       setFormIdToResponses(allResposes);
-      setIsLoading(false);
     };
     if (user !== null && allForms === null && formIdToResponses === null) {
       getFormsAndResponses();

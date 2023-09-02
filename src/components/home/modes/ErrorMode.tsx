@@ -1,10 +1,10 @@
-import { User } from '@/types';
+// import { User } from '@/types';
 
-type ErrorModeProps = {
-  user: User;
-  errorMessage: string;
-};
+// type ErrorModeProps = {
+//   user: User;
+//   errorMessage: string;
+// };
 
-export default function ErrorMode(props: ErrorModeProps) {
-  return <p>{props.errorMessage}</p>;
-}
+// export default function ErrorMode(props: ErrorModeProps) {
+//   return <p>{props.errorMessage}</p>;
+// }

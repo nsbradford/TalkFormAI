@@ -2,7 +2,7 @@ import { User } from '@supabase/auth-helpers-nextjs';
 import { NavBar } from '../home/NavBar';
 
 interface PageProps {
-  user: User | null;
+  // user: User | null;
   pageTitle: string;
   children: React.ReactNode;
 }
