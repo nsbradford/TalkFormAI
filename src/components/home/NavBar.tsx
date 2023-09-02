@@ -15,7 +15,7 @@ function classNames(...classes: string[]) {
 
 // const contact = <a href="mailto:nsbradford@gmail.com,seanhunterbrooks@gmail.com">Contact</a>;
 
-export function NavBar(theProps: {}) {
+export function NavBar() {
   // TODO later refactor all the user hydration code
   const { push } = useRouter();
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
@@ -35,14 +35,15 @@ export function NavBar(theProps: {}) {
     {
       name: 'Settings',
       href: '/settings',
-      onClick: () => {}, //setMode(settingsAppMode),
+      onClick: () => { },
     },
     {
+      // TODO some weirdness here
       name: 'Sign out',
       href: '#',
       onClick: () => {
         supabase.auth.signOut();
-        push('/');
+        push('/auth');
       },
     },
   ];
@@ -92,7 +93,7 @@ export function NavBar(theProps: {}) {
                       <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">Open user menu</span>
-                        {getAvatar(10)}
+                        {getAvatar(12)}
                       </Menu.Button>
                     </div>
                     <Transition
@@ -109,6 +110,7 @@ export function NavBar(theProps: {}) {
                           <Menu.Item key={item.name}>
                             {({ active }) => (
                               <a
+                                href={`${item.href}`}
                                 onClick={item.onClick ? item.onClick : () => {}}
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
@@ -144,7 +146,7 @@ export function NavBar(theProps: {}) {
             <Disclosure.Panel className="md:hidden">
               <div className="border-t border-gray-700 pb-3 pt-4">
                 <div className="flex items-center px-5">
-                  <div className="flex-shrink-0">{getAvatar(10)}</div>
+                  <div className="flex-shrink-0">{getAvatar(12)}</div>
                   <div className="ml-3">
                     <div className="text-sm font-medium leading-none text-gray-400">
                       {user.email}
