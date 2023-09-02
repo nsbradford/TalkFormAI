@@ -24,11 +24,11 @@ const ResponsesTable: React.FC<Props> = ({ data }) => {
 
   return (
     <div className="overflow-x-auto shadow-md rounded-lg">
-      <table className="min-w-full bg-white table-auto divide-y divide-gray-300">
+      <table className="min-w-full bg-white table-auto divide-y divide-gray-300 text-xs text-left">
         <thead className="bg-gray-800 text-white">
           <tr>
             {headers.map((header) => (
-              <th key={header} className="px-4 py-2">
+              <th key={header} className="px-2 py-2">
                 {header}
               </th>
             ))}
@@ -43,7 +43,7 @@ const ResponsesTable: React.FC<Props> = ({ data }) => {
               } hover:bg-gray-100`}
             >
               {headers.map((header) => (
-                <td key={header} className="border px-4 py-2">
+                <td key={header} className="border px-2 py-2">
                   {row[header] || 'N/A'}
                 </td>
               ))}
