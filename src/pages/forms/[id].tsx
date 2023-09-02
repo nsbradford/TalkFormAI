@@ -85,12 +85,7 @@ export default function FormDetailPage() {
               Description
             </h2>
             <div className="p-4 bg-gray-100 border border-gray-200 rounded">
-              {form.description.split('\n').map((line, i) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))}
+              {respectNewLines(form.description)}
             </div>
           </div>
 
@@ -102,12 +97,7 @@ export default function FormDetailPage() {
               Guidance
             </h2>
             <div className="p-4 bg-gray-100 border border-gray-200 rounded">
-              {form.fields_guidance.split('\n').map((line, i) => (
-                <span key={i}>
-                  {line}
-                  <br />
-                </span>
-              ))}
+              {respectNewLines(form.fields_guidance)}
             </div>
           </div>
 
@@ -135,3 +125,12 @@ export default function FormDetailPage() {
     </Page>
   );
 }
+function respectNewLines(text: string | null | undefined) {
+  return (text ?? '').split('\n').map((line, i) => (
+    <span key={i}>
+      {line}
+      <br />
+    </span>
+  ));
+}
+
