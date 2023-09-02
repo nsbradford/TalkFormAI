@@ -62,24 +62,43 @@ export default function FormDetailPage() {
   const camelCaseTitle =
     form.name.charAt(0).toUpperCase() + form.name.slice(1, form.name.length);
   return (
-    <Page pageTitle="Responses" user={user}>
+    <Page pageTitle={`${camelCaseTitle}`} user={user}>
       <div className="flex min-w-0 gap-x-4 mb-6 text-xs p-4">
         <div className="min-w-0 flex-auto">
-          <div className="flex gap-x-6 mb-2">
-            <h1 className="text-lg font-bold leading-6 text-gray-900">
-              {camelCaseTitle}
-            </h1>
-            <span
-              className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${badgeColor} ring-1 ring-inset ring-gray-500/10 shadow-md`}
-            >
-              {form.is_open ? 'Open' : 'Closed'}
-            </span>
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center">
+              <h1 className="text-xl font-bold mr-2 text-gray-900">
+                {/* {camelCaseTitle} */}
+                Status:{' '}
+              </h1>
+              <span
+                className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${badgeColor} ring-1 ring-inset ring-gray-500/10 shadow-md`}
+              >
+                {form.is_open ? 'Open' : 'Closed'}
+              </span>
+            </div>
+
+            <Link href={'/forms/fill/' + form.id}>
+              <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                View live form
+              </button>
+            </Link>
           </div>
-          <Link href={'/forms/fill/' + form.id}>
-            <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-              View live form
-            </button>
-          </Link>
+          {form.created_at && (
+            <p className="text-xs text-gray-600">
+              Created at:{' '}
+              {new Date(form.created_at).toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+              })}{' '}
+              {new Date(form.created_at).toLocaleTimeString(undefined, {
+                hour: '2-digit',
+                minute: '2-digit',
+              })}
+            </p>
+          )}
+
           <div className="mt-4">
             <h2 className="text-lg font-semibold text-gray-700 mb-2 mt-8">
               Description
@@ -133,4 +152,3 @@ function respectNewLines(text: string | null | undefined) {
     </span>
   ));
 }
-
