@@ -1,6 +1,6 @@
-import { AppShellProps } from '@/types';
+import { User } from '@/types';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { BellIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Fragment } from 'react';
 import { TalkFormLogo } from '../talkform';
 
@@ -13,9 +13,9 @@ function classNames(...classes: string[]) {
 export function NavBar(theProps: {
   getAvatar: (size: number) => JSX.Element;
   userNavigation: { name: string; href: string; onClick: () => void }[];
-  props: Partial<AppShellProps>;
+  user?: User | null;
 }) {
-  const { getAvatar, userNavigation, props } = theProps;
+  const { getAvatar, userNavigation, user } = theProps;
   return (
     <Disclosure as="nav" className="bg-black bg-opacity-5">
       {({ open }) => (
@@ -81,14 +81,14 @@ export function NavBar(theProps: {
             </div>
           </div>
 
-          {props.user && (
+          {user && (
             <Disclosure.Panel className="md:hidden">
               <div className="border-t border-gray-700 pb-3 pt-4">
                 <div className="flex items-center px-5">
                   <div className="flex-shrink-0">{getAvatar(10)}</div>
                   <div className="ml-3">
                     <div className="text-sm font-medium leading-none text-gray-400">
-                      {props.user.email}
+                      {user.email}
                     </div>
                   </div>
                 </div>
