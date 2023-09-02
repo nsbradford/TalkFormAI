@@ -107,9 +107,11 @@ export default function DashboardMode(props: { user: User | null }) {
                 >
                   <div className="flex-grow space-y-2">
                     <div className="flex items-center gap-4">
-                      <p className="text-md font-semibold leading-6 text-gray-900">
+                      <Link href={`/forms/${f.id}`}>
+                      <p className="text-md font-semibold leading-6 text-indigo-600 hover:text-indigo-400">
                         {camelCaseTitle}
-                      </p>
+                        </p>
+                      </Link>
                       <span
                         className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${badgeColor} ring-1 ring-inset ring-gray-500/10`}
                       >
