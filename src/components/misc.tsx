@@ -1,4 +1,4 @@
-import { Work_Sans } from "next/font/google";
+import { Work_Sans } from 'next/font/google';
 
 export const workSans = Work_Sans({
   weight: '400',
