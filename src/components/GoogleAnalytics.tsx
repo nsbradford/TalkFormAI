@@ -7,8 +7,6 @@ export const GoogleAnalytics = ({
 }) => {
   if (!GA_TRACKING_ID) {
     throw new Error('GA_TRACKING_ID is not defined');
-  } else {
-    console.log('Google Analytics is setup.');
   }
   return (
     <>
