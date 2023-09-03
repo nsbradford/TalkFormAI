@@ -5,9 +5,11 @@ export const GoogleAnalytics = ({
 }: {
   GA_TRACKING_ID: string | undefined;
 }) => {
-  if (!GA_TRACKING_ID) {throw new Error('GA_TRACKING_ID is not defined')} else {
+  if (!GA_TRACKING_ID) {
+    throw new Error('GA_TRACKING_ID is not defined');
+  } else {
     console.log('Google Analytics is setup.');
-  };
+  }
   return (
     <>
       <Script
