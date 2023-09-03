@@ -4,6 +4,16 @@ on:
     branches: [main, master]
   pull_request:
     branches: [main, master]
+
+env:
+  HELICONE_API_KEY: ${{ secrets.HELICONE_API_KEY }}
+  NEXT_PUBLIC_GA_TRACKING_ID: ${{ secrets.NEXT_PUBLIC_GA_TRACKING_ID }}
+  NEXT_PUBLIC_POSTHOG_API_KEY: ${{ secrets.NEXT_PUBLIC_POSTHOG_API_KEY }}
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+  NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+  NEXT_PUBLIC_TALKFORM_API_KEY: ${{ secrets.NEXT_PUBLIC_TALKFORM_API_KEY }}
+  OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
 jobs:
   test:
     timeout-minutes: 10
