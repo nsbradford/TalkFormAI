@@ -6,6 +6,7 @@ import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { TalkFormLogo } from '@/components/talkform';
 import { NavBar } from '@/components/home/NavBar';
+import NavBar2 from '@/components/home/NavBar2';
 
 export default function AuthPage() {
   const [mode, setMode] = useState<'sign_in' | 'sign_up'>('sign_up');
@@ -31,7 +32,7 @@ export default function AuthPage() {
 
   return (
     <>
-      <NavBar />
+      <NavBar2 />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">

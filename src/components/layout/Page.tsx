@@ -1,6 +1,7 @@
 import { User } from '@/types';
 import { NavBar } from '../home/NavBar';
 import Link from 'next/link';
+import NavBar2 from '../home/NavBar2';
 
 interface PageProps {
   user?: User | null;
@@ -12,7 +13,7 @@ export default function Page(props: PageProps) {
   return (
     <>
       <div className="min-h-full">
-        <NavBar />
+        <NavBar2 />
 
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">

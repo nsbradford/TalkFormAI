@@ -1,5 +1,5 @@
 import { MessageUI } from '@/components/chat';
-import { NavBar } from '@/components/home/NavBar';
+import NavBar2 from '@/components/home/NavBar2';
 import {
   sunsetGradient,
   titleGradient,
@@ -15,7 +15,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <>
-      <NavBar />
+      <NavBar2 />
       <div className={`flex justify-center items-center mt-20`}>
         <div className="flex flex-col items-center justify-center">
           <h1

@@ -1,4 +1,6 @@
 import { MessageUI } from '@/components/chat';
+import NavBar2 from '@/components/home/NavBar2';
+import { workSans } from '@/components/misc';
 import { PROMPT_FILL } from '@/prompts';
 import { ChatMessage, Form } from '@/types';
 import {
@@ -15,8 +17,6 @@ import {
 import { useRouter } from 'next/router';
 import React, { useEffect, useRef, useState } from 'react';
 import { Database } from '../../../../types/supabase';
-import { NavBar } from '@/components/home/NavBar';
-import { workSans } from '@/components/misc';
 
 // Makes it much easier to track renders/fetches by wrapping the component.
 export default function CreateForm() {
@@ -28,7 +28,7 @@ export default function CreateForm() {
       <div
         className={`bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 min-h-screen`}
       >
-        <NavBar />
+        <NavBar2 />
         <div
           className={`${workSans.className} flex flex-col items-center  min-h-screen py-20`}
         >
