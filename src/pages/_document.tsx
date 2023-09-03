@@ -6,7 +6,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <GoogleAnalytics
-          GA_TRACKING_ID={process.env.GA_TRACKING_ID ?? 'FAKE'}
+          GA_TRACKING_ID={process.env.NEXT_PUBLIC_GA_TRACKING_ID}
         />
       </Head>
       <body>
