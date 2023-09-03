@@ -6,7 +6,7 @@ export function MessageUI(message: ChatMessage) {
   const content = parseMessageJson(message);
   return (
     <div
-      className={`my-2 p-3 rounded-lg ${
+      className={`mb-2 p-3 rounded-lg ${
         message.role === 'assistant' ? 'bg-gray-100' : 'bg-white'
       }`}
     >

@@ -30,7 +30,7 @@ export default function CreateForm() {
       >
         <NavBar2 />
         <div
-          className={`${workSans.className} flex flex-col items-center  min-h-screen py-20`}
+          className={`${workSans.className} flex flex-col items-center  min-h-screen py-20 px-4`}
         >
           {router.isFallback || typeof formId !== 'string' ? (
             <h1 className="text-3xl font-extrabold mb-6">Loading...</h1>
@@ -162,8 +162,12 @@ export function InnerChat(props: {
 
   return (
     <>
-      <h1 className="text-3xl font-extrabold mb-6">{form.name}</h1>
-      <div className="w-4/5 lg:w-1/2 2xl:w-2/5 bg-white shadow-md p-6 rounded-lg">
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-center px-8 text-2xl lg:text-3xl font-extrabold mb-6">
+          {form.name}
+        </h1>
+      </div>
+      <div className="lg:w-1/2 2xl:w-2/5 bg-white shadow-md p-3 md:p-6 rounded-lg text-sm md:text-base">
         {messages.map((message, index) => (
           <MessageUI
             key={index}
