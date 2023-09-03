@@ -9,6 +9,7 @@
     "lint": "next lint",
     "lint:fix": "yarn lint --fix",
     "format": "npx prettier --write .",
+    "test:e2e": "playwright test",
     "generate-db-types": "npx supabase gen types typescript --project-id \"uvthrievvhksvomqwowg\" --schema public > types/supabase.ts"
   },
   "dependencies": {
@@ -40,6 +41,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.37.1",
     "@types/uuid": "^9.0.2",
     "@typescript-eslint/eslint-plugin": "^6.5.0",
     "eslint-config-prettier": "^9.0.0",
