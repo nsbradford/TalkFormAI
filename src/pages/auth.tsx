@@ -1,12 +1,10 @@
 'use client';
-import React, { useEffect, useState } from 'react';
-import SignUpForm from '../components/auth/SignUpForm';
 import SignInForm from '@/components/auth/SignInForm';
+import NavBar2 from '@/components/home/NavBar2';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
-import { TalkFormLogo } from '@/components/talkform';
-import { NavBar } from '@/components/home/NavBar';
-import NavBar2 from '@/components/home/NavBar2';
+import { useEffect, useState } from 'react';
+import SignUpForm from '../components/auth/SignUpForm';
 
 export default function AuthPage() {
   const [mode, setMode] = useState<'sign_in' | 'sign_up'>('sign_up');

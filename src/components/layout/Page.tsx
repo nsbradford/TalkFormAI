@@ -1,5 +1,4 @@
 import { User } from '@/types';
-import { NavBar } from '../home/NavBar';
 import Link from 'next/link';
 import NavBar2 from '../home/NavBar2';
 
