@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        # run: npm ci
+        # run: npm ci - https://stackoverflow.com/questions/58482655/what-is-the-closest-to-npm-ci-in-yarn
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
