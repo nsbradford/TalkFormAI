@@ -25,6 +25,10 @@ Head over to [talkform.ai](https://www.talkform.ai/) to try it out!
 
 This is a [Next.js](https://nextjs.org/) project. You'll need **Node** (probably using **[nvm](https://github.com/nvm-sh/nvm)**) and **[yarn](https://yarnpkg.com/)**.
 
+
+### Secrets
+We use Doppler for secrets, see [getting started docs](https://docs.doppler.com/docs/install-cli). Or, put everything in a `.env.local` file.
+
 ### Install dependencies
 
 ```bash
