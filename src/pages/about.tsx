@@ -27,7 +27,7 @@ export default function About() {
             ]}
           />
 
-            <p>All your form responses remain structured according to the inferred schema for easy analysis.</p>
+            <p>All your form responses remain structured according to the inferred schema for easy analysis:</p>
             <SampleResponseTable /> 
 
             <p className=''>And you get unlimited power to do custom/complicated logic, all with minimal effort! Here are some examples:</p>
