@@ -1,6 +1,6 @@
 'use client';
 import SignInForm from '@/components/auth/SignInForm';
-import NavBar2 from '@/components/home/NavBar2';
+import NavBar from '@/components/home/NavBar';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -30,7 +30,7 @@ export default function AuthPage() {
 
   return (
     <>
-      <NavBar2 />
+      <NavBar />
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">

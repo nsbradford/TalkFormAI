@@ -1,4 +1,4 @@
-import NavBar2 from '@/components/home/NavBar2';
+import NavBar from '@/components/home/NavBar';
 import {
   ChatHistory,
   FloatingTextBox,
@@ -18,7 +18,7 @@ import Link from 'next/link';
 export default function Home() {
   return (
     <>
-      <NavBar2 />
+      <NavBar />
       <div className={`flex justify-center items-center mt-20`}>
         <div className="flex flex-col items-center justify-center">
           <h1

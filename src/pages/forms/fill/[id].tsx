@@ -1,5 +1,5 @@
 import { MessageUI } from '@/components/chat';
-import NavBar2 from '@/components/home/NavBar2';
+import NavBar from '@/components/home/NavBar';
 import { workSans } from '@/components/misc';
 import { PROMPT_FILL } from '@/prompts';
 import { ChatMessage, Form } from '@/types';
@@ -28,7 +28,7 @@ export default function CreateForm() {
       <div
         className={`bg-gradient-to-br from-indigo-200 via-red-200 to-yellow-100 min-h-screen`}
       >
-        <NavBar2 />
+        <NavBar />
         <div
           className={`${workSans.className} flex flex-col items-center  min-h-screen py-20 px-4`}
         >
