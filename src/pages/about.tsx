@@ -1,6 +1,6 @@
 import { ChatHistory, FloatingTextBox, SampleResponseTable } from '@/components/landing/samples';
 import Page from '@/components/layout/Page';
-import { workSansHeavy } from '@/components/misc';
+import { workSans, workSansHeavy } from '@/components/misc';
 import Link from 'next/link';
 
 export default function About() {
@@ -8,7 +8,7 @@ export default function About() {
     <>
       <Page pageTitle="Announcing: TalkForm AI" disableWarning={true}>
         <div className="bg-white text-gray-700 flex items-center justify-center p-4">
-          <div className={`${workSansHeavy.className}prose prose-lg text-gray-800`}>
+          <div className={`${workSans.className} prose prose-lg text-gray-800`}>
             <p>Forms are ready to be reinvented. <Link className='text-indigo-500 hover:text-indigo-300' href="/">TalkForm AI</Link>{` is here to give you forms that are easy, fast, and as powerful as your imagination. And it's completely`} <Link className='text-indigo-500 hover:text-indigo-300' href="https://github.com/nsbradford/talkformai">open source</Link>!</p>
             <p>
               Creating a TalkForm is as simple as asking for what you want, and letting the AI infer the field types:
