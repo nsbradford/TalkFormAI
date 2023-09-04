@@ -50,6 +50,6 @@ const Team: React.FC<Props> = ({ members }) => {
             </div>
         </div>
     );
-}
+};
 
 export default Team;
