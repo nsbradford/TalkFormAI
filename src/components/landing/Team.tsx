@@ -10,12 +10,12 @@ interface Props {
 const Team: React.FC<Props> = ({ members }) => {
     return (
         <div className="container mx-auto p-8">
-            <div className="p-8">
+            <div className="">
                 {/* <h2 className="text-2xl block text-center  font-semibold mb-4">About the Team</h2> */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {members.map((member, index) => (
-                        <div key={index} className="p-4 rounded">
-                            <img src={member.image} alt={member.name} className="w-48 h-48 rounded-full mx-auto mb-4 border border-2 border-gray-400"/>
+                        <div key={index} className="p-4 rounded bg-gray-100 rounded-2xl border border-2 border-gray-200">
+                            <img src={member.image} alt={member.name} className="w-40 h-40 rounded-full mx-auto mb-4 border border-2 border-gray-400"/>
                             <h3 className="block text-center text-xl">{member.name}</h3>
                             {
                                 member.subtitle && (

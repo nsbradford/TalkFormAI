@@ -61,15 +61,14 @@ export default function NavBar2() {
       ];
 
   const navigation = [
-    // { name: 'Create', href: '/forms/new', current: false },
     {
       name: 'About',
-      href: '/about',
+      href: '/contact',
       current: false,
     },
     {
       name: 'Contact',
-      href: 'mailto:nsbradford@gmail.com,seanhunterbrooks@gmail.com',
+      href: '/contact',
       current: false,
     },
     {
