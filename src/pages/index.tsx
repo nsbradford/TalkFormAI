@@ -15,30 +15,6 @@ import Link from 'next/link';
 
 
 export default function Home() {
-  const teamMembers = [
-    {
-      name: 'Nick Bradford',
-      image: 'https://avatars.githubusercontent.com/u/6633811',
-      subtitle: 'Building LLM agents for large-scale codebase migrations',
-      website: 'nsbradford.com',
-      socials: {
-        twitter: 'https://twitter.com/n_s_bradford',
-        linkedIn: 'https://linkedin.com/in/nsbradford',
-        github: 'https://github.com/nsbradford',
-      },
-    },
-    {
-        name: 'Hunter Brooks',
-        subtitle: 'Building virtual teammates for developers',
-        website: 'bitbuilder.ai',
-        image: 'https://avatars.githubusercontent.com/u/24214708',
-        socials: {
-          twitter: 'https://twitter.com/HunterFromNYC',
-          linkedIn: 'https://linkedin.com/in/seanhunterbrooks',
-          github: 'https://github.com/hbrooks',
-        },
-    },
-];
   return (
     <>
       <NavBar2 />
@@ -63,7 +39,6 @@ export default function Home() {
           <GetStartedButtons />
         </div>
       </div>
-      <Team members={teamMembers} />
       <Footer />
     </>
   );

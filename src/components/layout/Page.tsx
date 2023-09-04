@@ -6,6 +6,7 @@ interface PageProps {
   user?: User | null;
   pageTitle: string;
   children: React.ReactNode;
+  disableWarning?: boolean;
 }
 
 export default function Page(props: PageProps) {
@@ -19,7 +20,7 @@ export default function Page(props: PageProps) {
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
               {props.pageTitle}
             </h1>
-            <div
+           {!props.disableWarning && <div
               className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-3 mt-4"
               role="alert"
             >
@@ -37,6 +38,7 @@ export default function Page(props: PageProps) {
                 .
               </p>
             </div>
+          }
           </div>
         </header>
         <main>

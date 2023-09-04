@@ -63,6 +63,11 @@ export default function NavBar2() {
   const navigation = [
     // { name: 'Create', href: '/forms/new', current: false },
     {
+      name: 'About',
+      href: '/about',
+      current: false,
+    },
+    {
       name: 'Contact',
       href: 'mailto:nsbradford@gmail.com,seanhunterbrooks@gmail.com',
       current: false,
