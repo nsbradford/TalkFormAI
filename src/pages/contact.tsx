@@ -31,6 +31,7 @@ export default function contact() {
   return (
     <>
       <Page pageTitle="Contact the team" disableWarning={true}>
+        <p className='text-center'>Feel free to <a href='mailto:nsbradford@gmail.com,hunter@bitbuilder.ai' className='text-indigo-500 hover:text-indigo-300'>email us</a>, or reach out:</p>
         <Team members={teamMembers} />
       </Page>
     </>
