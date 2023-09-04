@@ -1,18 +1,19 @@
-import { MessageUI } from '@/components/chat';
 import NavBar2 from '@/components/home/NavBar2';
-import Team from '@/components/landing/Team';
 import {
-  sunsetGradient,
+  ChatHistory,
+  FloatingTextBox,
+  SampleResponseTable
+} from '@/components/landing/samples';
+import {
   titleGradient,
   titleGradientHover,
   workSans,
-  workSansHeavy,
+  workSansHeavy
 } from '@/components/misc';
 import { TalkFormLogo } from '@/components/talkform';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
-
 
 export default function Home() {
   return (
@@ -152,29 +153,15 @@ function Specifics() {
           heading="Chat to fill."
           content="Our AI automatically validates, cleans, structures, and fills the fields."
         >
-          <FloatingGradientBackground>
-            <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400 text-left">
-              <MessageUI
-                role={'assistant'}
-                content={
-                  'Thanks, Jane! Now, what is your company and job title?'
-                }
-              />
-              <MessageUI
-                role={'user'}
-                content={`I'm a ML Engineer at Tech Co`}
-              />
-              <MessageUI
-                role={'assistant'}
-                content={`Very cool! What's your GitHub?`}
-              />
-              <MessageUI role={'user'} content={`https://github.com/jd-70B`} />
-              <MessageUI
-                role={'assistant'}
-                content={`Thanks, I see your username is 'jd-70B'. Now, what technologies do you use when doing marketing research?`}
-              />
-            </div>
-          </FloatingGradientBackground>
+          <ChatHistory
+            messages={[
+              'Thanks, Jane! Now, what is your company and job title?',
+              `I'm a ML Engineer at Tech Co`,
+              `Very cool! What's your GitHub?`,
+              'https://github.com/jd-70B',
+              `Thanks, I see your username is 'jd-70B'. Now, what technologies do you use when doing marketing research?`,
+            ]}
+          />
         </SpecificsTextOnRight>
         <SpecificsTextOnLeft
           heading="Keep your data structured."
@@ -196,62 +183,5 @@ function Specifics() {
         </h2>
       </div>
     </section>
-  );
-}
-
-function SampleResponseTable() {
-  return (
-    <FloatingGradientBackground>
-      <table className="text-xs min-w-full bg-white rounded-lg shadow-xl text-sm text-gray-400 border-collapse text-left">
-        <thead>
-          <tr className="border-b">
-            <th className="p-1 pl-2 sm:p-2">Name</th>
-            <th className="p-1 pl-2 sm:p-2">Email</th>
-            <th className="p-1 pl-2 sm:p-2">Company</th>
-            <th className="p-1 pl-2 sm:p-2">Title</th>
-            <th className="p-1 pl-2 sm:p-2">Tech</th>
-            <th className="p-1 hidden sm:table-cell">GitHub</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td className="p-1 pl-2 sm:p-2 border-b">Jane Doe</td>
-            <td className="p-1 pl-2 sm:p-2 border-b">jd@ex.co</td>
-            <td className="p-1 pl-2 sm:p-2 border-b">Tech Co.</td>
-            <td className="p-1 pl-2 sm:p-2 border-b">ML Engineer</td>
-            <td className="p-1 pl-2 sm:p-2 border-b">React, Node, Python</td>
-            <td className="p-1 pl-2 sm:p-2 border-b hidden sm:table-cell">
-              jd-70B
-            </td>
-          </tr>
-          <tr>
-            <td className="p-1 pl-2 sm:p-2 border-b">Bill Smith</td>
-            <td className="p-1 pl-2 sm:p-2 border-b">bsx@ex.co</td>
-            <td className="p-1 pl-2 sm:p-2 border-b">Biz Corp.</td>
-            <td className="p-1 pl-2 sm:p-2 border-b">Marketing Manager</td>
-            <td className="p-1 pl-2 sm:p-2 border-b">Google Analytics</td>
-            <td className="p-1 border-b hidden sm:table-cell">-</td>
-          </tr>
-        </tbody>
-      </table>
-    </FloatingGradientBackground>
-  );
-}
-
-function FloatingGradientBackground(props: { children: React.ReactNode }) {
-  return (
-    <div className={`${sunsetGradient} p-6 rounded-xl shadow-xl`}>
-      {props.children}
-    </div>
-  );
-}
-
-function FloatingTextBox(props: { text: string }) {
-  return (
-    <FloatingGradientBackground>
-      <div className="bg-white p-4 rounded-lg shadow-xl text-xs text-gray-400 text-left">
-        {props.text}
-      </div>
-    </FloatingGradientBackground>
   );
 }

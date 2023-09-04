@@ -1,6 +1,6 @@
-import NavBar2 from "@/components/home/NavBar2";
-import Team from "@/components/landing/Team";
-import Page from "@/components/layout/Page";
+import NavBar2 from '@/components/home/NavBar2';
+import Team from '@/components/landing/Team';
+import Page from '@/components/layout/Page';
 
 const teamMembers = [
   {
@@ -15,22 +15,24 @@ const teamMembers = [
     },
   },
   {
-      name: 'Hunter Brooks',
-      subtitle: 'Building virtual teammates for developers',
-      website: 'bitbuilder.ai',
-      image: 'https://avatars.githubusercontent.com/u/24214708',
-      socials: {
-        twitter: 'https://twitter.com/HunterFromNYC',
-        linkedIn: 'https://linkedin.com/in/seanhunterbrooks',
-        github: 'https://github.com/hbrooks',
-      },
+    name: 'Hunter Brooks',
+    subtitle: 'Building virtual teammates for developers',
+    website: 'bitbuilder.ai',
+    image: 'https://avatars.githubusercontent.com/u/24214708',
+    socials: {
+      twitter: 'https://twitter.com/HunterFromNYC',
+      linkedIn: 'https://linkedin.com/in/seanhunterbrooks',
+      github: 'https://github.com/hbrooks',
+    },
   },
 ];
 
 export default function contact() {
-  return <>
-    <Page pageTitle="Contact the team" disableWarning={true}>
-      <Team members={teamMembers} />
-    </Page>
-  </>;
+  return (
+    <>
+      <Page pageTitle="Contact the team" disableWarning={true}>
+        <Team members={teamMembers} />
+      </Page>
+    </>
+  );
 }

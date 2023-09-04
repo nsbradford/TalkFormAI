@@ -4,9 +4,6 @@ Create and fill forms with chat.
 
 ![Vercel](https://img.shields.io/github/deployments/nsbradford/TalkFormAI/production?logo=vercel&label=Vercel%20deployment) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/nsbradford/talkformai/playwright.yml?label=e2e%20tests) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-
-
-
 ## Why
 
 Tired of lame, sad forms? Annoyed with tedious form builders? Feeling limited in what kinds of custom validations and logic you can express? You're in luck: [text is the universal interface](https://scale.com/blog/text-universal-interface), and so [TalkForm.AI](https://www.talkform.ai/) is here to help.
@@ -25,8 +22,8 @@ Head over to [talkform.ai](https://www.talkform.ai/) to try it out!
 
 This is a [Next.js](https://nextjs.org/) project. You'll need **Node** (probably using **[nvm](https://github.com/nvm-sh/nvm)**) and **[yarn](https://yarnpkg.com/)**.
 
-
 ### Secrets
+
 We use Doppler for secrets, see [getting started docs](https://docs.doppler.com/docs/install-cli). Or, put everything in a `.env.local` file.
 
 ### Install dependencies

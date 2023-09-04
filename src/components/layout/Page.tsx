@@ -20,25 +20,26 @@ export default function Page(props: PageProps) {
             <h1 className="text-3xl font-bold tracking-tight text-gray-900">
               {props.pageTitle}
             </h1>
-           {!props.disableWarning && <div
-              className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-3 mt-4"
-              role="alert"
-            >
-              <p className="text-xs">
-                <span className="font-bold">Warning</span>: This product is in
-                early stages of development. Do not use for
-                sensitive/confidential info. For details, see{' '}
-                <Link
-                  className="underline hover:"
-                  href="https://github.com/nsbradford/TalkFormAI/blob/main/LICENSE"
-                  target="_blank"
-                >
-                  terms
-                </Link>
-                .
-              </p>
-            </div>
-          }
+            {!props.disableWarning && (
+              <div
+                className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-3 mt-4"
+                role="alert"
+              >
+                <p className="text-xs">
+                  <span className="font-bold">Warning</span>: This product is in
+                  early stages of development. Do not use for
+                  sensitive/confidential info. For details, see{' '}
+                  <Link
+                    className="underline hover:"
+                    href="https://github.com/nsbradford/TalkFormAI/blob/main/LICENSE"
+                    target="_blank"
+                  >
+                    terms
+                  </Link>
+                  .
+                </p>
+              </div>
+            )}
           </div>
         </header>
         <main>

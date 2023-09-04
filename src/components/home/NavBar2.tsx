@@ -63,7 +63,7 @@ export default function NavBar2() {
   const navigation = [
     {
       name: 'About',
-      href: '/contact',
+      href: '/about',
       current: false,
     },
     {
