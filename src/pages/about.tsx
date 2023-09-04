@@ -1,6 +1,7 @@
 import { MessageUI } from '@/components/chat';
 import { ChatHistory, FloatingGradientBackground, FloatingTextBox, SampleResponseTable } from '@/components/landing/samples';
 import Page from '@/components/layout/Page';
+import { workSansHeavy } from '@/components/misc';
 import Link from 'next/link';
 
 export default function About() {
@@ -8,7 +9,7 @@ export default function About() {
     <>
       <Page pageTitle="Announcing: TalkForm AI" disableWarning={true}>
         <div className="bg-white text-gray-700 flex items-center justify-center p-4">
-          <div className="prose prose-lg text-gray-800">
+          <div className={`${workSansHeavy.className}prose prose-lg text-gray-800`}>
             <p>Forms are ready to be reinvented. <Link href="/">TalkForm AI</Link> is here to give you forms that are easy, fast, and as powerful as your imagination.</p>
             <p>
               Creating a TalkForm is as simple as asking for what you want, and letting the AI infer the field types:
@@ -70,7 +71,7 @@ export default function About() {
             <FloatingTextBox text={`Intake form. Ask for name, address, date of birth. If they're Gen Z, ask for their favorite TikTok. They'll love that.`} />
 
             <h2 className="mt-20 text-2xl">What are you waiting for?</h2>
-            <p>You can sign up now for free! If you have any questions or want to get in touch, we&rsquo;d love to hear from you - <Link href='/contact'>contact us here</Link>!</p>
+            <p>You can sign up now for free! If you have any questions or want to get in touch, we&rsquo;d love to hear from you - <Link className='text-indigo-500 hover:text-indigo-300' href='/contact'>contact us here</Link>!</p>
           </div>
         </div>
         <div className='my-20'></div>
