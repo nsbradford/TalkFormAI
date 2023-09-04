@@ -1,5 +1,4 @@
-import { MessageUI } from '@/components/chat';
-import { ChatHistory, FloatingGradientBackground, FloatingTextBox, SampleResponseTable } from '@/components/landing/samples';
+import { ChatHistory, FloatingTextBox, SampleResponseTable } from '@/components/landing/samples';
 import Page from '@/components/layout/Page';
 import { workSansHeavy } from '@/components/misc';
 import Link from 'next/link';

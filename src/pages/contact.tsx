@@ -1,4 +1,3 @@
-import NavBar2 from '@/components/home/NavBar2';
 import Team from '@/components/landing/Team';
 import Page from '@/components/layout/Page';
 

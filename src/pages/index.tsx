@@ -78,12 +78,28 @@ function Footer() {
           <TalkFormLogo />
         </div>
         <div className="flex-1">
-          <p className="uppercase text-gray-500 md:mb-6">contact us</p>
+          {/* <p className="uppercase text-gray-500 md:mb-6">contact us</p> */}
           <ul className="list-reset mb-6">
+            <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+              <Link
+                href="https://github.com/nsbradford/talkformai"
+                className="no-underline  text-gray-800 hover:text-indigo-300"
+              >
+                About
+              </Link>
+            </li>
+            <li className="mt-2 inline-block mr-2 md:block md:mr-0">
+              <Link
+                href="https://github.com/nsbradford/talkformai"
+                className="no-underline  text-gray-800 hover:text-indigo-300"
+              >
+                Contact
+              </Link>
+            </li>
             <li className="mt-2 inline-block mr-2 md:block md:mr-0">
               <a
                 href="https://github.com/nsbradford/talkformai"
-                className="no-underline hover:underline text-gray-800 hover:text-rose-500"
+                className="no-underline  text-gray-800 hover:text-indigo-300"
               >
                 GitHub
               </a>
