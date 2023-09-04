@@ -33,7 +33,7 @@ export function SampleResponseTable() {
             <th className="p-1 pl-2 sm:p-2">Company</th>
             <th className="p-1 pl-2 sm:p-2">Title</th>
             <th className="p-1 pl-2 sm:p-2">Tech</th>
-            <th className="p-1 hidden sm:table-cell">GitHub</th>
+            <th className="p-1 hidden lg:table-cell">GitHub</th>
           </tr>
         </thead>
         <tbody>
@@ -43,7 +43,7 @@ export function SampleResponseTable() {
             <td className="p-1 pl-2 sm:p-2 border-b">Tech Co.</td>
             <td className="p-1 pl-2 sm:p-2 border-b">ML Engineer</td>
             <td className="p-1 pl-2 sm:p-2 border-b">React, Node, Python</td>
-            <td className="p-1 pl-2 sm:p-2 border-b hidden sm:table-cell">
+            <td className="p-1 pl-2 sm:p-2 border-b hidden lg:table-cell">
               jd-70B
             </td>
           </tr>
@@ -53,7 +53,7 @@ export function SampleResponseTable() {
             <td className="p-1 pl-2 sm:p-2 border-b">Biz Corp.</td>
             <td className="p-1 pl-2 sm:p-2 border-b">Marketing Manager</td>
             <td className="p-1 pl-2 sm:p-2 border-b">Google Analytics</td>
-            <td className="p-1 border-b hidden sm:table-cell">-</td>
+            <td className="p-1 border-b hidden lg:table-cell">-</td>
           </tr>
         </tbody>
       </table>

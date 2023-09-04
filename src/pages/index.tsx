@@ -134,7 +134,7 @@ function SpecificsTextOnRight(props: {
 
 function Specifics() {
   return (
-    <section className={`${workSans.className} bg-white`}>
+    <section className={`${workSans.className} bg-white px-0 md:px-4`}>
       <div className="container max-w-5xl mx-auto mt-8">
         <h2 className="w-full my-2 text-3xl sm:text-4xl font-bold leading-tight text-center text-gray-800">
           Faster, easier, more powerful.
