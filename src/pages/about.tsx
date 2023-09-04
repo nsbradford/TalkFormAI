@@ -72,7 +72,6 @@ export default function About() {
             <h2 className="mt-20 text-2xl">What are you waiting for?</h2>
 
             <p>You can sign up now for free, or view the code on <a className='text-indigo-500 hover:text-indigo-300' href='https://github.com/nsbradford/talkformai'>GitHub</a>! If you have any questions or want to get in touch, we&rsquo;d love to hear from you - <Link className='text-indigo-500 hover:text-indigo-300' href='/contact'>contact us here</Link>!</p>
-            <p>Anything you can dream, you can build. Truly, we live in a golden age of technology.</p>
           </div>
         </div>
         <div className='my-20'></div>
