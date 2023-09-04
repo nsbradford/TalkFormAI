@@ -153,7 +153,7 @@ export default function NavBar() {
                         <Menu.Item key={item.name}>
                           {({ active }) => (
                             // issue for signout page if you use Link
-                            <a
+                            <Link
                               href={item.href}
                               onClick={item.onClick ? item.onClick : () => {}}
                               className={classNames(
@@ -162,7 +162,7 @@ export default function NavBar() {
                               )}
                             >
                               {item.name}
-                            </a>
+                            </Link>
                           )}
                         </Menu.Item>
                       ))}

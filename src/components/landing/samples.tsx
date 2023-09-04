@@ -1,7 +1,6 @@
 import { MessageUI } from '../chat';
 import { sunsetGradient } from '../misc';
 
-
 export function ChatHistory(props: { messages: string[] }) {
   const messages = props.messages.map((message, index) => {
     return (
@@ -20,7 +19,6 @@ export function ChatHistory(props: { messages: string[] }) {
     </FloatingGradientBackground>
   );
 }
-
 
 export function SampleResponseTable() {
   return (

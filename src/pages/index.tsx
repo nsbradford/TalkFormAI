@@ -2,13 +2,13 @@ import NavBar from '@/components/home/NavBar';
 import {
   ChatHistory,
   FloatingTextBox,
-  SampleResponseTable
+  SampleResponseTable,
 } from '@/components/landing/samples';
 import {
   titleGradient,
   titleGradientHover,
   workSans,
-  workSansHeavy
+  workSansHeavy,
 } from '@/components/misc';
 import { TalkFormLogo } from '@/components/talkform';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
