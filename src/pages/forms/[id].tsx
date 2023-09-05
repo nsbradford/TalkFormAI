@@ -1,4 +1,4 @@
-import SpinnerFullPage from '@/components/home/Spinner';
+import { SpinnerFullPage } from '@/components/home/Spinner';
 import Page from '@/components/layout/Page';
 import { Form, Response, User } from '@/types';
 import {

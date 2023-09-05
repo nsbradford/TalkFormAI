@@ -59,7 +59,7 @@ function GetStartedButtons() {
           View on GitHub
         </Link>
         <Link
-          href="/home"
+          href="/forms/fill/bb16be91-9ba7-40b8-8e3d-ead3cf3184ca"
           className={`inline-block text-gray-500 border border-2 border-gray-500 font-semibold py-2 px-4 my-2 mx-1 rounded-lg transition duration-200 ease-in-out hover:bg-gray-200`}
         >
           Fill a sample form

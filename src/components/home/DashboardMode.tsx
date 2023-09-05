@@ -1,4 +1,4 @@
-import SpinnerFullPage from '@/components/home/Spinner';
+import { SpinnerFullPage } from '@/components/home/Spinner';
 import { Form, Response, User } from '@/types';
 import { getFormsFromSupabase, getResponsesFromSupabase } from '@/utils';
 import { LinkIcon } from '@heroicons/react/24/outline';

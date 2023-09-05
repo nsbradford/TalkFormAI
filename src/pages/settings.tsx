@@ -5,7 +5,7 @@ import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Database } from '../../types/supabase';
-import SpinnerFullPage from '@/components/home/Spinner';
+import { SpinnerFullPage } from '@/components/home/Spinner';
 import Page from '@/components/layout/Page';
 
 export default function SettingsMode() {
