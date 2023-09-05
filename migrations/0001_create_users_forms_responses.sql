@@ -43,3 +43,32 @@ $$ language plpgsql security definer;
 create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
+
+
+CREATE POLICY forms_user_policy
+  ON forms
+  FOR ALL
+  USING (user_id::uuid = auth.uid())
+  WITH CHECK (user_id::uuid = auth.uid());
+
+CREATE POLICY responses_write_policy
+  ON responses
+  FOR ALL
+  USING (true)
+  WITH CHECK (true);
+
+CREATE POLICY responses_select_policy
+  ON responses
+  FOR SELECT
+  USING (
+    EXISTS (
+      SELECT 1
+      FROM forms
+      WHERE forms.id = responses.form_id AND forms.user_id::uuid = auth.uid()
+    )
+  );
+
+CREATE POLICY forms_public_select_by_id_policy
+  ON forms
+  FOR SELECT
+  USING (true);  -- true means no restrictions on reading
