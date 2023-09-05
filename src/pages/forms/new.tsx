@@ -87,7 +87,7 @@ export default function NewFormPage(props: NewFormPageProps) {
           'Here is a short text description of what I want to create a survey form about: ' +
           formTopic +
           '\n' +
-          'What should the title of this survey form be?',
+          'What should the title of this survey form be? Respond with just the title, no other text, prefixes, or annotations, e.g. "Birthday Party RSVP", "Doctors\'s Office Intake", "Marketing Survey", etc.',
       },
     ];
     const titleResponse = await callLLM(PROMPT_BUILD, conversationThread);
@@ -103,7 +103,7 @@ export default function NewFormPage(props: NewFormPageProps) {
     conversationThread.push({
       role: 'user',
       content:
-        'Create a short description of this survey form.  This description will be given to a person who is in charge of administering the form data collection.  This person will use this description to understand what the form is about, so that they can collect the correct information from respondents.  Don\'t include information that is not relevant to the form, or state that this is a form.  This survey administrator already knows that, instead they care about information relation the forms content.  For example, if you want to collect a respondent\'s name and age, you can write: "This form is to collect the names and ages of people attending a birthday party."',
+        `Create a short description of this survey form. This description will be given to a person who is in charge of administering the form data collection. This person will use this description to understand what the form is about, so that they can collect the correct information from respondents.  Don't include information that is not relevant to the form, or state that this is a form. This survey administrator already knows that, instead they care about information relation the forms content. For example, if you want to collect a respondent\'s name and age, you can write: "This form is to collect the names and ages of people attending a birthday party."`,
     });
     const descriptionResponse = await callLLM(PROMPT_BUILD, conversationThread);
     if (descriptionResponse instanceof Error) {
