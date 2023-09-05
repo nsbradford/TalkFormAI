@@ -25,7 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         initialSession={pageProps.initialSession}
       >
         <Component {...pageProps} />
-        <Analytics />g
+        <Analytics />
       </SessionContextProvider>
     </>
   );
