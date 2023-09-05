@@ -39,7 +39,7 @@ RULES YOU MUST FOLLOW:
 YOUR SCHEMA:
 Name: ${form.name}
 Description: ${form.description || '[No description]'}
-Guidence: ${form.fields_guidance || '[No guidance, use your best judgement]'}
+Guidance: ${form.fields_guidance || '[No guidance, use your best judgement]'}
 \`\`\`
 ${JSON.stringify(form.fields_schema, null, 2)}
 \`\`\`
@@ -48,49 +48,3 @@ You MUST provide your response in JSON.
 `;
 }
 // Movie-themed game night. Ask everyone their name, RSVP, favorite movie, dietary preferences, # of guests. Remind everyone to BYOB.
-
-export const FAKE_SCHEMA = `
-{
-  "rsvpForm": {
-      "meta": "RSVP for Sarah's bday dinner",
-      "fields": [
-          {
-              "label": "Full Name",
-              "type": "text",
-              "required": true
-          },
-          {
-              "label": "Email",
-              "type": "email",
-              "required": true
-          },
-          {
-              "label": "Contact Number",
-              "type": "number",
-              "required": false
-          },
-          {
-              "label": "Attending?",
-              "type": "checkbox",
-              "options": ["Yes", "No"],
-              "required": true
-          },
-          {
-              "label": "Number of Guests",
-              "type": "number",
-              "required": true
-          },
-          {
-              "label": "Dietary Restrictions",
-              "type": "textarea",
-              "required": false
-          },
-          {
-              "label": "Special Note",
-              "type": "textarea",
-              "required": false
-          }
-      ]
-  }
-}
-`;
