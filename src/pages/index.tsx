@@ -48,10 +48,10 @@ export default function Home() {
 function GetStartedButtons() {
   return (
     <>
-      <div className="space-x-4">
+      <div className="flex flex-wrap justify-center items-center md:space-y-0">
         <Link
           href="https://github.com/nsbradford/talkformai" // Replace with your repo URL
-          className="inline-block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out hover:bg-gray-600"
+          className="inline-block bg-gray-800 text-white font-semibold py-2 px-4 my-2 mx-1 rounded-lg transition duration-200 ease-in-out hover:bg-gray-600 border-2 border-transparent"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -60,9 +60,15 @@ function GetStartedButtons() {
         </Link>
         <Link
           href="/home"
-          className={`inline-block ${titleGradient} text-white font-semibold py-2 px-4 rounded-lg transition duration-300 ease-in-out ${titleGradientHover}`}
+          className={`inline-block text-gray-500 border border-2 border-gray-500 font-semibold py-2 px-4 my-2 mx-1 rounded-lg transition duration-200 ease-in-out hover:bg-gray-200`}
         >
-          Create a form ›
+          Fill a sample form
+        </Link>
+        <Link
+          href="/home"
+          className={`inline-block ${titleGradient} text-white font-semibold py-2.5 px-4 my-2 mx-1 rounded-lg transition duration-200 ease-in-out ${titleGradientHover}`}
+        >
+          Create a form
         </Link>
       </div>
     </>
