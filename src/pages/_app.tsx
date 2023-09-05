@@ -6,6 +6,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { createPagesBrowserClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import type { AppProps } from 'next/app';
+import { Analytics } from '@vercel/analytics/react';
 import { useState } from 'react';
 config.autoAddCss = false;
 
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         initialSession={pageProps.initialSession}
       >
         <Component {...pageProps} />
+        <Analytics />g
       </SessionContextProvider>
     </>
   );
