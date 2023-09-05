@@ -5,7 +5,7 @@ const teamMembers = [
   {
     name: 'Nick Bradford',
     image: 'https://avatars.githubusercontent.com/u/6633811',
-    subtitle: 'Building LLM agents',
+    subtitle: 'Building LLM coding agents',
     website: 'nsbradford.com',
     socials: {
       twitter: 'https://twitter.com/n_s_bradford',

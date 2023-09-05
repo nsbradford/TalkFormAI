@@ -22,7 +22,7 @@ export default function NewFormPage(props: NewFormPageProps) {
   const supabase = createClientComponentClient<Database>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [step, setStep] = useState(1);
-  const [description, setDescription] = useState('');
+  // const [description, setDescription] = useState('');
   const [formTopic, setFormTopic] = useState('');
   const [title, setTitle] = useState('');
   const [fieldsGuidance, setFieldsGuidance] = useState('');
@@ -65,7 +65,7 @@ export default function NewFormPage(props: NewFormPageProps) {
     const formId = v4();
     await supabase.from('forms').insert([
       {
-        description: description,
+        description: formTopic, // we're deleting the intermediate description
         raw_instructions: formTopic,
         fields_guidance: fieldsGuidance,
         fields_schema: fieldsSchema,
@@ -101,24 +101,55 @@ export default function NewFormPage(props: NewFormPageProps) {
 
     console.log('titleResponse', titleResponse);
     conversationThread.push(titleResponse);
-    conversationThread.push({
-      role: 'user',
-      content: `Create a short description of this survey form. This description will be given to a person who is in charge of administering the form data collection. This person will use this description to understand what the form is about, so that they can collect the correct information from respondents.  Don't include information that is not relevant to the form, or state that this is a form. This survey administrator already knows that, instead they care about information relation the forms content. For example, if you want to collect a respondent\'s name and age, you can write: "This form is to collect the names and ages of people attending a birthday party."`,
-    });
-    const descriptionResponse = await callLLM(PROMPT_BUILD, conversationThread);
-    if (descriptionResponse instanceof Error) {
-      console.error('No response from LLM');
-      setStep(1);
-      return;
-    }
-    setDescription(removeStartAndEndQuotes(descriptionResponse.content) || '');
+    // conversationThread.push({
+    //   role: 'user',
+    //   content: `Create a short description of this survey form. This description will be given to a person who is in charge of administering the form data collection. This person will use this description to understand what the form is about, so that they can collect the correct information from respondents.  Don't include information that is not relevant to the form, or state that this is a form. This survey administrator already knows that, instead they care about information relation the forms content. For example, if you want to collect a respondent\'s name and age, you can write: "This form is to collect the names and ages of people attending a birthday party."`,
+    // });
+    // const descriptionResponse = await callLLM(PROMPT_BUILD, conversationThread);
+    // if (descriptionResponse instanceof Error) {
+    //   console.error('No response from LLM');
+    //   setStep(1);
+    //   return;
+    // }
+    // setDescription(removeStartAndEndQuotes(descriptionResponse.content) || '');
 
-    console.log('descriptionResponse', descriptionResponse);
-    conversationThread.push(descriptionResponse);
+    // console.log('descriptionResponse', descriptionResponse);
+    // conversationThread.push(descriptionResponse);
     conversationThread.push({
       role: 'user',
-      content:
-        'Write any guidance that will help respondents fill out this form, such as conditional information to collect or how to answer questions.  The survey administrator will reference this guidence when deciding which follow up questions to ask or how to interpret the answers.  For example, if you want to collect a RSVP for a birthday party, including the number of guests attending, you may write "Please include the number of guests attending the birthday party, but only if the RSVP is yes." because it doesn\'t make sense to ask for the number of guests if the respondent is not attending.',
+      content: `Now, we must write instructions to the survey administrator. Write any guidance that the administrator will need, such as conditional information to collect or how to answer questions.  The survey administrator will reference this guidence when deciding which follow up questions to ask or how to interpret the answers. Be concise.
+
+Examples:
+-If you want to collect a RSVP for a birthday party, including the number of guests attending, you may write "Please include the number of guests attending the birthday party (skip if RSVP is no)." because it doesn\'t make sense to ask for the number of guests if the respondent is not attending.
+-If a question is a Yes/No question, or has to pass certain validation checks, make a note, e.g. "RSVP: yes/no".
+
+Example instructions:
+----
+Movie Night RSVP
+- Name: string (double check with user if it doesn't look like a real name)
+- Email: valid email address
+- RSVP: yes/no
+
+If RSVP is yes:
+- Number of guests: number (double check with user if more than 10)
+- Dietary restrictions: string
+----
+
+----
+Startup marketing survey
+- Name: string (double check with user if it doesn't look like a real name)
+- Email: valid email address
+- Company name: string
+- Job title: string
+
+If job title is some kind of software engineer or related (ML engineer, data scientist, engineering manager, etc.):
+- GitHub username: string (just the username, not the full URL. Extract if necessary.)
+
+All respondents:
+- Marketing technologies: string (comma separated list of marketing technologies used)
+----
+
+        `,
     });
 
     const fieldsGuidanceResponse = await callLLM(
@@ -138,8 +169,18 @@ export default function NewFormPage(props: NewFormPageProps) {
     conversationThread.push(fieldsGuidanceResponse);
     conversationThread.push({
       role: 'user',
-      content:
-        'Now return a JSON object that will serve as a template for the form responses.  This object should have keys that are strings and values that are strings.  The keys are the names of the fields that the survey administrator should attempt to obtain.  They values should be descriptions of those fields, including any formatting information or non-obvious ways to validate the provided information.  For example, if you want to collect a respondent\'s name and age, you can write: {"name": "name of the respondent", "age": "age of the respondent"}',
+      content: `Now return a JSON object that will serve as a template for the form responses. This object should have keys that are strings and values that are strings. The keys are the names of the fields that the survey administrator should attempt to obtain. They values should be descriptions of those fields, including any formatting information or non-obvious ways to validate the provided information. Keys should be in \`snake_case\`. Be concise.
+
+Examples:
+Input:
+- GitHub username: GitHub username. Extract if necessary, e.g. if user provides URL.
+
+Your output:
+{
+  "github_username": "GitHub username. Extract if necessary, e.g. if user provides URL."
+}
+
+        `,
     });
 
     const fieldsSchemaResponse = await callLLM(
@@ -191,22 +232,36 @@ export default function NewFormPage(props: NewFormPageProps) {
           </div>
         </div>
       );
-    } /* if (step === 1.5) {
+    } else {
       return (
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <Spinner />
-          <div className="text-gray-600">{loadingMessage}</div>
-        </div>
-      );
-    } else if (step === 2) */ else {
-      return (
-        <div className="col-span-full  px-4">
+        <div className="col-span-full px-4">
           <div className="sm:col-span-4">
+            {formTopic !== '' && (
+              <>
+                <label
+                  htmlFor="description"
+                  className="block mt-0 text-md font-medium leading-6 text-gray-900"
+                >
+                  Your Description
+                </label>
+                <div className="mt-2">
+                  <textarea
+                    id="description"
+                    rows={5}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    value={formTopic}
+                    onChange={(e) => setFormTopic(e.target.value)}
+                    placeholder="Adding a description can help us gather the correct information from respondents..."
+                  />
+                </div>
+              </>
+            )}
+
             {title !== '' && (
               <>
                 <label
                   htmlFor="title"
-                  className="block text-sm font-medium leading-6 text-gray-900"
+                  className="block mt-6 text-md font-medium leading-6 text-gray-900"
                 >
                   Title
                 </label>
@@ -223,34 +278,13 @@ export default function NewFormPage(props: NewFormPageProps) {
               </>
             )}
 
-            {description !== '' && (
-              <>
-                <label
-                  htmlFor="description"
-                  className="block mt-4 text-sm font-medium leading-6 text-gray-900"
-                >
-                  Description (Optional)
-                </label>
-                <div className="mt-2">
-                  <textarea
-                    id="description"
-                    rows={5}
-                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    placeholder="Adding a description can help us gather the correct information from respondents..."
-                  />
-                </div>
-              </>
-            )}
-
             {fieldsGuidance !== '' && (
               <>
                 <label
                   htmlFor="fields_guidance"
-                  className="block mt-4 text-sm font-medium leading-6 text-gray-900"
+                  className="block mt-6 text-md font-medium leading-6 text-gray-900"
                 >
-                  Guidance (Optional)
+                  Guidance
                 </label>
                 <div className="mt-2">
                   <textarea
@@ -269,7 +303,13 @@ export default function NewFormPage(props: NewFormPageProps) {
               <>
                 <div>
                   <div className="mt-4">
-                    Fields Schema:
+                    <label
+                      htmlFor="fields_guidance"
+                      className="block mt-6 text-md font-medium leading-6 text-gray-900"
+                    >
+                      Fields Schema:
+                    </label>
+
                     <pre className="bg-gray-100 p-3 rounded whitespace-pre-wrap text-sm">
                       {JSON.stringify(fieldsSchema, null, 2)}
                     </pre>
