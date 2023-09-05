@@ -1,4 +1,4 @@
-import Spinner from '@/components/home/Spinner';
+import SpinnerFullPage from '@/components/home/Spinner';
 import Page from '@/components/layout/Page';
 import { Form, Response, User } from '@/types';
 import {
@@ -53,7 +53,7 @@ export default function FormDetailPage() {
   }, [isSessionLoading, user, form, responses]);
 
   if (isLoading || isSessionLoading || form === null || responses === null) {
-    return <Spinner />;
+    return <SpinnerFullPage />;
   }
 
   const badgeColor = form.is_open

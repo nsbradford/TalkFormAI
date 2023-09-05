@@ -5,7 +5,7 @@ import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Database } from '../../types/supabase';
-import Spinner from '@/components/home/Spinner';
+import SpinnerFullPage from '@/components/home/Spinner';
 import Page from '@/components/layout/Page';
 
 export default function SettingsMode() {
@@ -32,7 +32,7 @@ export default function SettingsMode() {
           <h1>User ID: {user.id}</h1>
         </>
       ) : (
-        <Spinner />
+        <SpinnerFullPage />
       )}
     </Page>
   );

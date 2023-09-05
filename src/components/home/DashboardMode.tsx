@@ -1,4 +1,4 @@
-import Spinner from '@/components/home/Spinner';
+import SpinnerFullPage from '@/components/home/Spinner';
 import { Form, Response, User } from '@/types';
 import { getFormsFromSupabase, getResponsesFromSupabase } from '@/utils';
 import { LinkIcon } from '@heroicons/react/24/outline';
@@ -49,7 +49,7 @@ export default function DashboardMode(props: { user: User | null }) {
   }, [isSessionLoading, user, allForms, formIdToResponses]);
 
   if (user === null || allForms === null || formIdToResponses === null) {
-    return <Spinner />;
+    return <SpinnerFullPage />;
   } else if (allForms.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-full">

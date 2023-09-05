@@ -7,10 +7,10 @@ import { callLLM, getUserFromSupabase } from '@/utils';
 import { PROMPT_BUILD } from '@/prompts';
 import { removeStartAndEndQuotes } from '@/utils';
 import Page from '@/components/layout/Page';
-import Spinner from '@/components/home/Spinner';
 import { useRouter } from 'next/router';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
+import { Spinner } from '@/components/home/Spinner';
 
 type NewFormPageProps = {
   user: User;
@@ -31,6 +31,7 @@ export default function NewFormPage(props: NewFormPageProps) {
   const [user, setUser] = useState<null | User>(null);
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
   const [loadingMessage, setLoadingMessage] = useState('Building form...');
+  const showSpinner = step === 1.5 || isLoading;
 
   useEffect(() => {
     if (!isSessionLoading && !session) {
@@ -39,7 +40,7 @@ export default function NewFormPage(props: NewFormPageProps) {
     if (!isSessionLoading && session) {
       getUserFromSupabase(session, supabase, setUser);
     }
-  }, [isLoading, session]);
+  }, [isSessionLoading, session]);
 
   useEffect(() => {
     if (step === 1.5) {
@@ -102,8 +103,7 @@ export default function NewFormPage(props: NewFormPageProps) {
     conversationThread.push(titleResponse);
     conversationThread.push({
       role: 'user',
-      content:
-        `Create a short description of this survey form. This description will be given to a person who is in charge of administering the form data collection. This person will use this description to understand what the form is about, so that they can collect the correct information from respondents.  Don't include information that is not relevant to the form, or state that this is a form. This survey administrator already knows that, instead they care about information relation the forms content. For example, if you want to collect a respondent\'s name and age, you can write: "This form is to collect the names and ages of people attending a birthday party."`,
+      content: `Create a short description of this survey form. This description will be given to a person who is in charge of administering the form data collection. This person will use this description to understand what the form is about, so that they can collect the correct information from respondents.  Don't include information that is not relevant to the form, or state that this is a form. This survey administrator already knows that, instead they care about information relation the forms content. For example, if you want to collect a respondent\'s name and age, you can write: "This form is to collect the names and ages of people attending a birthday party."`,
     });
     const descriptionResponse = await callLLM(PROMPT_BUILD, conversationThread);
     if (descriptionResponse instanceof Error) {
@@ -160,7 +160,7 @@ export default function NewFormPage(props: NewFormPageProps) {
   const renderStepContent = () => {
     if (step === 1) {
       return (
-        <div className="sm:col-span-4">
+        <div className="sm:col-span-4 px-4">
           <label
             htmlFor="formTopic"
             className="block text-xl font-medium leading-6 text-gray-900"
@@ -191,76 +191,99 @@ export default function NewFormPage(props: NewFormPageProps) {
           </div>
         </div>
       );
-    } else if (step === 1.5) {
+    } /* if (step === 1.5) {
       return (
         <div className="flex flex-col items-center justify-center space-y-2">
           <Spinner />
           <div className="text-gray-600">{loadingMessage}</div>
         </div>
       );
-    } else if (step === 2) {
+    } else if (step === 2) */ else {
       return (
-        <div className="col-span-full">
+        <div className="col-span-full  px-4">
           <div className="sm:col-span-4">
-            <label
-              htmlFor="title"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
-              Title
-            </label>
-            <div className="mt-2">
-              <input
-                type="text"
-                id="title"
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                placeholder="Birthday party RSVP"
-              />
-            </div>
+            {title !== '' && (
+              <>
+                <label
+                  htmlFor="title"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
+                  Title
+                </label>
+                <div className="mt-2">
+                  <input
+                    type="text"
+                    id="title"
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    placeholder="Birthday party RSVP"
+                  />
+                </div>
+              </>
+            )}
 
-            <label
-              htmlFor="description"
-              className="block mt-4 text-sm font-medium leading-6 text-gray-900"
-            >
-              Description (Optional)
-            </label>
-            <div className="mt-2">
-              <textarea
-                id="description"
-                rows={5}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                placeholder="Adding a description can help us gather the correct information from respondents..."
-              />
-            </div>
+            {description !== '' && (
+              <>
+                <label
+                  htmlFor="description"
+                  className="block mt-4 text-sm font-medium leading-6 text-gray-900"
+                >
+                  Description (Optional)
+                </label>
+                <div className="mt-2">
+                  <textarea
+                    id="description"
+                    rows={5}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="Adding a description can help us gather the correct information from respondents..."
+                  />
+                </div>
+              </>
+            )}
 
-            <label
-              htmlFor="fields_guidance"
-              className="block mt-4 text-sm font-medium leading-6 text-gray-900"
-            >
-              Guidance (Optional)
-            </label>
-            <div className="mt-2">
-              <textarea
-                id="fields_guidance"
-                rows={5}
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                value={fieldsGuidance}
-                onChange={(e) => setFieldsGuidance(e.target.value)}
-                placeholder="Write any information that will help respondents fill out this form..."
-              />
-            </div>
-            <div>
-              <div className="mt-4">
-                Fields Schema:
-                <pre className="bg-gray-100 p-3 rounded whitespace-pre-wrap">
-                  {JSON.stringify(fieldsSchema, null, 2)}
-                </pre>
-              </div>
-            </div>
+            {fieldsGuidance !== '' && (
+              <>
+                <label
+                  htmlFor="fields_guidance"
+                  className="block mt-4 text-sm font-medium leading-6 text-gray-900"
+                >
+                  Guidance (Optional)
+                </label>
+                <div className="mt-2">
+                  <textarea
+                    id="fields_guidance"
+                    rows={5}
+                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    value={fieldsGuidance}
+                    onChange={(e) => setFieldsGuidance(e.target.value)}
+                    placeholder="Write any information that will help respondents fill out this form..."
+                  />
+                </div>
+              </>
+            )}
+
+            {fieldsSchema !== '{}' && (
+              <>
+                <div>
+                  <div className="mt-4">
+                    Fields Schema:
+                    <pre className="bg-gray-100 p-3 rounded whitespace-pre-wrap text-sm">
+                      {JSON.stringify(fieldsSchema, null, 2)}
+                    </pre>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
+          {showSpinner && (
+            <div className="flex flex-col items-center justify-center py-8">
+              <Spinner />
+              <div className="text-gray-600 my-4">{loadingMessage}</div>
+            </div>
+          )}
         </div>
       );
     }
@@ -276,7 +299,7 @@ export default function NewFormPage(props: NewFormPageProps) {
             </div>
           </div>
         </div>
-        <div className="mt-6 flex items-center justify-end gap-x-6">
+        <div className="mt-6 flex items-center justify-end gap-x-6 px-4">
           {step === 2 && (
             <Link href="/home">
               <button
@@ -290,7 +313,7 @@ export default function NewFormPage(props: NewFormPageProps) {
           {step === 2 && (
             <button
               type="submit"
-              disabled={isLoading}
+              disabled={showSpinner}
               className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Save
