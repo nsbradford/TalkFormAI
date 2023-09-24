@@ -1,4 +1,5 @@
 import NavBar from '@/components/home/NavBar';
+import GitHubBadge from '@/components/GitHubBadge';
 import {
   ChatHistory,
   FloatingTextBox,
@@ -11,15 +12,14 @@ import {
   workSansHeavy,
 } from '@/components/misc';
 import { TalkFormLogo } from '@/components/talkform';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 
 export default function Home() {
   return (
     <>
       <NavBar />
-      <div className={`flex justify-center items-center mt-20`}>
+      <div className={`flex justify-center items-center mt-20`}
+        <GitHubBadge />
         <div className="flex flex-col items-center justify-center">
           <h1
             className={`text-4xl font-extrabold pb-8 md:text-7xl ${titleGradient} bg-clip-text text-transparent text-center`}
@@ -30,7 +30,7 @@ export default function Home() {
             className={`${workSansHeavy.className} text-xl font-extrabold mb-8 md:text-2xl px-12 text-center`}
           >
             Chat to create. Chat to fill. Zero config.{' '}
-            <span className={`${titleGradient} bg-clip-text text-transparent`}>
+            <span className={`${titleGradient} bg-clip-text text-transparent`}
               It just works.
             </span>
           </h2>
@@ -49,15 +49,6 @@ function GetStartedButtons() {
   return (
     <>
       <div className="flex flex-wrap justify-center items-center md:space-y-0">
-        <Link
-          href="https://github.com/nsbradford/talkformai" // Replace with your repo URL
-          className="inline-block bg-gray-800 text-white font-semibold py-2 px-4 my-2 mx-1 rounded-lg transition duration-200 ease-in-out hover:bg-gray-600 border-2 border-transparent"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <FontAwesomeIcon icon={faGithub} className="fa-fw text-white-400" />{' '}
-          View on GitHub
-        </Link>
         <Link
           href="/forms/fill/5771953d-a003-4969-9071-fcfff4c5bb10"
           className={`inline-block text-gray-500 border border-2 border-gray-500 font-semibold py-2 px-4 my-2 mx-1 rounded-lg transition duration-200 ease-in-out hover:bg-gray-200`}
@@ -134,6 +125,7 @@ function SpecificsTextOnLeft(props: {
     </div>
   );
 }
+
 function SpecificsTextOnRight(props: {
   heading: string;
   content: string;
@@ -156,7 +148,7 @@ function SpecificsTextOnRight(props: {
 
 function Specifics() {
   return (
-    <section className={`${workSans.className} bg-white px-0 md:px-4`}>
+    <section className={`${workSans.className} bg-white px-0 md:px-4`}
       <div className="container max-w-5xl mx-auto mt-8">
         <h2 className="w-full my-2 text-3xl sm:text-4xl font-bold leading-tight text-center text-gray-800">
           Faster, easier, more powerful.
