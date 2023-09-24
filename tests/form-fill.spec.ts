@@ -49,7 +49,7 @@ const testScenarios = [
       company: 'Big Tech Co.',
       job_title: 'Software Engineer',
       marketing_technologies: 'PostHog',
-      github: 'jd123456',
+      github: 'github.com/jd123456',
     },
   },
   {
