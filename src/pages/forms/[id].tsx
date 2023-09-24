@@ -83,6 +83,36 @@ export default function FormDetailPage() {
                 View live form
               </button>
             </Link>
+            <button className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600" disabled={!form.is_open}>
+            const handleCloseForm = async () => {
+                if (form) {
+                    const { data, error } = await supabase
+                        .from('forms')
+                        .update({ is_open: !form.is_open })
+                        .eq('id', form.id);
+                    if (error) {
+                        console.error('Error updating form: ', error);
+                    } else {
+                        setForm(data[0]);
+                    }
+                }
+            };
+                if (form) {
+                    const { data, error } = await supabase
+            <button onClick={handleCloseForm} className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600" disabled={!form.is_open}>
+                Close form
+            </button>
+                        .from('forms')
+                        .update({ is_open: !form.is_open })
+                        .eq('id', form.id);
+                    if (error) {
+                        console.error('Error updating form: ', error);
+                    } else {
+                        setForm(data[0]);
+                    }
+                }
+            };
+            </button>
           </div>
           {form.created_at && (
             <p className="text-xs text-gray-600">
@@ -140,15 +170,3 @@ export default function FormDetailPage() {
         data={responses.map(
           (response) => response.fields as Array<Record<string, any>>
         )}
-      />
-    </Page>
-  );
-}
-function respectNewLines(text: string | null | undefined) {
-  return (text ?? '').split('\n').map((line, i) => (
-    <span key={i}>
-      {line}
-      <br />
-    </span>
-  ));
-}
