@@ -78,11 +78,16 @@ export default function FormDetailPage() {
               </span>
             </div>
 
-            <Link href={'/forms/fill/' + form.id}>
-              <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                View live form
+            <div className="flex">
+              <Link href={'/forms/fill/' + form.id}>
+                <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  View live form
+                </button>
+              </Link>
+              <button className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 ml-2" disabled={!form.is_open} onClick={handleCloseForm}>
+                Close form
               </button>
-            </Link>
+            </div>
           </div>
           {form.created_at && (
             <p className="text-xs text-gray-600">
@@ -151,4 +156,16 @@ function respectNewLines(text: string | null | undefined) {
       <br />
     </span>
   ));
+}
+
+async function handleCloseForm() {
+  const { data, error } = await supabase
+    .from('forms')
+    .update({ is_open: false })
+    .eq('id', form.id);
+  if (error) {
+    console.error('Error: ', error);
+  } else {
+    setForm(data[0]);
+  }
 }
