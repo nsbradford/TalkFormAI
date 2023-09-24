@@ -159,13 +159,11 @@ export default function DashboardMode(props: { user: User | null }) {
                         </Link>
                       ) : null}
                     </div>
-<p className="mt-2 text-xs leading-5 text-gray-500 sm:mt-0">
-  {responsesForThisForm.length === 0
-    ? 'No responses yet'
-    : responsesForThisForm.length === 1
-      ? '1 response'
-      : responsesForThisForm.length + ' responses'}
-</p>
+                    <p className="mt-2 text-xs leading-5 text-gray-500 sm:mt-0">
+                      {responsesForThisForm.length === 0
+                        ? 'No responses yet'
+                        : responsesForThisForm.length + ' responses'}
+                    </p>
                   </div>
                 </li>
               );
