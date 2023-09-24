@@ -91,7 +91,7 @@ export default function DashboardMode(props: { user: User | null }) {
         ) : (
           <ul role="list" className="divide-y divide-gray-200 space-y-4">
             {allForms.map((f) => {
-              const responsesForThisForm = formIdToResponses[f.id] || [];
+import { Tooltip } from '../misc';
               const badgeColor = f.is_open
                 ? 'bg-green-100 text-green-800'
                 : 'bg-red-100 text-red-800';
@@ -113,8 +113,13 @@ export default function DashboardMode(props: { user: User | null }) {
                       <span
                         className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${badgeColor} ring-1 ring-inset ring-gray-500/10`}
                       >
-                        {f.is_open ? 'Open' : 'Closed'}
-                      </span>
+<Tooltip message={f.is_open ? 'This form is currently accepting responses' : 'This form is not currently accepting responses'}>
+<span
+  className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${badgeColor} ring-1 ring-inset ring-gray-500/10`}
+>
+  {f.is_open ? 'Open' : 'Closed'}
+</span>
+</Tooltip>
                     </div>
                     <div className="">
                       {f.created_at && (
