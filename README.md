@@ -56,6 +56,12 @@ Uses **[prettier](https://prettier.io/)** to enforce standard code formatting.
 yarn format
 ```
 
+### Test
+uses Playwright
+```bash
+yarn test:e2e
+```
+
 ### Create an optimized production build
 
 Useful to see what will actually be released.
