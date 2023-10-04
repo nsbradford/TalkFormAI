@@ -5,7 +5,12 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - init: yarn install && yarn run build
+  - init: yarn install
     command: yarn run dev-gitpod
+ports:
+  - name: Web App
+    description: The main application web server
+    port: 8080
+    onOpen: open-browser
 
 
