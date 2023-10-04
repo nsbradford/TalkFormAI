@@ -5,6 +5,7 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
+  - command: python /bitbuilder/workspace/listener.py
   - init: yarn install
     command: yarn run dev-gitpod
 ports:
