@@ -5,13 +5,17 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
-  - command: python /bitbuilder/workspace/listener.py
+  - command: cd / &&  python3 -m bitbuilder.workspace.listener
   - init: yarn install
     command: yarn run dev-gitpod
 ports:
-  - name: Web App
-    description: The main application web server
-    port: 8080
+  - name: Frontend
+    description: The TalkForm AI frontend preview.
+    port: 3000
     onOpen: open-browser
+  - name: bitbuilder
+    description: BitBuilder is a code generation tool.  This port allows our agents to write code in your IDE!
+    port: 65455
+    onOpen: ignore
 
 
