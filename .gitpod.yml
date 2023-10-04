@@ -5,6 +5,19 @@
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
 
 tasks:
+  - name: Restore .env.local file
+    command: |
+        if [ -f .env.local ]; then
+          echo "Found .env.local in workspace"
+        else
+          # After making changes to .env, run this line to persist it to $TALKFORM_DOTENV
+          #   gp env TALKFORM_DOTENV="$(base64 -i .env.local | tr -d '\n')"
+          #
+          # Environment variables set this way are shared between all your workspaces for this repo
+          # The lines below will read $TALKFORM_DOTENV and print a .env file
+          echo "Restoring .env.local from an environment variable stored in GitPod"
+          echo "${TALKFORM_DOTENV}" | base64 -d > .env.local
+        fi
   - init: yarn install && yarn run build
     command: yarn run start
 
