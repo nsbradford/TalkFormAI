@@ -9,13 +9,14 @@ tasks:
   - init: yarn install
     command: yarn run dev-gitpod
 ports:
-  - name: Frontend
+  - name: App Preview
     description: The TalkForm AI frontend preview.
     port: 3000
     onOpen: open-browser
-  - name: bitbuilder
-    description: BitBuilder is a code generation tool.  This port allows our agents to write code in your IDE!
+  - name: BitBuilder Code Generation
+    description: Connects to the BitBuilder API, allowing code generation to take place in this GitPod instance.
     port: 65455
     onOpen: ignore
+    visibility: public
 
 
