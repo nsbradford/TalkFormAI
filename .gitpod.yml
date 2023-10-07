@@ -12,7 +12,6 @@ ports:
   - name: App Preview
     description: The TalkForm AI frontend preview.
     port: 3000
-    onOpen: open-browser
   - name: BitBuilder Code Generation
     description: Connects to the BitBuilder API, allowing code generation to take place in this GitPod instance.
     port: 65455
