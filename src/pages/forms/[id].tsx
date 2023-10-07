@@ -15,6 +15,17 @@ import { Database } from '../../../types/supabase';
 import ResponsesTable from '../../components/home/modes/ResponsesTable';
 
 export default function FormDetailPage() {
+const closeForm = async () => {
+  const { data, error } = await supabase
+    .from('forms')
+    .update({ is_open: false })
+    .eq('id', form.id);
+  if (error) {
+    console.error('Error closing form:', error);
+  } else {
+    setForm(data[0]);
+  }
+};
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
   const supabase = createClientComponentClient<Database>();
   const [user, setUser] = useState<null | User>(null);
@@ -83,6 +94,9 @@ export default function FormDetailPage() {
                 View live form
               </button>
             </Link>
+            <button onClick={closeForm} className={`rounded-md px-3 py-2 text-sm font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${form.is_open ? 'bg-indigo-600 text-white hover:bg-indigo-500' : 'bg-gray-300 text-gray-500 cursor-not-allowed'}`} disabled={!form.is_open}>
+              Close form
+            </button>
           </div>
           {form.created_at && (
             <p className="text-xs text-gray-600">
