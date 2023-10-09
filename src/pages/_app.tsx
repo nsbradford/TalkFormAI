@@ -8,12 +8,17 @@ import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import type { AppProps } from 'next/app';
 import { Analytics } from '@vercel/analytics/react';
 import { useState } from 'react';
+import Head from 'next/head';
 config.autoAddCss = false;
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() => createPagesBrowserClient());
   return (
     <>
+      <Head>
+        <title>TalkForm AI</title>
+      </Head>
+
       <GoogleAnalytics
         GA_TRACKING_ID={process.env.NEXT_PUBLIC_GA_TRACKING_ID}
       />

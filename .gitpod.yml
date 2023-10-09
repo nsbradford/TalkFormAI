@@ -17,5 +17,3 @@ ports:
     port: 65455
     onOpen: ignore
     visibility: public
-
-

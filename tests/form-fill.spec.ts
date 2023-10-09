@@ -4,7 +4,7 @@ async function runTestScenario(
   page: Page,
   formId: string,
   messages: string[],
-  expected: object,
+  expected: object
 ) {
   // Navigate to the specified URL
   await page.goto(`http://localhost:3000/forms/fill/${formId}`);

@@ -57,7 +57,9 @@ yarn format
 ```
 
 ### Test
+
 uses Playwright
+
 ```bash
 yarn test:e2e
 ```
