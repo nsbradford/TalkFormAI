@@ -13,6 +13,8 @@ export default function HomePage() {
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
   const supabase = createClientComponentClient<Database>();
   const [user, setUser] = useState<null | User>(null);
+  const [openForms, setOpenForms] = useState(0);
+  const [closedForms, setClosedForms] = useState(0);
 
   useEffect(() => {
     if (!isSessionLoading && !session) {
@@ -20,12 +22,30 @@ export default function HomePage() {
     }
     if (!isSessionLoading && session) {
       getUserFromSupabase(session, supabase, setUser);
+      getFormCounts();
     }
   }, [isSessionLoading, session]);
+
+  async function getFormCounts() {
+    let { data: forms, error } = await supabase
+      .from('forms')
+      .select('*');
+    if (error) console.log('Error: ', error);
+    else {
+      let openCount = forms.filter(form => form.is_open).length;
+      let closedCount = forms.length - openCount;
+      setOpenForms(openCount);
+      setClosedForms(closedCount);
+    }
+  }
 
   return (
     <Page pageTitle="Home" user={user}>
       <DashboardMode user={user} />
+      <div>
+        <span>Open Forms: {openForms}</span>
+        <span>Closed Forms: {closedForms}</span>
+      </div>
     </Page>
   );
 }

@@ -81,7 +81,9 @@ export default function FormDetailPage() {
             <Link href={'/forms/fill/' + form.id}>
               <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 View live form
-              </button>
+            <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600" onClick={closeForm} disabled={!form.is_open}>
+              Close form
+            </button>
             </Link>
           </div>
           {form.created_at && (
@@ -151,4 +153,15 @@ function respectNewLines(text: string | null | undefined) {
       <br />
     </span>
   ));
+}
+async function closeForm() {
+  const { data, error } = await supabase
+    .from('forms')
+    .update({ is_open: false })
+    .eq('id', form.id)
+  if (error) {
+    console.error('Error: ', error)
+  } else {
+    setForm({ ...form, is_open: false })
+  }
 }

@@ -55,10 +55,16 @@ export function CreateFormInner(props: { formId: string }) {
           console.error(maybeForm.message);
           setError(maybeForm);
         } else {
+      getFormFromSupabase(formId, supabase).then((maybeForm) => {
+        if (maybeForm instanceof Error) {
+          console.error(maybeForm.message);
+          setError(maybeForm);
+        } else if (!maybeForm.is_open) {
+          setError(new Error('This form is closed and cannot be filled.'));
+        } else {
           setForm(maybeForm);
         }
       });
-    }
   }, []); // The empty array ensures this effect runs only once on mount
   return form ? (
     <InnerChat form={form} supabase={supabase} />
