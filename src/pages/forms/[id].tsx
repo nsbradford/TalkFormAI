@@ -5,6 +5,7 @@ import {
   getFormFromSupabase,
   getResponsesFromSupabase,
   getUserFromSupabase,
+  toggleFormStatus
 } from '@/utils';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext } from '@supabase/auth-helpers-react';
@@ -62,8 +63,8 @@ export default function FormDetailPage() {
   const camelCaseTitle =
     form.name.charAt(0).toUpperCase() + form.name.slice(1, form.name.length);
 
-  const toggleFormStatus = async () => {
-    const { data, error } = await supabase
+import { toggleFormStatus } from '@/utils';
+import { insertFormStatusChange } from '@/utils';
       .from('forms')
       .update({ is_open: !form.is_open })
       .eq('id', form.id);
@@ -72,7 +73,46 @@ export default function FormDetailPage() {
     } else {
       setForm({ ...form, is_open: !form.is_open });
     }
+const newFormStatus = await toggleFormStatus(form, supabase);
+if (newFormStatus) {
+  setForm(newFormStatus);
+  const formStatusChange = {
+    form_id: form.id,
+    user_id: user.id,
+    status: newFormStatus.is_open
   };
+  await insertFormStatusChange(formStatusChange, supabase);
+}
+
+
+  return (
+    <Page pageTitle={`${camelCaseTitle}`} user={user}>
+      <div className="flex min-w-0 gap-x-4 mb-6 text-xs p-4">
+        <div className="min-w-0 flex-auto">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center">
+              <h1 className="text-xl font-bold mr-2 text-gray-900">
+                {/* {camelCaseTitle} */}
+                Status:{' '}
+              </h1>
+              <span
+                className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ${badgeColor} ring-1 ring-inset ring-gray-500/10 shadow-md`}
+              >
+                {form.is_open ? 'Open' : 'Closed'}
+              </span>
+            </div>
+
+            <div className="flex gap-x-4">
+              <button
+                onClick={toggleFormStatus}
+                className="rounded-md bg-white text-red-600 px-3 py-2 text-sm font-semibold shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+              >
+                {form.is_open ? 'Close form' : 'Open form'}
+              </button>
+const newFormStatus = await toggleFormStatus(form, supabase);
+if (newFormStatus) {
+  setForm(newFormStatus);
+}
 
   return (
     <Page pageTitle={`${camelCaseTitle}`} user={user}>

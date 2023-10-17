@@ -1,0 +1,7 @@
+CREATE TABLE form_status_changes (
+  id SERIAL PRIMARY KEY,
+  form_id INT NOT NULL,
+  user_id INT NOT NULL,
+  status BOOLEAN NOT NULL,
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

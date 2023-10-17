@@ -62,6 +62,19 @@ export async function getUserFromSupabase(
 
 export async function getFormsFromSupabase(
   userId: string,
+
+export const toggleFormStatus = async (form: Form, supabase: SupabaseClient<Database>) => {
+  const { data, error } = await supabase
+    .from('forms')
+    .update({ is_open: !form.is_open })
+    .eq('id', form.id);
+  if (error) {
+    console.error('Error updating form status:', error);
+  } else {
+    return { ...form, is_open: !form.is_open };
+  }
+};
+
   supabase: SupabaseClient<Database>
 ): Promise<Form[] | undefined> {
   const { data, error } = await supabase
