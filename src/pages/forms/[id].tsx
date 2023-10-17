@@ -61,6 +61,19 @@ export default function FormDetailPage() {
     : 'bg-red-100 text-red-800';
   const camelCaseTitle =
     form.name.charAt(0).toUpperCase() + form.name.slice(1, form.name.length);
+
+  const toggleFormStatus = async () => {
+    const { data, error } = await supabase
+      .from('forms')
+      .update({ is_open: !form.is_open })
+      .eq('id', form.id);
+    if (error) {
+      console.error('Error updating form status:', error);
+    } else {
+      setForm({ ...form, is_open: !form.is_open });
+    }
+  };
+
   return (
     <Page pageTitle={`${camelCaseTitle}`} user={user}>
       <div className="flex min-w-0 gap-x-4 mb-6 text-xs p-4">
@@ -78,11 +91,20 @@ export default function FormDetailPage() {
               </span>
             </div>
 
-            <Link href={'/forms/fill/' + form.id}>
-              <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                View live form
+            <div className="flex gap-x-4">
+              <button
+                onClick={toggleFormStatus}
+                className="rounded-md bg-white text-red-600 px-3 py-2 text-sm font-semibold shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+              >
+                {form.is_open ? 'Close form' : 'Open form'}
               </button>
-            </Link>
+
+              <Link href={'/forms/fill/' + form.id}>
+                <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  View live form
+                </button>
+              </Link>
+            </div>
           </div>
           {form.created_at && (
             <p className="text-xs text-gray-600">
