@@ -92,12 +92,12 @@ export default function FormDetailPage() {
             </div>
 
             <div className="flex gap-x-4">
-              <button
-                onClick={toggleFormStatus}
-                className="rounded-md bg-white text-red-600 px-3 py-2 text-sm font-semibold shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
-              >
-                {form.is_open ? 'Close form' : 'Open form'}
-              </button>
+<button
+  onClick={toggleFormStatus}
+  className="rounded-md bg-red-600 text-white px-3 py-2 text-sm font-semibold shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+>
+  {form.is_open ? 'Close form' : 'Open form'}
+</button>
 
               <Link href={'/forms/fill/' + form.id}>
                 <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
