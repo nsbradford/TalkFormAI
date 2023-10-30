@@ -18,8 +18,8 @@ Head over to [talkform.ai](https://www.talkform.ai/) to try it out!
 
 > :warning: **WARNING**: TalkForm.AI is in early development. Use at own risk.
 
-## Contributing
 
+## Local dev (outside a dev container)
 This is a [Next.js](https://nextjs.org/) project. You'll need **Node** (probably using **[nvm](https://github.com/nvm-sh/nvm)**) and **[yarn](https://yarnpkg.com/)**.
 
 ### Secrets
@@ -71,6 +71,14 @@ Useful to see what will actually be released.
 ```bash
 yarn build
 ```
+
+## Working in a Dev Container
+Add this to your .zshrc - see [this discussion](https://community.doppler.com/t/vscode-container-support/104/2)
+```bash
+export DOPPLER_CLI_TOKEN=$(doppler configure get token --plain)
+```
+Then, when you open up the project in VSCode, just click "Reopen in Container".
+
 
 ## About
 
