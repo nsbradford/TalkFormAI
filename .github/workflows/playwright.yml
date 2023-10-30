@@ -40,6 +40,8 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
+  # There isn't an easy way to load the devcontainer itself,
+  # so we make do with just the dockerfile
   build_devcontainer:
     name: Build devcontainer
     runs-on: ubuntu-latest
@@ -49,6 +51,6 @@ jobs:
 
     - name: Build container
       run: |
-        docker build -t devcontainer .devcontainer
+        docker build -t devcontainer-instance .
       # docker run devcontainer <your-test-command>
 
