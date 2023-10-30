@@ -32,6 +32,11 @@
 	],
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {}
+	},
+	"portsAttributes": {
+		"3000": {
+			"label": "website"
+		}
 	}
 
 	// Use 'postCreateCommand' to run commands after the container is created.
