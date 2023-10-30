@@ -3,14 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "doppler run -- next dev",
+    "dev": "doppler run  --project=talk-form-ai --config=dev -- next dev",
     "dev-gitpod": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "yarn lint --fix",
     "format": "npx prettier --write .",
-    "test:e2e": "doppler run -- playwright test",
+    "test:e2e": "doppler run --project=talk-form-ai --config=dev -- playwright test",
     "test:e2e-gitpod": "playwright test",
     "generate-db-types": "npx supabase gen types typescript --project-id \"uvthrievvhksvomqwowg\" --schema public > types/supabase.ts"
   },

@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: CI
 on:
   push:
     branches: [main]
@@ -16,6 +16,7 @@ env:
 
 jobs:
   test:
+    name: Playwright Tests
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -38,3 +39,18 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+  # There isn't an easy way to load the devcontainer itself,
+  # so we make do with just the dockerfile
+  build_devcontainer:
+    name: Build devcontainer
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Build container
+      run: |
+        docker build -t devcontainer-instance .
+      # docker run devcontainer <your-test-command>
+
