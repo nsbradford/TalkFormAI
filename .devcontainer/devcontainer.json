@@ -4,7 +4,7 @@
 	"name": "TalkForm",
 
 	// NOTE: because codespaces automatically 
-	"dockerFile": "../../Dockerfile.codespaces",
+	"dockerFile": "../Dockerfile",
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	// "image": "mcr.microsoft.com/devcontainers/typescript-node:1-18-bullseye",
 
