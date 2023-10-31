@@ -34,6 +34,12 @@
 		"ghcr.io/devcontainers/features/git:1": {}
 	},
 
+	"portsAttributes": {
+		"3000": {
+			"label": "website"
+		}
+	},
+
 	// TODO can't get the yarn install within Dockerfile to show up in dev container
 	"postCreateCommand": "yarn install --frozen-lockfile"
 
