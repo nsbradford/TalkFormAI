@@ -41,22 +41,23 @@
 	},
 
 	// TODO can't get the yarn install within Dockerfile to show up in dev container
-	"postCreateCommand": "yarn install --frozen-lockfile"
+	"postCreateCommand": "yarn install --frozen-lockfile",
 
 	// Configure tool-specific properties.
-	// "customizations": {
-	// 	"vscode": {
-	// 		"settings": {},
-	// 		"extensions": [
-	// 			"dbaeumer.vscode-eslint",
-	// 			"eamodio.gitlens",
-	// 			"esbenp.prettier-vscode",
-	// 			"GitHub.copilot",
-	// 			"k--kato.intellij-idea-keybindings",
-	// 			"Orta.vscode-jest"
-	// 		]
-	// 	}
-	// }
+	"customizations": {
+		"vscode": {
+			"settings": {},
+			"extensions": [
+				"dbaeumer.vscode-eslint",
+				"eamodio.gitlens",
+				"esbenp.prettier-vscode",
+				"GitHub.copilot",
+				"k--kato.intellij-idea-keybindings",
+				"Orta.vscode-jest",
+				"ms-azuretools.vscode-docker"
+			]
+		}
+	}
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
