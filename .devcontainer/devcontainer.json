@@ -32,11 +32,10 @@
 	],
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {}
-	}
+	},
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// TODO yarn install probably should be cached in Dockerfile
-	// "postCreateCommand": "yarn install",
+	// TODO can't get the yarn install within Dockerfile to show up in dev container
+	"postCreateCommand": "yarn install --frozen-lockfile"
 
 	// Configure tool-specific properties.
 	// "customizations": {
