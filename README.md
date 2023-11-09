@@ -80,7 +80,8 @@ export DOPPLER_CLI_TOKEN=$(doppler configure get token --plain)
 Then, when you open up the project in VSCode, just click "Reopen in Container".
 
 ## Open in GitPod
-Go to https://gitpod.io/#github.com/nsbradford/talkformai
+- Go to https://gitpod.io/#github.com/nsbradford/talkformai
+- To open up a specific folder, add to the end of the gitpod URL: `gitpod.io/?folder=/your/folder`
 
 ## About
 
