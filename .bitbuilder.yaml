@@ -5,6 +5,7 @@ commands:
   - name: "build"
     description: "Make sure everything still works."
     command: "yarn build"
+    return_output_on_success: false
 
 pr_review:
   auto_review: False
