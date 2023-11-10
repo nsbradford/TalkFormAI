@@ -1,5 +1,10 @@
 about:
   - Uses FastAPI and Next.js.
+      
+commands:
+  - name: "build"
+    description: "Make sure everything still works."
+    command: "yarn build"
 
 pr_review:
   auto_review: False
