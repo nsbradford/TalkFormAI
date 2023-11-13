@@ -28,9 +28,7 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/BitBuilder-ai/devcontainer/cli:0": {
-			"version": "0.0.2"
-		}
+		"ghcr.io/BitBuilder-ai/devcontainer/cli:0.0.3": {}
 	},
 		
 	"portsAttributes": {
