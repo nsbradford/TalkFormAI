@@ -36,7 +36,8 @@
 			"label": "website"
 		},
 		"65455": {
-			"label": "BitBuilder Code Generation"
+			"label": "BitBuilder Code Generation",
+			"visibility": "public"
 		}
 	},
 
