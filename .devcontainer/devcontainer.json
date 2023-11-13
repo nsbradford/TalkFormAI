@@ -39,6 +39,7 @@
 		"65455:65455": {
 			"label": "BitBuilder",
 			"onAutoForward": "silent",
+			"visability": "public",
 			"requireLocalPort": true
 		}
 	},
