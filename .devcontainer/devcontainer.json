@@ -36,9 +36,8 @@
 		"3000": {
 			"label": "website"
 		},
-		"65455": {
+		"65455:65455": {
 			"label": "BitBuilder",
-			"visibility": "public",
 			"onAutoForward": "silent",
 			"requireLocalPort": true
 		}
@@ -47,7 +46,7 @@
 	// TODO can't get the yarn install within Dockerfile to show up in dev container.
 	// This also seems to be what the Microsoft example devcontainers do.
 	"postCreateCommand": "yarn install --frozen-lockfile",
-	"postStartCommand": "bb listener start /workspace/TalkFormAI",
+	"postAttachCommand": "bb listener start .",
 
 	// Configure tool-specific properties.
 	"customizations": {
