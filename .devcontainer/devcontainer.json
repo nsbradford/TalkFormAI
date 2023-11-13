@@ -22,7 +22,8 @@
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
-		3000
+		3000,
+		65455
 	],
 		
 	// Features to add to the dev container. More info: https://containers.dev/features.
@@ -38,7 +39,8 @@
 		"65455": {
 			"label": "BitBuilder",
 			"visibility": "public",
-			"onAutoForward": "silent"
+			"onAutoForward": "silent",
+			"requireLocalPort": true
 		}
 	},
 
