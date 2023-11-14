@@ -50,6 +50,7 @@
 	// This also seems to be what the Microsoft example devcontainers do.
 	"postCreateCommand": "yarn install --frozen-lockfile",
 	"postStartCommand": "bb listener start .",
+	"waitFor": "postStartCommand",
 
 	// Configure tool-specific properties.
 	"customizations": {
