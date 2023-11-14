@@ -43,6 +43,9 @@
 		}
 	},
 
+	"remoteEnv": {
+		"BITBUILDER_API_URL": "https://bitbuilder-beta.up.railway.app"
+	}
 	// TODO can't get the yarn install within Dockerfile to show up in dev container.
 	// This also seems to be what the Microsoft example devcontainers do.
 	"postCreateCommand": "yarn install --frozen-lockfile",
