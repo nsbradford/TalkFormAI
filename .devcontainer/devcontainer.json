@@ -37,9 +37,7 @@
 			"label": "website"
 		},
 		"65455:65455": {
-			"label": "BitBuilder",
-			"onAutoForward": "silent",
-			"requireLocalPort": true
+			"label": "BitBuilder"
 		}
 	},
 
