@@ -2,7 +2,6 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node 
 {
 	"name": "TalkForm",
-	"dockerFile": "../Dockerfile",
 
 	// https://community.doppler.com/t/vscode-container-support/104
 	// https://community.doppler.com/t/doppler-and-github-codespaces/989/2
