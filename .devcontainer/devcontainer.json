@@ -19,14 +19,14 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/BitBuilder-ai/devcontainer/cli:0.1.13": {}
+		"ghcr.io/BitBuilder-ai/devcontainer/cli:0.1.14": {} // This adds the BitBuilder CLI
 	},
 		
 	"portsAttributes": {
 		"3000": {
 			"label": "website"
 		},
-		"65455": {
+		"65455": { // This opens a port, allowing BitBuilder to make code changes in this Codespace when prompted.
 			"label": "BitBuilder",
 			"onAutoForward": "silent",
 			"requireLocalPort": true
@@ -41,7 +41,6 @@
 	// TODO can't get the yarn install within Dockerfile to show up in dev container.
 	// This also seems to be what the Microsoft example devcontainers do.
 	"postCreateCommand": "yarn install --frozen-lockfile",
-	"postStartCommand": "bb listener start .",
 
 	// Configure tool-specific properties.
 	"customizations": {
