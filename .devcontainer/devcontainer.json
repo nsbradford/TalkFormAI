@@ -1,25 +1,14 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
+// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node 
 {
 	"name": "TalkForm",
-
-	// NOTE: because codespaces automatically 
-	"dockerFile": "../Dockerfile",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	// "image": "mcr.microsoft.com/devcontainers/typescript-node:1-18-bullseye",
-
 
 	// https://community.doppler.com/t/vscode-container-support/104
 	// https://community.doppler.com/t/doppler-and-github-codespaces/989/2
 	"containerEnv": {
 		"DOPPLER_TOKEN": "${localEnv:DOPPLER_CLI_TOKEN}"
 	},
-		
-	// "settings": {
-	// 		"terminal.integrated.shell.linux": "/bin/bash"
-	// },
-	
-	
+
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		3000,
@@ -29,24 +18,29 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/BitBuilder-ai/devcontainer/cli:0.1.9": {}
+		"ghcr.io/BitBuilder-ai/devcontainer/cli:0.17.2": {} // This adds the BitBuilder CLI
 	},
 		
 	"portsAttributes": {
 		"3000": {
 			"label": "website"
 		},
-		"65455:65455": {
+		"65455": { // This opens a port, allowing BitBuilder to make code changes in this Codespace when prompted.
 			"label": "BitBuilder",
 			"onAutoForward": "silent",
 			"requireLocalPort": true
 		}
 	},
+	"postStartCommand": "nohup bash -c 'bb listener start . &'",
 
+	"remoteEnv": {
+		// Present because this repository is for internal testing.
+		"BITBUILDER_API_URL": "https://bitbuilder-beta.up.railway.app"
+	},
+	
 	// TODO can't get the yarn install within Dockerfile to show up in dev container.
 	// This also seems to be what the Microsoft example devcontainers do.
 	"postCreateCommand": "yarn install --frozen-lockfile",
-	"postAttachCommand": "bb listener start .",
 
 	// Configure tool-specific properties.
 	"customizations": {
@@ -63,7 +57,4 @@
 			]
 		}
 	}
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
 }
