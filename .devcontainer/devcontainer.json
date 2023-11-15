@@ -31,6 +31,7 @@
 			"requireLocalPort": true
 		}
 	},
+	"postStartCommand": "nohup bash -c 'bb listener start . &'",
 
 	"remoteEnv": {
 		// Present because this repository is for internal testing.
