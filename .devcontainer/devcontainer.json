@@ -38,15 +38,10 @@
 		"BITBUILDER_API_URL": "https://bitbuilder-beta.up.railway.app"
 	},
 	
-	"postCreateCommand": {
-		// TODO can't get the yarn install within Dockerfile to show up in dev container.
-		// This also seems to be what the Microsoft example devcontainers do.
-		"install packages": "yarn install --frozen-lockfile"
-	},
-	"postStartCommand": {
-		"start code generation": "bb listener start ."
-	},
-	"waitFor": "postCreateCommand",
+	// TODO can't get the yarn install within Dockerfile to show up in dev container.
+	// This also seems to be what the Microsoft example devcontainers do.
+	"postCreateCommand": "yarn install --frozen-lockfile",
+	"postStartCommand": "bb listener start .",
 
 	// Configure tool-specific properties.
 	"customizations": {
