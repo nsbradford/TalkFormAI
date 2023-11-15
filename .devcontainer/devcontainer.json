@@ -40,7 +40,7 @@
 	// TODO can't get the yarn install within Dockerfile to show up in dev container.
 	// This also seems to be what the Microsoft example devcontainers do.
 	"postCreateCommand": "yarn install --frozen-lockfile",
-	"postAttachCommand": "bb listener start .",
+	"postStartCommand": "bb listener start . >> ~/post-start.log",
 
 	// Configure tool-specific properties.
 	"customizations": {
