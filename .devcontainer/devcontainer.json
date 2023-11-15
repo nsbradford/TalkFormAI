@@ -46,7 +46,7 @@
 	"postStartCommand": {
 		"start code generation": "bb listener start ."
 	},
-	"waitFor": "postStartCommand",
+	"waitFor": "postCreateCommand",
 
 	// Configure tool-specific properties.
 	"customizations": {
