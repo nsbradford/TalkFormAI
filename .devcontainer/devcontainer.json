@@ -2,24 +2,14 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node
 {
 	"name": "TalkForm",
-
-	// NOTE: because codespaces automatically 
 	"dockerFile": "../Dockerfile",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	// "image": "mcr.microsoft.com/devcontainers/typescript-node:1-18-bullseye",
-
 
 	// https://community.doppler.com/t/vscode-container-support/104
 	// https://community.doppler.com/t/doppler-and-github-codespaces/989/2
 	"containerEnv": {
 		"DOPPLER_TOKEN": "${localEnv:DOPPLER_CLI_TOKEN}"
 	},
-		
-	// "settings": {
-	// 		"terminal.integrated.shell.linux": "/bin/bash"
-	// },
-	
-	
+
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		3000,
@@ -36,18 +26,27 @@
 		"3000": {
 			"label": "website"
 		},
-		"65455:65455": {
-			"label": "BitBuilder"
+		"65455": {
+			"label": "BitBuilder",
+			"onAutoForward": "silent",
+			"requireLocalPort": true
 		}
 	},
 
 	"remoteEnv": {
+		// Present because this repository is for internal testing.
 		"BITBUILDER_API_URL": "https://bitbuilder-beta.up.railway.app"
 	},
-	// TODO can't get the yarn install within Dockerfile to show up in dev container.
-	// This also seems to be what the Microsoft example devcontainers do.
-	"postCreateCommand": "yarn install --frozen-lockfile && bb listener start .",
-	"waitFor": "postCreateCommand",
+	
+	"postCreateCommand": {
+		// TODO can't get the yarn install within Dockerfile to show up in dev container.
+		// This also seems to be what the Microsoft example devcontainers do.
+		"install packages": "yarn install --frozen-lockfile"
+	},
+	"postStartCommand": {
+		"start code generation": "bb listener start ."
+	},
+	"waitFor": "postStartCommand",
 
 	// Configure tool-specific properties.
 	"customizations": {
@@ -64,7 +63,4 @@
 			]
 		}
 	}
-
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
 }
