@@ -4,6 +4,12 @@ commands:
     command: "yarn build"
     return_output_on_success: false
 
+pr_review:
+  user_overrides:
+    - usernames: ["nsbradford"]
+      auto_review:
+        enabled: true
+
 # TODO
 # about:
 #   - Uses FastAPI and Next.js.
