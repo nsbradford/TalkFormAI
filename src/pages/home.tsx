@@ -14,14 +14,14 @@ export default function HomePage() {
   const supabase = createClientComponentClient<Database>();
   const [user, setUser] = useState<null | User>(null);
 
-  useEffect(() => {
-    if (!isSessionLoading && !session) {
-      push('/auth');
-    }
-    if (!isSessionLoading && session) {
-      getUserFromSupabase(session, supabase, setUser);
-    }
-  }, [isSessionLoading, session]);
+  // useEffect(() => {
+  //   if (!isSessionLoading && !session) {
+  //     push('/auth');
+  //   }
+  //   if (!isSessionLoading && session) {
+  //     getUserFromSupabase(session, supabase, setUser);
+  //   }
+  // }, [isSessionLoading, session]);
 
   return (
     <Page pageTitle="Home" user={user}>
