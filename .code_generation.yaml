@@ -7,8 +7,7 @@ commands:
 pr_review:
   user_overrides:
     - usernames: ["nsbradford"]
-      auto_review:
-        enabled: true
+      auto_review_enabled: true
 
 # TODO
 # about:
