@@ -17,6 +17,8 @@ export default async function handler(
   res: NextApiResponse<LLMResponse | { error: string }>
 ) {
   const auth = req.headers.authorization;
+  // Don't worry, this is important we log in prod for a bit.
+  console.log(`LLM middleware: got headers: ${req.headers}`);
   if (!auth || auth !== `Bearer ${process.env.NEXT_PUBLIC_LLM_API_KEY}`) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
