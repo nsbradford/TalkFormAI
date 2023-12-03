@@ -131,6 +131,12 @@ export async function submitResponseToSupabase(
   }
 }
 
+/**
+ * Removes the starting and ending quotes from a string.
+ *
+ * @param {string | null} str - The string to remove quotes from.
+ * @returns {string | null} The string without starting and ending quotes, or null if the input was null.
+ */
 export function removeStartAndEndQuotes(str: string | null) {
   if (!str) {
     return str;
