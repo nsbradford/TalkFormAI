@@ -132,6 +132,21 @@ export async function submitResponseToSupabase(
 }
 
 export const removeStartAndEndQuotes = (str: string | null) => {
+export async function updateFormStatusInSupabase(
+  formId: string,
+  status: boolean,
+  supabase: SupabaseClient<Database>
+): Promise<void> {
+  const { error } = await supabase
+    .from('forms')
+    .update({ is_open: status })
+    .eq('id', formId);
+  if (error) {
+    console.error(`Error updating form status`, { formId, status, error });
+  } else {
+    console.log('Successfully updated form status', { formId, status });
+  }
+}
   if (!str) {
     return str;
   }
