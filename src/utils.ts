@@ -10,10 +10,10 @@ import { Session, SupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { v4 } from 'uuid';
 import { Database, Json } from '../types/supabase';
 
-export const callLLM = async (
+export async function callLLM(
   systemPrompt: string,
   messages: ChatMessage[]
-) => {
+) {
   const data: LLMRequest = {
     completion_create: {
       model: 'gpt-3.5-turbo',
@@ -34,7 +34,7 @@ export const callLLM = async (
   }
   const json: LLMResponse = await response.json();
   return json.completion.choices[0].message;
-};
+}
 
 export async function getUserFromSupabase(
   session: Session | null,
@@ -131,9 +131,9 @@ export async function submitResponseToSupabase(
   }
 }
 
-export const removeStartAndEndQuotes = (str: string | null) => {
+export function removeStartAndEndQuotes(str: string | null) {
   if (!str) {
     return str;
   }
   return str.replace(/^"(.*)"$/, '$1');
-};
+}
