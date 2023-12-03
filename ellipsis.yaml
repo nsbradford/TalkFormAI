@@ -1,6 +1,6 @@
 version: 1.1
 
-workspace_type: "github_codespaces"
+workspace_type: "virtual_file_system"
 
 commands: 
   - name: "build"
