@@ -31,7 +31,7 @@
 			"requireLocalPort": true
 		}
 	},
-	"postStartCommand": "nohup bash -c 'bb listener start . &'", // This allows Ellipsis to write file changes in the codespace.
+	"postStartCommand": "nohup bash -c 'ellipsis listener start . &'", // This allows Ellipsis to write file changes in the codespace.
 
 	"remoteEnv": {
 		// Present because this repository is for internal testing.
