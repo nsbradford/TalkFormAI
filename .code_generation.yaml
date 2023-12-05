@@ -1,3 +1,5 @@
+version: 1.1
+
 commands:
   - name: "build"
     description: "Make sure everything still works."
