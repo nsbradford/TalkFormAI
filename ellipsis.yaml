@@ -7,6 +7,7 @@ commands:
     description: "Make sure everything still works."
     command: "yarn build"
     return_output_on_success: false
+    auto_repair: true
 
 pr_review:
   user_overrides:
