@@ -4,6 +4,16 @@ Create and fill forms with chat.
 
 ![Vercel](https://img.shields.io/github/deployments/nsbradford/TalkFormAI/production?logo=vercel&label=Vercel%20deployment) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/nsbradford/talkformai/playwright.yml?label=e2e%20tests) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+### Chat to create
+<img width="433" alt="image" src="https://github.com/nsbradford/TalkFormAI/assets/6633811/f8e97719-191f-44e2-8cbe-8871e3880939">
+
+### Chat to fill
+<img width="536" alt="image" src="https://github.com/nsbradford/TalkFormAI/assets/6633811/b1e906db-ae13-4829-8322-b2531f08d3c3">
+
+### Your data stays structured
+<img width="534" alt="image" src="https://github.com/nsbradford/TalkFormAI/assets/6633811/be32d5c6-51c0-4942-9d1c-290f947b2a59">
+
+
 ## Why
 
 Tired of lame, sad forms? Annoyed with tedious form builders? Feeling limited in what kinds of custom validations and logic you can express? You're in luck: [text is the universal interface](https://scale.com/blog/text-universal-interface), and so [TalkForm.AI](https://www.talkform.ai/) is here to help.
