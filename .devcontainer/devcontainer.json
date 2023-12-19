@@ -37,7 +37,7 @@
 		"ELLIPSIS_API_URL": "https://bitbuilder-beta.up.railway.app"
 	},
 	
-	"onCreateCommand": "yarn install --frozen-lockfile && ",
+	"onCreateCommand": "yarn install --frozen-lockfile",
 	"postCreateCommand": "nohup bash -c 'bb listener start . &'",
 
 	// Configure tool-specific properties.
