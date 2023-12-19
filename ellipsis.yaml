@@ -1,12 +1,13 @@
 version: 1.1
 
-workspace_type: "virtual_file_system"
+workspace_type: "github_codespaces"
 
 commands: 
   - name: "build"
     description: "Make sure everything still works."
     command: "yarn build"
     return_output_on_success: false
+    auto_repair: true
 
 pr_review:
   user_overrides:
