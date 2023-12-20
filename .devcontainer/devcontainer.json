@@ -13,7 +13,7 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
-		"ghcr.io/ellipsis-dev/devcontainer/cli:0.2.2": {} // This adds the Ellipsis CLI
+		"ghcr.io/ellipsis-dev/devcontainer/cli:0.2.5": {} // This adds the Ellipsis CLI
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
