@@ -14,6 +14,7 @@
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
+		"ghcr.io/devcontainers/features/github-cli:1": {},
 		"ghcr.io/ellipsis-dev/devcontainer/cli:0.2.5": {} // This adds the Ellipsis CLI
 	},
 
