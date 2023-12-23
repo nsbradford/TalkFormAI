@@ -8,8 +8,15 @@ commands:
     command: "yarn build"
     return_output_on_success: false
     auto_repair: true
+  - name: "lint_fix"
+    description: "Lints the code in fix mode, which will fix some errors."
+    command: "yarn lint:fix"
+    return_output_on_success: false
+    auto_repair: true
 
 pr_review:
+  auto_review_enabled: true
+  auto_summarize_pr: true
   user_overrides:
     - usernames: ["nsbradford"]
       auto_review_enabled: true
