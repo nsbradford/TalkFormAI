@@ -1,5 +1,9 @@
 import Script from 'next/script';
 
+
+/**
+ * We use PostHog for analytics and session recording.
+ */
 export function PostHogScript({
   POSTHOG_API_KEY,
 }: {
