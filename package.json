@@ -6,6 +6,7 @@
     "dev": "doppler run  --project=talk-form-ai --config=dev -- next dev",
     "dev-gitpod": "next dev",
     "build": "next build",
+    "build-doppler": "doppler run --project=talk-form-ai --config=dev -- yarn build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "yarn lint --fix",

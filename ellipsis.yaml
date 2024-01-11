@@ -5,7 +5,7 @@ workspace_type: "github_codespaces"
 commands: 
   - name: "build"
     description: "Make sure everything still works."
-    command: "yarn build"
+    command: "yarn build-doppler"
     return_output_on_success: false
     auto_repair: true
   - name: "lint_fix"
