@@ -1,6 +1,6 @@
 version: 1.1
 
-workspace_type: "github_codespaces"
+workspace_type: "internal_ec2"
 
 commands: 
   - name: "build"
@@ -18,25 +18,5 @@ pr_review:
   auto_review_enabled: true
   auto_summarize_pr: true
   user_overrides:
-    - usernames: ["nsbradford"]
-      auto_review_enabled: true
-
-# TODO
-# about:
-#   - Uses FastAPI and Next.js.
-# pr_review:
-#   auto_review: False
-#   sensitivity: 0.5
-#   rules:
-#     - "Don’t use spread syntax when transforming between javascript objects. Instead: Explicitly destructure all attributes that you want to pass into a new object for better readability"
-#     - "Use verb prefix is, has, or can in boolean variable names"
-#     - |
-#       Avoid calling Array#push with the direct result of a function call 
-#       ```
-#       // GOOD:
-#       const intermediateArray = functionThatReturnsArray()
-#       existingArray.push(...intermediateArray)
-
-#       // BAD:
-#       existingArray.push(...functionThatReturnsArray())
-#       ```
+    - usernames: ["hbrooks"]
+      auto_review_enabled: false
