@@ -1,6 +1,11 @@
 # Use the specified image
 # this had trouble with the `yarn install`
+# FROM mcr.microsoft.com/devcontainers/typescript-node:1-18-bullseye
+# FROM node:18.15.0-alpine
 FROM node:18.15.0-bullseye-slim
+
+# codespaces automatically clones the repo into /workspaces/<repo-name>
+# WORKDIR /app
 
 # necessary for some of the npm packages
 RUN apt-get update && apt-get install -y \
@@ -15,13 +20,14 @@ RUN apt-get update && apt-get install -y apt-transport-https ca-certificates cur
     apt-get update && \
     apt-get -y install doppler
 
-COPY package.json yarn.lock ./
+# codespaces automatically clones the repo into /workspaces/<repo-name>
+# COPY package.json yarn.lock ./
+
+# codespaces automatically clones the repo into /workspaces/<repo-name>
 RUN yarn install --frozen-lockfile
 
 # Copy the rest of the project files into the working directory
-COPY . .
+# COPY . .
 
 # Expose the port your app runs on
 EXPOSE 3000
-
-CMD ["yarn", "run", "dev"]
