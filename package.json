@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "doppler run  --project=talk-form-ai --config=dev -- next dev",
-    "dev-gitpod": "next dev",
+    "dev-ellipsis": "next dev",
     "build": "next build",
     "build-doppler": "doppler run --project=talk-form-ai --config=dev -- yarn build",
     "start": "next start",
