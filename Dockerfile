@@ -24,4 +24,5 @@ COPY . .
 # Expose the port your app runs on
 EXPOSE 3000
 
-CMD ["yarn", "run", "dev-ellipsis"]
+# no point in this
+# CMD ["yarn", "run", "dev-ellipsis"]
