@@ -6,7 +6,8 @@ FROM node:18.15.0-bullseye-slim
 RUN apt-get update && apt-get install -y \
     python3 \
     make \
-    g++
+    g++ \
+    git
 
 # https://docs.doppler.com/docs/install-cli
 RUN apt-get update && apt-get install -y apt-transport-https ca-certificates curl gnupg && \
