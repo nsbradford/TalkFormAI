@@ -3,6 +3,8 @@ import Script from 'next/script';
 
 /**
  * We use PostHog for analytics and session recording.
+ * Session recording is a feature that allows you to see how users interact with your website.
+ * It records user actions like clicks, scrolls, and form inputs. This can be very useful for understanding user behavior and improving the user experience.
  */
 export function PostHogScript({
   POSTHOG_API_KEY,
