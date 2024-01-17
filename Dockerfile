@@ -23,9 +23,3 @@ RUN yarn install --frozen-lockfile
 
 # Copy the rest of the project files into the working directory
 COPY . .
-
-# Expose the port your app runs on
-EXPOSE 3000
-
-# no point in this
-# CMD ["yarn", "run", "dev-ellipsis"]
