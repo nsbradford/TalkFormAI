@@ -2,6 +2,8 @@
 # this had trouble with the `yarn install`
 FROM node:18.15.0-bullseye-slim
 
+WORKDIR /app
+
 # necessary for some of the npm packages
 RUN apt-get update && apt-get install -y \
     python3 \
