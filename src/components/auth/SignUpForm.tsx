@@ -3,7 +3,7 @@ import { Database } from '../../../types/supabase';
 import React, { useState } from 'react';
 import { AuthError } from '@supabase/supabase-js';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import ErrorAlert from './ErrorAlert';
+import Error from '../shared/Error';
 import { useRouter } from 'next/router';
 
 export default function SignUpForm() {
@@ -41,7 +41,7 @@ export default function SignUpForm() {
 
   return (
     <>
-      {error && <ErrorAlert error={error} />}
+      {<Error error={error} session={null}/>}
       <form
         className="space-y-6"
         action="#"

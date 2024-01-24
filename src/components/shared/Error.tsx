@@ -5,6 +5,6 @@ type ErrorModeProps = {
   error: AuthError | null;
 };
 
-export default function ErrorMode(props: ErrorModeProps) {
+export default function Error(props: ErrorModeProps) {
   return <p>{JSON.stringify(props.error?.message)}</p>;
 }

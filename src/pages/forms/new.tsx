@@ -10,7 +10,7 @@ import Page from '@/components/layout/Page';
 import { useRouter } from 'next/router';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
-import { Spinner } from '@/components/home/Spinner';
+import { Spinner } from '@/components/shared/Spinner';
 
 type NewFormPageProps = {
   user: User;

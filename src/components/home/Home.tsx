@@ -1,4 +1,4 @@
-import { SpinnerFullPage } from '@/components/home/Spinner';
+import { SpinnerFullPage } from '@/components/shared/Spinner';
 import { Form, Response, User } from '@/types';
 import { getFormsFromSupabase, getResponsesFromSupabase } from '@/utils';
 import { LinkIcon } from '@heroicons/react/24/outline';
@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { Database } from '../../../types/supabase';
 import { titleGradient, titleGradientHover } from '../misc';
 
-export default function DashboardMode(props: { user: User | null }) {
+export default function Home(props: { user: User | null }) {
   const { user } = props;
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
   const supabase = createClientComponentClient<Database>();

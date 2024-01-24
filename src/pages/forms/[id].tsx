@@ -1,4 +1,4 @@
-import { SpinnerFullPage } from '@/components/home/Spinner';
+import { SpinnerFullPage } from '@/components/shared/Spinner';
 import Page from '@/components/layout/Page';
 import { Form, Response, User } from '@/types';
 import {
@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Database } from '../../../types/supabase';
-import ResponsesTable from '../../components/home/modes/ResponsesTable';
+import ResponsesTable from '../../components/home/ResponsesTable';
 
 export default function FormDetailPage() {
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
