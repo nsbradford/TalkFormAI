@@ -46,7 +46,7 @@ export default function SignUpForm() {
         className="space-y-6"
         action="#"
         method="POST"
-        onSubmit={() => onFormSubmit}
+        onSubmit={onFormSubmit}
       >
         <div>
           <label
