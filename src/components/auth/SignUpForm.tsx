@@ -13,7 +13,7 @@ export default function SignUpForm() {
     useState<boolean>(false);
   const { push } = useRouter();
 
-  async function signUp(email: string, password: string) {
+  const signUp = async (email: string, password: string) => {
     setIsMainButtonDisabled(true);
     const { data, error } = await supabase.auth.signUp({
       email,
@@ -26,7 +26,7 @@ export default function SignUpForm() {
       supabase.auth.signInWithPassword({ email, password });
       push('/home');
     }
-  }
+  };
 
   async function onFormSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -46,7 +46,7 @@ export default function SignUpForm() {
         className="space-y-6"
         action="#"
         method="POST"
-        onSubmit={onFormSubmit}
+        onSubmit={() => onFormSubmit}
       >
         <div>
           <label
