@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Database } from '../../../types/supabase';
-import ResponsesTable from '../../components/home/modes/ResponsesTable';
+import ResponsesTable from '../../components/home/ResponsesTable';
 
 export default function FormDetailPage() {
   const { isLoading: isSessionLoading, session, error } = useSessionContext();

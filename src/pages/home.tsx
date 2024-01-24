@@ -1,5 +1,5 @@
 import Page from '@/components/layout/Page';
-import DashboardMode from '@/components/home/DashboardMode';
+import Home from '@/components/home/Home';
 import { getUserFromSupabase } from '@/utils';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext } from '@supabase/auth-helpers-react';
@@ -25,7 +25,7 @@ export default function HomePage() {
 
   return (
     <Page pageTitle="Home" user={user}>
-      <DashboardMode user={user} />
+      <Home user={user} />
     </Page>
   );
 }

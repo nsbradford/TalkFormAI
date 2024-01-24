@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import { Database } from '../../../types/supabase';
 import { titleGradient, titleGradientHover } from '../misc';
 
-export default function DashboardMode(props: { user: User | null }) {
+export default function Home(props: { user: User | null }) {
   const { user } = props;
   const { isLoading: isSessionLoading, session, error } = useSessionContext();
   const supabase = createClientComponentClient<Database>();
