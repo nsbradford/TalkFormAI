@@ -41,7 +41,7 @@ export default function SignUpForm() {
 
   return (
     <>
-      {error && <Error error={error} session={null} />}
+      {<Error error={error} session={null} />}
       <form
         className="space-y-6"
         action="#"
