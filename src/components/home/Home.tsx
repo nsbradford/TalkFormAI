@@ -152,7 +152,7 @@ export default function Home(props: { user: User | null }) {
                         </button>
                       </Link>
                       {f.is_open ? (
-                        <Link href={'/forms/fill/' + f.id}>
+                        <Link href={'/forms/entry/' + f.id}>
                           <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600">
                             <LinkIcon className="h-5 w-5" aria-hidden="true" />
                           </button>

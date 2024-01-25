@@ -7,7 +7,7 @@ async function runTestScenario(
   expected: object
 ) {
   // Navigate to the specified URL
-  await page.goto(`http://localhost:3000/forms/fill/${formId}`);
+  await page.goto(`http://localhost:3000/forms/entry/${formId}`);
 
   for (const message of messages) {
     // Wait for input to be enabled and visible
