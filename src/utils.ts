@@ -5,7 +5,7 @@ import {
   LLMResponse,
   Response,
   User,
-} from '@/types';
+} from '@/models';
 import { Session, SupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { v4 } from 'uuid';
 import { Database, Json } from '../types/supabase';

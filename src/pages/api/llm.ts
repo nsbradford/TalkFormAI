@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import OpenAI from 'openai';
-import { LLMRequest, LLMResponse } from '../../types';
+import { LLMRequest, LLMResponse } from '../../models';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,

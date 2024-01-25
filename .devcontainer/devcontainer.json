@@ -1,19 +1,14 @@
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/typescript-node 
 {
 	"name": "TalkForm",
 	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye",
 	"remoteUser": "root",
 	"containerUser": "root",
 	
-	// https://community.doppler.com/t/vscode-container-support/104
-	// https://community.doppler.com/t/doppler-and-github-codespaces/989/2
 	"containerEnv": {
 		"DOPPLER_TOKEN": "${localEnv:DOPPLER_CLI_TOKEN}"
 	},
 
 		
-	// Features to add to the dev container. More info: https://containers.dev/features.
 	"features": {
 		"ghcr.io/devcontainers/features/git:1": {},
 		"ghcr.io/devcontainers/features/github-cli:1": {},
@@ -21,7 +16,6 @@
 		"ghcr.io/metcalfc/devcontainer-features/doppler:0.1.1": {}
 	},
 
-	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [
 		3000,
 		65455 // Required for Ellipsis
@@ -36,13 +30,8 @@
 			"requireLocalPort": true
 		}
 	},
-	"postStartCommand": "nohup bash -c 'ellipsis listener start . &'", // This allows Ellipsis to write file changes in the codespace.
-	
-	// TODO can't get the yarn install within Dockerfile to show up in dev container.
-	// This also seems to be what the Microsoft example devcontainers do.
 	"postCreateCommand": "yarn install --frozen-lockfile",
 
-	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"settings": {},

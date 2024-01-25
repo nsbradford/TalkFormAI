@@ -9,7 +9,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { Database } from '../../../types/supabase';
-import { User } from '@/types';
+import { User } from '@/models';
 import Link from 'next/link';
 
 function classNames(...classes: string[]) {

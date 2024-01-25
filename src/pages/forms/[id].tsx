@@ -1,6 +1,6 @@
-import { SpinnerFullPage } from '@/components/home/Spinner';
+import { SpinnerFullPage } from '@/components/settings/Spinner';
 import Page from '@/components/layout/Page';
-import { Form, Response, User } from '@/types';
+import { Form, Response, User } from '@/models';
 import {
   getFormFromSupabase,
   getResponsesFromSupabase,
@@ -12,25 +12,18 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Database } from '../../../types/supabase';
-import ResponsesTable from '../../components/home/modes/ResponsesTable';
+import ResponsesTable from '../../components/settings/modes/ResponsesTable';
 
 export default function FormDetailPage() {
-  const { isLoading: isSessionLoading, session, error } = useSessionContext();
-  const supabase = createClientComponentClient<Database>();
-  const [user, setUser] = useState<null | User>(null);
-  const [form, setForm] = useState<Form | null>(null);
   const [responses, setResponses] = useState<Response[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const { push } = useRouter();
 
-  useEffect(() => {
-    if (!isSessionLoading && !session) {
-      push('/auth');
-    }
-    if (!isSessionLoading && session) {
-      getUserFromSupabase(session, supabase, setUser);
-    }
-  }, [isLoading, session]);
+  const { isLoading: isSessionLoading, session, error } = useSessionContext();
+  const supabase = createClientComponentClient<Database>();
+  const [user, setUser] = useState<null | User>(null);
+  const [form, setForm] = useState<Form | null>(null);
+
 
   useEffect(() => {
     const getFormAndResponses = async () => {
@@ -52,15 +45,26 @@ export default function FormDetailPage() {
     }
   }, [isSessionLoading, user, form, responses]);
 
+  useEffect(() => {
+    if (!isSessionLoading && !session) {
+      push('/auth');
+    }
+    if (!isSessionLoading && session) {
+      getUserFromSupabase(session, supabase, setUser);
+    }
+  }, [isLoading, session]);
+
   if (isLoading || isSessionLoading || form === null || responses === null) {
     return <SpinnerFullPage />;
   }
 
   const badgeColor = form.is_open
-    ? 'bg-green-100 text-green-800'
-    : 'bg-red-100 text-red-800';
+    ? 'bg-green-100 text-green-600'
+    : 'bg-red-100 text-red-600';
+  
   const camelCaseTitle =
     form.name.charAt(0).toUpperCase() + form.name.slice(1, form.name.length);
+  
   return (
     <Page pageTitle={`${camelCaseTitle}`} user={user}>
       <div className="flex min-w-0 gap-x-4 mb-6 text-xs p-4">
@@ -78,7 +82,7 @@ export default function FormDetailPage() {
               </span>
             </div>
 
-            <Link href={'/forms/fill/' + form.id}>
+            <Link href={'/forms/entry/' + form.id}>
               <button className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 View live form
               </button>

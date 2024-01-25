@@ -7,7 +7,7 @@ async function runTestScenario(
   expected: object
 ) {
   // Navigate to the specified URL
-  await page.goto(`http://localhost:3000/forms/fill/${formId}`);
+  await page.goto(`http://localhost:3000/forms/entry/${formId}`);
 
   for (const message of messages) {
     // Wait for input to be enabled and visible
@@ -53,31 +53,8 @@ const testScenarios = [
       github: 'github.com/jd123456',
     },
   },
-  // TODO failing: LLM stopped giving structured responses and/or cache not working
-  // {
-  //   name: 'public-facing demo',
-  //   formId: '5771953d-a003-4969-9071-fcfff4c5bb10',
-  //   messages: [
-  //     'Nick',
-  //     'e@e.co',
-  //     'big tech co',
-  //     'eng manager',
-  //     'https://github.com/nsbradford',
-  //     'google analytics and Posthog',
-  //     'confirm',
-  //   ],
-  //   expected: {
-  //     name: 'Nick',
-  //     email_address: 'e@e.co',
-  //     company: 'big tech co',
-  //     job_title: 'eng manager',
-  //     github_username: 'nsbradford',
-  //     technologies_used: 'google analytics, Posthog',
-  //   },
-  // },
 ];
 
-// Iterate through your scenarios to run the tests
 for (const scenario of testScenarios) {
   test(`Chat component e2e test: ${scenario.name}`, async ({ page }) => {
     await runTestScenario(

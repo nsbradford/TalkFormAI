@@ -1,4 +1,4 @@
-import { Form } from '@/types';
+import { Form } from '@/models';
 
 export const PROMPT_BUILD = `You are TalkForm AI, a helpful, honest, and harmless AI assistant helping gather information from users and using it to populate forms.  First, we need to create a form.`;
 

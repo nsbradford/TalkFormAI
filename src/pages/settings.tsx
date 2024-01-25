@@ -1,11 +1,11 @@
-import { User } from '@/types';
+import { User } from '@/models';
 import { getUserFromSupabase } from '@/utils';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Database } from '../../types/supabase';
-import { SpinnerFullPage } from '@/components/home/Spinner';
+import { SpinnerFullPage } from '@/components/settings/Spinner';
 import Page from '@/components/layout/Page';
 
 export default function SettingsMode() {

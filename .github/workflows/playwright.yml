@@ -25,7 +25,6 @@ jobs:
         with:
           node-version: 18
       - name: Install dependencies
-        # run: npm ci - https://stackoverflow.com/questions/58482655/what-is-the-closest-to-npm-ci-in-yarn
         run: yarn install --frozen-lockfile
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -40,8 +39,7 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-  # There isn't an easy way to load the devcontainer itself,
-  # so we make do with just the dockerfile
+  # TODO use devcontainer CLI
   build_devcontainer:
     name: Build devcontainer
     runs-on: ubuntu-latest
@@ -52,5 +50,4 @@ jobs:
     - name: Build container
       run: |
         docker build -t devcontainer-instance .
-      # docker run devcontainer <your-test-command>
 

@@ -1,6 +1,6 @@
 'use client';
 import SignInForm from '@/components/auth/SignInForm';
-import NavBar from '@/components/home/NavBar';
+import NavBar from '@/components/settings/NavBar';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';

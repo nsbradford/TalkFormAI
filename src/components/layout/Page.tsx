@@ -1,6 +1,6 @@
-import { User } from '@/types';
+import { User } from '@/models';
 import Link from 'next/link';
-import NavBar from '../home/NavBar';
+import NavBar from '../settings/NavBar';
 
 interface PageProps {
   user?: User | null;

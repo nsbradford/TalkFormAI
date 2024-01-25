@@ -4,6 +4,6 @@ interface ErrorAlertProps {
   error: AuthError;
 }
 
-export default function ErrorAlert(props: ErrorAlertProps) {
+export default function ErrorParagraph(props: ErrorAlertProps) {
   return <p>{props.error.message}</p>;
 }

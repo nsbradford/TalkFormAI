@@ -1,12 +1,12 @@
 import Page from '@/components/layout/Page';
-import DashboardMode from '@/components/home/DashboardMode';
+import DashboardMode from '@/components/settings/DashboardMode';
 import { getUserFromSupabase } from '@/utils';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { Database } from '../../types/supabase';
-import { User } from '@/types';
+import { User } from '@/models';
 
 export default function HomePage() {
   const { push } = useRouter();

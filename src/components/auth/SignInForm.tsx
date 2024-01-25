@@ -3,7 +3,7 @@ import { Database } from '../../../types/supabase';
 import React, { useState } from 'react';
 import { AuthError } from '@supabase/supabase-js';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import ErrorAlert from './ErrorAlert';
+import ErrorParagraph from './ErrorAlert';
 import { useRouter } from 'next/router';
 
 export default function SignInForm() {
@@ -40,7 +40,7 @@ export default function SignInForm() {
 
   return (
     <>
-      {error && <ErrorAlert error={error} />}
+      {error && <ErrorParagraph error={error} />}
       <form
         className="space-y-6"
         action="#"

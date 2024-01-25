@@ -1,4 +1,4 @@
-import { ChatMessage } from '@/types';
+import { ChatMessage } from '@/models';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRobot, faUser } from '@fortawesome/free-solid-svg-icons';
 

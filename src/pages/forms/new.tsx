@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Database } from '../../../types/supabase';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { ChatMessage, User } from '@/types';
+import { ChatMessage, User } from '@/models';
 import { v4 } from 'uuid';
 import { callLLM, getUserFromSupabase } from '@/utils';
 import { PROMPT_BUILD } from '@/prompts';
@@ -10,7 +10,7 @@ import Page from '@/components/layout/Page';
 import { useRouter } from 'next/router';
 import { useSessionContext } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
-import { Spinner } from '@/components/home/Spinner';
+import { Spinner } from '@/components/settings/Spinner';
 
 type NewFormPageProps = {
   user: User;

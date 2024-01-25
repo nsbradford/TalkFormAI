@@ -2463,6 +2463,11 @@ prettier@^3.0.3:
   resolved "https://registry.npmjs.org/prettier/-/prettier-3.0.3.tgz"
   integrity sha512-L/4pUDMxcNa8R/EthV08Zt42WBO4h1rarVtK0K+QJG0X187OLo7l699jWw0GKuwzkPQ//jMFA/8Xm6Fh3J/DAg==
 
+promptlayer@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/promptlayer/-/promptlayer-0.0.7.tgz#1cfb76db24464bc3e3d52d8d1e9a01f49a9cbf73"
+  integrity sha512-tuJCNW72XpG79GzU/kODuLpfSOOoDJ3XE7cmgFdWYBLIuCvNdPV1PxOh1bi9jFWqVFYR3kUUSjtucB7bfAXpDQ==
+
 prop-types@^15.7.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmjs.org/prop-types/-/prop-types-15.8.1.tgz"
