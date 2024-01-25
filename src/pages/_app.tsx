@@ -12,7 +12,6 @@ import Head from 'next/head';
 config.autoAddCss = false;
 
 const isProduction = process.env.NODE_ENV === 'production';
-const isProduction = process.env.NODE_ENV === 'production';
 
 export default function App({ Component, pageProps }: AppProps) {
   const [supabaseClient] = useState(() => createPagesBrowserClient());
