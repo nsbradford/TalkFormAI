@@ -129,7 +129,7 @@ export function InnerChat(props: { form: Form; supabase: SupabaseClient<Database
             ref={inputRef} />
           <button
             className="ml-2 py-2 px-4 bg-rose-400 hover:bg-rose-300 text-white rounded-lg disabled:bg-gray-300"
-            onClick={() => handleSubmit(inputValue)}
+            onClick={handleSubmit(inputValue)}
             disabled={isWaiting || isDone}
           >
             {isWaiting ? (

@@ -1,3 +1,4 @@
+import { InnerChat } from '@/components/InnerChat';
 import { Form } from '@/models';
 import { getFormFromSupabase } from '@/utils';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
@@ -23,7 +24,7 @@ export function CreateFormInner(props: { formId: string; }) {
         }
       });
     }
-  }, []); // The empty array ensures this effect runs only once on mount
+  }, []);
   return form ? (
     <InnerChat form={form} supabase={supabase} />
   ) : (
