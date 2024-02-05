@@ -89,12 +89,6 @@ export DOPPLER_CLI_TOKEN=$(doppler configure get token --plain)
 ```
 Then, when you open up the project in VSCode, just click "Reopen in Container".
 
-## Open in GitPod
-- Add to your gitpod.io/settings Default Workspace Image: <your/image:tag>
-- Go to https://gitpod.io/#github.com/nsbradford/talkformai
-- To open up a specific folder, add to the end of the gitpod URL: `gitpod.io/?folder=/your/folder`
-
-
 ## About
 
 See our [about page](https://www.talkform.ai/about).
