@@ -1,6 +1,6 @@
 # <img src="./public/talkform.png" alt="Talkform Icon" width="25"> TalkForm.AI
 
-Create and fill forms with chat.
+Create and fill forms with chat. Made with :heart: by @nsbradford and @hbrooks
 
 ![Vercel](https://img.shields.io/github/deployments/nsbradford/TalkFormAI/production?logo=vercel&label=Vercel%20deployment) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/nsbradford/talkformai/playwright.yml?label=e2e%20tests) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
