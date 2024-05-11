@@ -126,7 +126,7 @@ export async function submitResponseToSupabase(
     console.error(`Error creating response`, { response, error });
     return Error(error.message, { cause: error });
   } else {
-    console.log('Successfully created response', response);
+    console.log('Successfully created response:', response);
     return response;
   }
 }
