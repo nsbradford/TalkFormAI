@@ -28,6 +28,7 @@ async function runTestScenario(
   const modalContent = await page.textContent('#submissionBox p');
   const parsed = JSON.parse(modalContent || '');
   expect(parsed).toEqual(expected);
+  expect(1).toEqual(2);
 }
 
 // Define your list of test scenarios
