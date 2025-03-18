@@ -46,11 +46,10 @@ jobs:
     name: Build devcontainer
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Build container
-      run: |
-        docker build -t devcontainer-instance .
-      # docker run devcontainer <your-test-command>
-
+      - name: Build container
+        run: |
+          docker build -t devcontainer-instance .
+        # docker run devcontainer <your-test-command>

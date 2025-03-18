@@ -5,14 +5,16 @@ Create and fill forms with chat.
 ![Vercel](https://img.shields.io/github/deployments/nsbradford/TalkFormAI/production?logo=vercel&label=Vercel%20deployment) ![GitHub Workflow Status (with event)](https://img.shields.io/github/actions/workflow/status/nsbradford/talkformai/playwright.yml?label=e2e%20tests) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ### Chat to create
+
 <img width="433" alt="image" src="https://github.com/nsbradford/TalkFormAI/assets/6633811/f8e97719-191f-44e2-8cbe-8871e3880939">
 
 ### Chat to fill
+
 <img width="536" alt="image" src="https://github.com/nsbradford/TalkFormAI/assets/6633811/b1e906db-ae13-4829-8322-b2531f08d3c3">
 
 ### Your data stays structured
-<img width="534" alt="image" src="https://github.com/nsbradford/TalkFormAI/assets/6633811/be32d5c6-51c0-4942-9d1c-290f947b2a59">
 
+<img width="534" alt="image" src="https://github.com/nsbradford/TalkFormAI/assets/6633811/be32d5c6-51c0-4942-9d1c-290f947b2a59">
 
 ## Why
 
@@ -28,8 +30,8 @@ Head over to [talkform.ai](https://www.talkform.ai/) to try it out!
 
 > :warning: **WARNING**: TalkForm.AI is in early development. Use at own risk.
 
-
 ## Local dev (outside a dev container)
+
 This is a [Next.js](https://nextjs.org/) project. You'll need **Node** (probably using **[nvm](https://github.com/nvm-sh/nvm)**) and **[yarn](https://yarnpkg.com/)**.
 
 ### Secrets
@@ -83,17 +85,20 @@ yarn build
 ```
 
 ## Working in a Dev Container
+
 Add this to your .zshrc - see [this discussion](https://community.doppler.com/t/vscode-container-support/104/2)
+
 ```bash
 export DOPPLER_CLI_TOKEN=$(doppler configure get token --plain)
 ```
+
 Then, when you open up the project in VSCode, just click "Reopen in Container".
 
 ## Open in GitPod
+
 - Add to your gitpod.io/settings Default Workspace Image: <your/image:tag>
 - Go to https://gitpod.io/#github.com/nsbradford/talkformai
 - To open up a specific folder, add to the end of the gitpod URL: `gitpod.io/?folder=/your/folder`
-
 
 ## About
 
