@@ -1,8 +1,8 @@
-version: "1.3.0"
+version: '1.3.0'
 
 build:
-  file: ".ellipsis/sandbox.Dockerfile"
-  kind: "modal_dockerfile"
+  file: '.ellipsis/sandbox.Dockerfile'
+  kind: 'modal_dockerfile'
   # when: "always"  # TODO not in use yet.
   commands:
     - name: 'build'
