@@ -1,7 +1,7 @@
 version: '1.3.0'
 
 build:
-  file: '.ellipsis/sandboxes/default.Dockerfile'
+  dockerfile_path: '.ellipsis/sandboxes/default.Dockerfile'
   kind: 'modal_dockerfile'
   environment:
     - kind: persistent
